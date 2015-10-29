@@ -523,7 +523,7 @@ void MainWindow::realtimeDataSlot4(double R, double P, double Y)
 }
 
 void MainWindow::readResponse4(){
-    QFile fichier("/Users/utilisateur/Documents/Navia/QT/input/rpy.txt");
+    /*QFile fichier("/Users/utilisateur/Documents/Navia/QT/input/rpy.txt");
     if(!fichier.exists()){
          QMessageBox::information(0,"info","n'existe pas");
     }
@@ -545,7 +545,10 @@ void MainWindow::readResponse4(){
     }
     else{
     QMessageBox::information(0,"info","ne peux pas ouvrir");
-    }
+    }*/
+
+   QStringList list= r.readRPY();
+   realtimeDataSlot4(list.at(0).toDouble(),list.at(1).toDouble(),list.at(2).toDouble());
 }
 
 QStringList MainWindow::recuperationRPY(QString s){
