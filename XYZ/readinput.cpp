@@ -7,7 +7,7 @@ readInput::readInput()
 
 readInput::readInput(QString f){
     file = f;
-    posRPY =0;
+    posRPY = 0; //set the position at the beginning of the file
 }
 
 QStringList readInput::readRPY(){
@@ -19,13 +19,12 @@ QStringList readInput::readRPY(){
             QTextStream flux(&fichier);
             if(!flux.atEnd())
              {
-                flux.seek(posRPY);
+                flux.seek(posRPY);  //seek the position in the file
                 QString line = flux.readLine();
                 QStringList list=recuperationRPY(line);
-                //realtimeDataSlot4(list.at(0).toDouble(),list.at(1).toDouble(),list.at(2).toDouble());
-                posRPY=flux.pos();
+                posRPY=flux.pos();  //update the position
                 fichier.close();
-                return list;
+                return list;        //
             }
             else{
                 fichier.close();
@@ -34,9 +33,9 @@ QStringList readInput::readRPY(){
     }
     else{
     QMessageBox::information(0,"info","ne peux pas ouvrir");
-    return QStringList();
-    }
 
+    }
+    return QStringList();
 }
 
 QStringList readInput::recuperationRPY(QString s){

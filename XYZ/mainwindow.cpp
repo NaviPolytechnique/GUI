@@ -15,8 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setupRealtimeData3(ui->customPlot3);
     setupRealtimeData4(ui->customPlot4);
 
-    //set position in the text at 0
-    pos=0;
+
 }
 
 MainWindow::~MainWindow()
@@ -523,58 +522,10 @@ void MainWindow::realtimeDataSlot4(double R, double P, double Y)
 }
 
 void MainWindow::readResponse4(){
-    /*QFile fichier("/Users/utilisateur/Documents/Navia/QT/input/rpy.txt");
-    if(!fichier.exists()){
-         QMessageBox::information(0,"info","n'existe pas");
-    }
-    if(fichier.open(QIODevice::ReadOnly | QIODevice::Text)){
-            QTextStream flux(&fichier);
-            if(!flux.atEnd())
-             {
-                flux.seek(pos);
-                QString line = flux.readLine();
-                QStringList list=recuperationRPY(line);
-                realtimeDataSlot4(list.at(0).toDouble(),list.at(1).toDouble(),list.at(2).toDouble());
-                pos=flux.pos();
-                fichier.close();
-            }
-            else{
-                fichier.close();
-                QMessageBox::information(0,"info","fichier fermé");
-            }
-    }
-    else{
-    QMessageBox::information(0,"info","ne peux pas ouvrir");
-    }*/
 
    QStringList list= r.readRPY();
    realtimeDataSlot4(list.at(0).toDouble(),list.at(1).toDouble(),list.at(2).toDouble());
 }
-
-QStringList MainWindow::recuperationRPY(QString s){
-    QStringList l;
-       int i = 0;
-       int j=s.size();
-       while(s[i]==' ')
-       {
-           i++;
-       }
-       for (int k=0;k<3;k++)
-       {
-           QString RorPorY;
-           while (s[i]!=' ' && i<j ){
-               RorPorY=RorPorY + s[i];
-               i++;
-           }
-           i++;
-           while (s[i]==' '&& i<j )
-           {
-               i++;
-           }
-           l << RorPorY;
-       }
-       return l;
-    }
 
 
 

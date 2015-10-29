@@ -30,15 +30,13 @@ private slots:
     void realtimeDataSlot1();
     void realtimeDataSlot2();
     void realtimeDataSlot3();
-    void realtimeDataSlot4(double R, double P, double Y);
-    void readResponse4();
+    void realtimeDataSlot4(double R, double P, double Y); //replot the graph updated
+    void readResponse4(); //read the text file
 
 private:
     Ui::MainWindow *ui;
-    QStringList recuperationRPY(QString s);
     QTimer datatimer;
-    qint64 pos;
-    readInput r;
+    readInput r; //reader of the text file;
 };
 
 #endif // MAINWINDOW_H
