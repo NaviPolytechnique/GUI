@@ -2,7 +2,7 @@
 
 readInput::readInput()
 {
-
+Salut
 }
 
 readInput::readInput(QString f){
