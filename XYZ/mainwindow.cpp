@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    rpy = readInput("/Users/utilisateur/Documents/Navia/GUI/XYZ/rpy.txt");
-    xyz = readInput("/Users/utilisateur/Documents/Navia/GUI/XYZ/log_out.txt");
+    rpy = readInput("/Users/utilisateur/Documents/Navi/GUI/XYZ/rpy.txt");
+    xyz = readInput("/Users/utilisateur/Documents/Navi/GUI/XYZ/log_out.txt");
 
     //fenêtre XYZ
     setupRealtimeData1(ui->customPlot1);
