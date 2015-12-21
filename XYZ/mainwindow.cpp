@@ -7,8 +7,18 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    rpy = readInput("/Users/utilisateur/Documents/Navia/GUI/XYZ/rpy.txt");
-    xyz = readInput("/Users/utilisateur/Documents/Navia/GUI/XYZ/log_out.txt");
+    //rpy = readInput("/Users/utilisateur/Documents/Navia/GUI/XYZ/rpy.txt");
+    //xyz = readInput("/Users/utilisateur/Documents/Navia/GUI/XYZ/log_out.txt");
+
+    QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),
+    "",
+    tr("Text files (*.txt)"));
+    QString namexyz = QFileDialog::getOpenFileName(this, tr("Open LOGOUT"),
+    "",
+    tr("Text files (*.txt)"));
+
+    rpy=readInput(namerpy);
+    xyz=readInput(namexyz);
 
     //fenêtre XYZ
     setupRealtimeData1(ui->customPlot1);
@@ -403,8 +413,7 @@ void MainWindow::realtimeDataSlot2(double Vx, double Vy, double Vz)
     double value1 = qCos(key); //qSin(key*1.3+qCos(key*1.2)*1.2)*7 + qSin(key*0.9+0.26)*24 + 26;
     double value2 = qSin(key)-qCos(key);
     */
-
-    // add data to lines for plot 2:
+    // add data to lines for plot 2:2011 tv show
     ui->customPlot2->graph(0)->addData(key, Vx);
     ui->customPlot2->graph(1)->addData(key, Vy);
     ui->customPlot2->graph(2)->addData(key, Vz);

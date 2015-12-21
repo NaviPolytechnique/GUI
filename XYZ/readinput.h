@@ -13,6 +13,7 @@
 #include <QString>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QFileDialog>
 
 class readInput
 {
