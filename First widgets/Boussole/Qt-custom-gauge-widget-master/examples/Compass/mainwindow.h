@@ -31,7 +31,7 @@
 
 #include <QMainWindow>
 #include "../../source/qcgaugewidget.h"
-
+#include "readinput.h"
 
 namespace Ui {
 class MainWindow;
