@@ -26,41 +26,33 @@
 **           Version:  1.0                                                **
 ****************************************************************************/
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
-{
-    ui->setupUi(this);
+#include <QMainWindow>
+#include "../../source/qcgaugewidget.h"
+#include "readinput.h"
 
-    mAirspeedGauge = new QcGaugeWidget;
-    mAirspeedGauge->addArc(55);
-    mAirspeedGauge->addDegrees(65)->setValueRange(0,100);
-    QcColorBand *clrBand = mAirspeedGauge->addColorBand(50);
-    clrBand->setValueRange(0,100);
-    mAirspeedGauge->addValues(80)->setValueRange(0,100);
-    mAirspeedGauge->addLabel(70)->setText("Km/h");
-    QcLabelItem *lab = mAirspeedGauge->addLabel(40);
-    lab->setText("0");
-    mAirspeedNeedle = mAirspeedGauge->addNeedle(60);
-    mAirspeedNeedle->setLabel(lab);
-    mAirspeedNeedle->setColor(Qt::blue);
-    mAirspeedNeedle->setValueRange(0,100);
-    mAirspeedGauge->addBackground(7);
-    ui->horizontalLayout->addWidget(mAirspeedGauge);
-
+namespace Ui {
+class MainWindow;
 }
 
-MainWindow::~MainWindow()
+class MainWindow : public QMainWindow
 {
-    delete ui;
-}
+    Q_OBJECT
 
+public:
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
 
+private slots:
+    void on_horizontalSlider_valueChanged(int value);
 
-void MainWindow::on_horizontalSlider_valueChanged(int value)
-{
-    mAirspeedNeedle->setCurrentValue(value);
-}
+private:
+    Ui::MainWindow *ui;
+
+    QcGaugeWidget * mCompassGauge;
+    QcNeedleItem *mCompassNeedle;
+};
+
+#endif // MAINWINDOW_H
