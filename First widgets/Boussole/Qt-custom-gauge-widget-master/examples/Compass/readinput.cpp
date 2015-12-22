@@ -28,6 +28,7 @@ QStringList readInput::readRPY(){
                 return list;
             }
             else{
+
                 fichier.close();
                 QMessageBox::information(0,"info","fichier fermé");
             }

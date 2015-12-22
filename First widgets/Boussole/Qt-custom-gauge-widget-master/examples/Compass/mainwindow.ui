@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>313</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,16 +15,13 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="2" column="0">
      <layout class="QVBoxLayout" name="verticalLayout"/>
     </item>
     <item row="1" column="0">
-     <widget class="QSlider" name="horizontalSlider">
-      <property name="maximum">
-       <number>360</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>Ouvrir le fichier rpy</string>
       </property>
      </widget>
     </item>
@@ -36,7 +33,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
