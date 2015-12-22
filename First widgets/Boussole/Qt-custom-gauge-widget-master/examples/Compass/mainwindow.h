@@ -31,7 +31,11 @@
 
 #include <QMainWindow>
 #include "../../source/qcgaugewidget.h"
+#include <QFileDialog>
+#include <QStringList>
 #include "readinput.h"
+#include <QThread>
+
 
 namespace Ui {
 class MainWindow;
@@ -46,11 +50,13 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_horizontalSlider_valueChanged(int value);
+
+
+    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
-
+    int value;
     QcGaugeWidget * mCompassGauge;
     QcNeedleItem *mCompassNeedle;
 };

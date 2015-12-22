@@ -87,7 +87,37 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_horizontalSlider_valueChanged(int value)
+
+
+void MainWindow::on_pushButton_clicked()
 {
-    mCompassNeedle->setCurrentValue(value);
+
+    QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),
+    "",
+    tr("Text files (*.txt)"));
+
+    readInput rpy=readInput(namerpy);
+
+
+
+    while (  ){
+        QStringList list=rpy.readRPY();
+        QString s1value=list.at(2);
+        QStringList s2value=s1value.split( ".");
+        QString s3value=s2value.at(0);
+        value=s3value.toInt();
+        while (value<(-90)|| value > 270 ){
+            if (value<(-90)){
+                value+=360;
+            }
+            else{
+                value-=360;
+            }
+        }
+        mCompassNeedle->setCurrentValue(value+90);
+
+    }
+
+
+
 }
