@@ -34,7 +34,7 @@
 #include <QFileDialog>
 #include <QStringList>
 #include "readinput.h"
-#include <QThread>
+#include <QTimer>
 
 
 namespace Ui {

@@ -98,9 +98,9 @@ void MainWindow::on_pushButton_clicked()
 
     readInput rpy=readInput(namerpy);
 
+int i=0;
 
-
-    while (  ){
+    while (  i<10000){
         QStringList list=rpy.readRPY();
         QString s1value=list.at(2);
         QStringList s2value=s1value.split( ".");
@@ -115,6 +115,7 @@ void MainWindow::on_pushButton_clicked()
             }
         }
         mCompassNeedle->setCurrentValue(value+90);
+        QCoreApplication::processEvents();
 
     }
 
