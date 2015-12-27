@@ -63,15 +63,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),
-    "",
-    tr("Text files (*.txt)"));
-
+    QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),"",tr("Text files (*.txt)"));
     readInput rpy=readInput(namerpy);
-
-int i=0;
-
-    while (  i<10000){
+    int i=0;
+    while(i<10000){
         QStringList list=rpy.readRPY();
 
         //roll
@@ -87,7 +82,6 @@ int i=0;
                 roll-=360;
             }
         }
-        // roll
         mAttitudeNeedle->setCurrentValue(90-roll);
         mAttMeter->setCurrentRoll(roll);
 
@@ -106,6 +100,7 @@ int i=0;
         }
         mAttMeter->setCurrentPitch(pitch);
 
+        i++;
         QCoreApplication::processEvents();
 
     }
