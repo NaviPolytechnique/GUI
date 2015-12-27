@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     ../../source/qcgaugewidget.cpp \
-    readinput.cpp
+    readinput.cpp \
+    etatdrone.cpp
 
 HEADERS  += mainwindow.h \
     ../../source/qcgaugewidget.h \
-    readinput.h
+    readinput.h \
+    etatdrone.h
 
 FORMS    += mainwindow.ui
