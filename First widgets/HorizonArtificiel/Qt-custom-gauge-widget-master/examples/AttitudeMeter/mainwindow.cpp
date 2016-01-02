@@ -35,6 +35,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //init etat drone
+    etatdrone=new EtatDrone(this);
+    connect(etatdrone, SIGNAL(ModifierEtatDrone(QVector<String>)), this, SLOT(MAJIHM(QVector<QString>)));
+
+
+    //init horizon artificiel
     mAttitudeGauge = new QcGaugeWidget;
     mAttitudeGauge->addBackground(99);
     QcBackgroundItem *bkg = mAttitudeGauge->addBackground(92);
@@ -66,42 +72,51 @@ void MainWindow::on_pushButton_clicked()
     QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),"",tr("Text files (*.txt)"));
     readInput rpy=readInput(namerpy);
     int i=0;
+    QVector<QString> lignelu=QVector<QString>(10,"0");
+
     while(i<10000){
         QStringList list=rpy.readRPY();
+        lignelu[0]=list.at(0);
+        lignelu[1]=list.at(1);
+        lignelu[2]=list.at(2);
+        emit LigneLu(lignelu);
 
-        //roll
-        QString s1roll=list.at(0);
-        QStringList s2roll=s1roll.split( ".");
-        QString s3roll=s2roll.at(0);
-        int roll=s3roll.toInt();
-        while (roll<(-180)|| roll > 180 ){
-            if (roll<(180)){
-                roll+=360;
-            }
-            else{
-                roll-=360;
-            }
-        }
-        mAttitudeNeedle->setCurrentValue(90-roll);
-        mAttMeter->setCurrentRoll(roll);
-
-        //pitch
-        QString s1pitch=list.at(1);
-        QStringList s2pitch=s1pitch.split( ".");
-        QString s3pitch=s2pitch.at(0);
-        int pitch=s3pitch.toInt();
-        while (pitch<(-180)|| pitch > 180 ){
-            if (pitch<(180)){
-                pitch+=360;
-            }
-            else{
-                pitch-=360;
-            }
-        }
-        mAttMeter->setCurrentPitch(pitch);
-
-        i++;
         QCoreApplication::processEvents();
-
+        i++;
     }
+}
+
+void MainWindow::MAJIHM(QVector<QString> EtatDroneMAJ){
+
+    //roll
+    QString s1roll=EtatDroneMAJ[0];
+    QStringList s2roll=s1roll.split( ".");
+    QString s3roll=s2roll.at(0);
+    int roll=s3roll.toInt();
+    while (roll<(-180)|| roll > 180 ){
+        if (roll<(180)){
+            roll+=360;
+        }
+        else{
+            roll-=360;
+        }
+    }
+    mAttitudeNeedle->setCurrentValue(90-roll);
+    mAttMeter->setCurrentRoll(roll);
+
+    //pitch
+    QString s1pitch=EtatDroneMAJ[1];
+    QStringList s2pitch=s1pitch.split( ".");
+    QString s3pitch=s2pitch.at(0);
+    int pitch=s3pitch.toInt();
+    while (pitch<(-180)|| pitch > 180 ){
+        if (pitch<(180)){
+            pitch+=360;
+        }
+        else{
+            pitch-=360;
+        }
+    }
+    mAttMeter->setCurrentPitch(pitch);
+
 }

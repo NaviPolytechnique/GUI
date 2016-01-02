@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     ../../source/qcgaugewidget.cpp \
     readinput.cpp \
-    etatdrone.cpp
+    etatdrone.cpp \
+    lecturefichiertexte.cpp
 
 HEADERS  += mainwindow.h \
     ../../source/qcgaugewidget.h \
     readinput.h \
-    etatdrone.h
+    etatdrone.h \
+    lecturefichiertexte.h
 
 FORMS    += mainwindow.ui

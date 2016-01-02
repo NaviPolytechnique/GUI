@@ -35,9 +35,8 @@ QStringList readInput::readRPY(){
     }
     else{
     QMessageBox::information(0,"info","ne peux pas ouvrir");
-    return QStringList();
     }
-
+    return QStringList();
 }
 
 QStringList readInput::recuperationRPY(QString s){

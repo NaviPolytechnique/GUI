@@ -34,7 +34,9 @@
 #include <QFileDialog>
 #include <QStringList>
 #include "readinput.h"
+#include "etatdrone.h"
 #include <QTimer>
+#include <QVector>
 
 namespace Ui {
 class MainWindow;
@@ -48,14 +50,19 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+signals:
+    void LigneLu(QVector<QString> LigneLu );
+
 private slots:
     void on_pushButton_clicked();
+    void MAJIHM(QVector<QString> EtatDroneMAJ);
 
 private:
     Ui::MainWindow *ui;
 
-    QcGaugeWidget * mAttitudeGauge;
-    QcNeedleItem * mAttitudeNeedle;
+    EtatDrone *etatdrone;
+    QcGaugeWidget *mAttitudeGauge;
+    QcNeedleItem *mAttitudeNeedle;
     QcAttitudeMeter *mAttMeter;
 };
 
