@@ -37,6 +37,7 @@
 #include "etatdrone.h"
 #include <QTimer>
 #include <QVector>
+#include <QMetaType>
 
 namespace Ui {
 class MainWindow;
@@ -51,11 +52,11 @@ public:
     ~MainWindow();
 
 signals:
-    void LigneLu(QVector<QString> LigneLu );
+    void LigneLu(QString Str );
 
 private slots:
     void on_pushButton_clicked();
-    void MAJIHM(QVector<QString> EtatDroneMAJ);
+    void MAJIHM(QString EtatDroneMAJ);
 
 private:
     Ui::MainWindow *ui;

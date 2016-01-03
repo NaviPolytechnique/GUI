@@ -22,13 +22,11 @@ QStringList readInput::readRPY(){
                 flux.seek(posRPY);
                 QString line = flux.readLine();
                 QStringList list=recuperationRPY(line);
-                //realtimeDataSlot4(list.at(0).toDouble(),list.at(1).toDouble(),list.at(2).toDouble());
                 posRPY=flux.pos();
                 fichier.close();
                 return list;
             }
             else{
-
                 fichier.close();
                 QMessageBox::information(0,"info","fichier fermé");
             }

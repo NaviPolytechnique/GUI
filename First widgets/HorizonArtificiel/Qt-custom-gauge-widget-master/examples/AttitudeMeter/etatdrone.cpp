@@ -2,29 +2,31 @@
 
 EtatDrone::EtatDrone(QObject *parent) : QObject(parent)
 {
-    VecteurEtatDrone=new QVector<QString>(10,"0");
-    ParametresDrone=new QVector<QString>(4,"0");
-    connect(parent, SIGNAL(LigneLu(QVector<QString>)), this, SLOT(ModifierEtatDrone(QVector<String>)));
+    VecteurEtatDrone= QString();
+    ParametresDrone= QString();
+    connect(parent, SIGNAL(LigneLu(QString)), this, SLOT(ModifierEtatDrone(QString)));
 }
 
-void EtatDrone::setvaleurED(const QVector<QString> NewEtat){
-    for (int i=0;i<10;i++){
-        VecteurEtatDrone->replace(i,NewEtat.at(i));
-    }
+void EtatDrone::setvaleurED(const QString NewEtat){
+     VecteurEtatDrone=NewEtat;
 }
 
-void EtatDrone::setvaleurPD(const QVector<QString> NewParam){
-    for (int i=0;i<4;i++){
-        ParametresDrone->replace(i,NewParam.at(i));
-    }
+void EtatDrone::setvaleurPD(const QString NewParam){
+    ParametresDrone=NewParam;
 }
 
-void EtatDrone::ModifierEtatDrone(QVector<QString> NewEtat){
+void EtatDrone::ModifierEtatDrone(QString NewEtat){
     setvaleurED(NewEtat);
     emit EtatDroneMAJ(VecteurEtatDrone);
 }
 
-void EtatDrone::ModifierParametresDrone(QVector<QString> NewParam){
+void EtatDrone::ModifierParametresDrone(QString NewParam){
     setvaleurPD(NewParam);
     emit ParametresDroneMAJ(ParametresDrone);
+}
+QString EtatDrone::getVecteurEtatDrone(){
+    return VecteurEtatDrone;
+}
+QString EtatDrone::getParametresDrone(){
+    return ParametresDrone;
 }

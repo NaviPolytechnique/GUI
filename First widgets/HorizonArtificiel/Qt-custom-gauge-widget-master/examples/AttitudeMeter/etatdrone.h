@@ -2,32 +2,36 @@
 #define ETATDRONE_H
 
 #include <QObject>
-#include <QVector>
 #include <QString>
+#include <QStringList>
+#include <QMetaType>
 
 class EtatDrone : public QObject
 {
     Q_OBJECT
 
-Q_PROPERTY(QVector<QString> VecteurEtatDrone READ VecteurEtatDrone WRITE setvaleurED NOTIFY EtatDroneMAJ)
-Q_PROPERTY(QVector<QString> ParametresDrone READ ParametresDrone WRITE setvaleurPD NOTIFY ParametresDroneMAJ)
+Q_PROPERTY(QString VecteurEtatDrone READ getVecteurEtatDrone WRITE setvaleurED NOTIFY EtatDroneMAJ)
+Q_PROPERTY(QString ParametresDrone READ getParametresDrone WRITE setvaleurPD NOTIFY ParametresDroneMAJ)
 
 public:
     explicit EtatDrone(QObject *parent = 0);
-    void setvaleurED(const QVector<QString> NewEtat);
-    void setvaleurPD(const QVector<QString> NewParam);
+    void setvaleurED(const QString NewEtat);
+    void setvaleurPD(const QString NewParam);
+    QString getVecteurEtatDrone();
+    QString getParametresDrone();
+
 
 signals:
-    void EtatDroneMAJ(QVector<QString> *VecteurEtatDrone);
-    void ParametresDroneMAJ(QVector<QString> *ParametresDrone);
+    void EtatDroneMAJ(QString VecteurEtatDrone);
+    void ParametresDroneMAJ(QString ParametresDrone);
 
 public slots:
-    void ModifierEtatDrone(QVector<QString> NewEtat);
-    void ModifierParametresDrone(QVector<QString> NewParam);
+    void ModifierEtatDrone(QString NewEtat);
+    void ModifierParametresDrone(QString NewParam);
 
 private:
-    QVector<QString> *VecteurEtatDrone;
-    QVector<QString> *ParametresDrone;
+    QString VecteurEtatDrone;
+    QString ParametresDrone;
 
 };
 
