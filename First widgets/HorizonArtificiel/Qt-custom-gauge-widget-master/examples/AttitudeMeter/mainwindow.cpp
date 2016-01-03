@@ -37,8 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //init etat drone
 
-    etatdrone=new EtatDrone(this);
-    connect(etatdrone, SIGNAL(EtatDroneMAJ(QString)), this, SLOT(MAJIHM(QString)));
+    dronestatus=new DroneStatus(this);
+    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), this, SLOT(MAJIHM(QString)));
 
 
     //init horizon artificiel
@@ -70,29 +70,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),"",tr("Text files (*.txt)"));
-    readInput rpy=readInput(namerpy);
-    int i=0;
-    QStringList lignelu=QStringList();
-    QString Str;
-    while(i<10000){
-        QStringList list=rpy.readRPY();
-        lignelu+=list.at(0);
-        lignelu+=list.at(1);
-        Str=lignelu.join(",");
-        emit LigneLu(Str);
-        lignelu.removeAt(1);
-        lignelu.removeAt(0);
 
-        QCoreApplication::processEvents();
-        i++;
-    }
+    QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),"",tr("Text files (*.txt)"));
+    ThreadReadInput* thread= new ThreadReadInput(namerpy);
+    connect(thread,SIGNAL(TonNewLine(QString)),this,SLOT(MAJIHM(QString)));
+    thread->start();
 }
 
-void MainWindow::MAJIHM(QString EtatDroneMAJ){
+void MainWindow::MAJIHM(QString DroneStatusMAJ){
 
     //roll
-    QStringList LED=EtatDroneMAJ.split(",");
+    QStringList LED=DroneStatusMAJ.split(",");
     QString s1roll=LED[0];
     QStringList s2roll=s1roll.split( ".");
     QString s3roll=s2roll.at(0);

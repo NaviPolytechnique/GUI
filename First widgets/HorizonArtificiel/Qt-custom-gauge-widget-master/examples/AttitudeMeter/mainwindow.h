@@ -34,7 +34,8 @@
 #include <QFileDialog>
 #include <QStringList>
 #include "readinput.h"
-#include "etatdrone.h"
+#include "dronestatus.h"
+#include "threadreadinput.h"
 #include <QTimer>
 #include <QVector>
 #include <QMetaType>
@@ -56,12 +57,12 @@ signals:
 
 private slots:
     void on_pushButton_clicked();
-    void MAJIHM(QString EtatDroneMAJ);
+    void MAJIHM(QString DroneStatusMAJ);
 
 private:
     Ui::MainWindow *ui;
 
-    EtatDrone *etatdrone;
+    DroneStatus *dronestatus;
     QcGaugeWidget *mAttitudeGauge;
     QcNeedleItem *mAttitudeNeedle;
     QcAttitudeMeter *mAttMeter;

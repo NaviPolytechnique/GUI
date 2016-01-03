@@ -10,6 +10,8 @@
 class readInput
 {
 public:
+
+
     readInput();
     readInput(QString f);
 
