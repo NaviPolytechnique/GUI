@@ -36,10 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //init etat drone
-
     dronestatus=new DroneStatus(this);
     connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), this, SLOT(MAJIHM(QString)));
-
 
     //init horizon artificiel
     mAttitudeGauge = new QcGaugeWidget;
