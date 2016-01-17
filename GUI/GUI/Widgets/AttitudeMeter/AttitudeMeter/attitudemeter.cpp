@@ -28,11 +28,53 @@ AttitudeMeter::AttitudeMeter(QWidget *parent) :
     mAttitudeNeedle->setColor(Qt::white);
     mAttitudeNeedle->setNeedle(QcNeedleItem::AttitudeMeterNeedle);
     mAttitudeGauge->addGlass(80);
-    ui->verticalLayout->addWidget(mAttitudeGauge);
+    ui->attitudemeter->addWidget(mAttitudeGauge);
+
+    QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),"",tr("Text files (*.txt)"));
+    ThreadReadInput* thread= new ThreadReadInput(namerpy);
+    connect(thread,SIGNAL(TonNewLine(QString)),this,SLOT(MAJIHM(QString)));
+    thread->start();
 }
 
 AttitudeMeter::~AttitudeMeter()
 {
     delete ui;
 }
+
+void AttitudeMeter::MAJIHM(QString DroneStatusMAJ){
+
+    //roll
+    QStringList LED=DroneStatusMAJ.split(",");
+    QString s1roll=LED[0];
+    QStringList s2roll=s1roll.split( ".");
+    QString s3roll=s2roll.at(0);
+    int roll=s3roll.toInt();
+    while (roll<(-180)|| roll > 180 ){
+        if (roll<(180)){
+            roll+=360;
+        }
+        else{
+            roll-=360;
+        }
+    }
+    mAttitudeNeedle->setCurrentValue(90-roll);
+    mAttMeter->setCurrentRoll(roll);
+
+    //pitch
+    QString s1pitch=LED[1];
+    QStringList s2pitch=s1pitch.split( ".");
+    QString s3pitch=s2pitch.at(0);
+    int pitch=s3pitch.toInt();
+    while (pitch<(-180)|| pitch > 180 ){
+        if (pitch<(180)){
+            pitch+=360;
+        }
+        else{
+            pitch-=360;
+        }
+    }
+    mAttMeter->setCurrentPitch(pitch);
+
+}
+
 
