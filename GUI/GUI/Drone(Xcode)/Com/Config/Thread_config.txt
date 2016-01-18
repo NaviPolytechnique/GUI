@@ -1,0 +1,8 @@
+//Thread-Config
+
+$ MessageProcessor{
+  policy = FIFO
+  priority = 2
+  cpu = 1
+
+};

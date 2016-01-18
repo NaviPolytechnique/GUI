@@ -1,0 +1,8 @@
+CC=g++
+HEADERS = -I Thread/ -I Utils/ -I serial_exception/ -I Serial/ -I Com/  -I Drone/ -I Config/
+SRC = *.cpp Serial/*.cpp Thread/*.cpp Utils/*.cpp Com/*.cpp Drone/*.cpp 
+LIBRARIES= -lpthread
+EXEC = Test
+
+$(EXEC): $(SRC)
+	$(CC) -g $^ $(HEADERS) $(LIBRARIES) -o $@

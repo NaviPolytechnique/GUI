@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "WidgetsUsed/Buttons/buttons.h"
+#include "WidgetsUsed/EandM/eandm.h"
+#include "WidgetsUsed/InputCommands/inputcommands.h"
+#include "dronestatus.h"
+
 
 namespace Ui {
 class MainWindow;
