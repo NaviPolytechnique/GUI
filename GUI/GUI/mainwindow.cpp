@@ -9,24 +9,32 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //init etat drone
     dronestatus=new DroneStatus(this);
-    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), this, SLOT(MAJIHM(QString)));
+
 
     //thread de lecture de drone
     QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),"",tr("Text files (*.txt)"));
-    ThreadReadInput* thread= new ThreadReadInput(namerpy);
-    connect(thread,SIGNAL(TonNewLine(QString)),this,SLOT(MAJIHM(QString)));
+    thread= new ThreadReadInput(namerpy);
     thread->start();
+    connect(thread, SIGNAL(TonNewLine(QString)), dronestatus, SLOT(ModifierDroneStatus(QString)));
 
     //adds widgets to the ui
-    Buttons* widgetcontrol = new Buttons();
+    widgetcontrol = new Buttons();
     ui->controls->addWidget(widgetcontrol);
-    EandM* widgeteandm = new EandM();
+    widgeteandm = new EandM();
     ui->eandm->addWidget(widgeteandm);
-    InputCommands* widgetinputcommands = new InputCommands();
+    widgetinputcommands = new InputCommands();
     ui->inputcommands->addWidget(widgetinputcommands);
+    widgetattitudemeter = new AttitudeMeter();
+    widgetattitudemeter->setMinimumSize(320,300);
+    ui->horizonindicator->addWidget(widgetattitudemeter,0,Qt::AlignCenter);
+
+
+    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetattitudemeter, SLOT(MAJAttitudeMeter(QString)));
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+

@@ -39,7 +39,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QWidget" name="horizonindicator" native="true"/>
+         <layout class="QHBoxLayout" name="horizonindicator" stretch=""/>
         </item>
         <item>
          <widget class="QWidget" name="compass" native="true"/>

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/new">
+        <file alias="logo">logo.png</file>
+    </qresource>
+</RCC>
