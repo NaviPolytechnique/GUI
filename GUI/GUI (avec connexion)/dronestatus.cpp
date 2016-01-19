@@ -4,7 +4,7 @@ DroneStatus::DroneStatus(QObject *parent) : QObject(parent)
 {
     VecteurDroneStatus= QString();
     ParametresDrone= QString();
-    connect(parent, SIGNAL(LigneLu(QString)), this, SLOT(ModifierDroneStatus(QString)));
+
 }
 
 void DroneStatus::setvaleurED(const QString NewEtat){

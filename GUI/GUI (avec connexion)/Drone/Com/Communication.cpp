@@ -18,7 +18,7 @@ Communication::Communication(Drone* drone_): drone(drone_){
   //pingProcessor = new PingProcessor(this, drone);
   
   
-}
+};
 
 Communication::~Communication(){
     delete drone;
@@ -31,7 +31,7 @@ Communication::~Communication(){
     delete rMsgListener;
     delete msgProcessor;
     delete pingProcessor;
-}
+};
 
 void Communication::start(){
   
@@ -43,29 +43,29 @@ void Communication::start(){
    
   std::cout<<"Communication started"<<std::endl;
     
-}
+};
 
 char* Communication::rMsgPop(){
 
   return rMsg->pop();
   
-}
+};
 
 Message* Communication::ttMsgPop(){
   //std::cout<<"okttmsg"<<std::endl;
   return ttMsg->pop();
-}
+};
 
 void Communication::addttMsg(Message* msg){
   //std::cout<<"okaddmsg"<<std::endl;
   ttMsg->add(msg);
-}
+};
 
 
 Message* Communication::tsMsgPop(){
   //std::cout<<"okttmsg"<<std::endl;
   return tsMsg->pop();
-}
+};
 
 void Communication::addtsMsg(Message* msg){
   tsMsg->add(msg);
@@ -73,7 +73,7 @@ void Communication::addtsMsg(Message* msg){
 
 void Communication::sendStr(char* str){
   rMsgListener->write(str);
-}
+};
 
 void Communication::registerAnswer(int id){
   pingProcessor->registerAnswer(id);

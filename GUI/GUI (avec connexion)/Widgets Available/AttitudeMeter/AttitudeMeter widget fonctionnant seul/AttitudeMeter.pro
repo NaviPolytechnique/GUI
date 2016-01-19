@@ -14,14 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         attitudemeter.cpp \
-    ../../../Source/qcgaugewidget.cpp \
+    ../../Source/qcgaugewidget.cpp \
     readinput.cpp \
     threadreadinput.cpp \
     dronestatus.cpp \
     lecturefichiertexte.cpp
 
 HEADERS  += attitudemeter.h \
-    ../../../Source/qcgaugewidget.h \
+    ../../Source/qcgaugewidget.h \
     readinput.h \
     threadreadinput.h \
     dronestatus.h \

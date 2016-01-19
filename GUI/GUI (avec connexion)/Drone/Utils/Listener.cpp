@@ -10,7 +10,7 @@ Listener::Listener(const char* portname, BlockingQueue<char*>* queue_, int baud_
     serialport = new Serial(portname, baud_rate);
 }
 
-Listener::~Listener(){}
+Listener::~Listener(){};
 
 
 
@@ -22,7 +22,7 @@ void* Listener::run(){
   }
     delete [] line;
     return 0;
-}
+};
 
 
 void Listener::start(){
@@ -30,8 +30,8 @@ void Listener::start(){
     th = new Thread(std::auto_ptr<Runnable>(this),false,Thread::FIFO,2);
     th->start();
 
-}
+};
 
 void Listener::write(char* msg){
   serialport->writeString(msg);
-}
+};

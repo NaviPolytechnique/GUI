@@ -9,7 +9,7 @@ AttitudeMeter::AttitudeMeter(QWidget *parent) :
 
     //init etat drone
     dronestatus=new DroneStatus(this);
-    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), this, SLOT(MAJIHM(QString)));
+   connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), this, SLOT(MAJIHM(QString)));
 
     //init horizon artificiel
     mAttitudeGauge = new QcGaugeWidget;
@@ -32,7 +32,7 @@ AttitudeMeter::AttitudeMeter(QWidget *parent) :
 
     QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),"",tr("Text files (*.txt)"));
     ThreadReadInput* thread= new ThreadReadInput(namerpy);
-    connect(thread,SIGNAL(TonNewLine(QString)),this,SLOT(MAJIHM(QString)));
+    connect(thread, SIGNAL(TonNewLine(QString)), dronestatus, SLOT(ModifierDroneStatus(QString)));
     thread->start();
 }
 

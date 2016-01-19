@@ -48,8 +48,10 @@ void ReadInput::sendline(){
     QStringList list=readRPY();
     lignelu->append(list.at(0));
     lignelu->append(list.at(1));
+    lignelu->append(list.at(2));
     newline=lignelu->join(",");
     emit signalNewLine(newline);
+    lignelu->removeAt(2);
     lignelu->removeAt(1);
     lignelu->removeAt(0);
 }

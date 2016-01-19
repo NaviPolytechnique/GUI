@@ -17,19 +17,19 @@ PingProcessor::PingProcessor(Communication* moduleCom_, Drone* drone_): moduleCo
     angleincr = drone->getAngleIncr();
     chargeincr = drone->getChargeIncr();
     
-}
+};
 
 PingProcessor::~PingProcessor(){
   delete drone;
   delete moduleCom;
-}
+};
 
 void PingProcessor::start(){
   drone->startThread(this, pingProcessorThread);
   Message* msg = new Message(Message::SYSTEM, "pingProcessor", 0);
   moduleCom->addttMsg(msg);
   
-}
+};
 
 
 void* PingProcessor::run(){
@@ -108,7 +108,7 @@ void* PingProcessor::run(){
       }
   }
     return 0;
-}
+};
 
 void PingProcessor::waitAnswer(int i){
   
@@ -122,7 +122,7 @@ void PingProcessor::waitAnswer(int i){
   }
   pthread_mutex_unlock(&waiting_mutex);
   std::cout<<"Communication lost, emergency stop !"<< std::endl;
-}
+};
 
 void PingProcessor::registerAnswer(int i){
   for(int k = 0; k<10; k++){
@@ -130,4 +130,4 @@ void PingProcessor::registerAnswer(int i){
       waiting[k] = -1;
     }
   }
-}
+};

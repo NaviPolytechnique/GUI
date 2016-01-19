@@ -18,7 +18,6 @@ public:
 
 private slots:
     //void on_textBrowser_2_textChanged();
-    void printMessageSystem(QString);
 
 private:
     Ui::EandM *ui;

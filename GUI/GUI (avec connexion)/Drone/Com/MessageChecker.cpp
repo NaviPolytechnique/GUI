@@ -2,15 +2,15 @@
 
 using namespace std;
 
-MessageChecker::MessageChecker(Communication* moduleCom_, Drone* drone_) : moduleCom(moduleCom_), drone(drone_){}
+MessageChecker::MessageChecker(Communication* moduleCom_, Drone* drone_) : moduleCom(moduleCom_), drone(drone_){};  
 
 
-MessageChecker::~MessageChecker(){}
+MessageChecker::~MessageChecker(){};
 
 
 void MessageChecker::start(){
      drone->startThread(this, mCheckerThread);
-}
+};
 
 void* MessageChecker::run(){
     char* msg;
@@ -47,7 +47,7 @@ void* MessageChecker::run(){
          }*/
     }
     return 0;
-}
+};
 
 int MessageChecker::isValid(char* msg, std::vector<std::string>* msg_tab){
   /*
@@ -103,7 +103,7 @@ int MessageChecker::isValid(char* msg, std::vector<std::string>* msg_tab){
     return 0; 
   }
   return 1;
-}
+};
 
 int MessageChecker::addMsgToProcess(std::vector<std::string>* msg_tab){
   Message* msg;
@@ -130,7 +130,7 @@ int MessageChecker::addMsgToProcess(std::vector<std::string>* msg_tab){
   }
   moduleCom->addttMsg(msg);
   return 1;
-}
+};
 
 uint32_t MessageChecker::Adler32(char* msg, size_t len){
   
@@ -141,7 +141,7 @@ uint32_t MessageChecker::Adler32(char* msg, size_t len){
     b = (b+a) % MOD_ADLER;
   }
   return (b<<16)|a;
-}
+};
 
 int MessageChecker::decompose(string str, std::vector<std::string>* buffer){
   std::size_t pos =1;
@@ -174,5 +174,5 @@ int MessageChecker::decompose(string str, std::vector<std::string>* buffer){
   }
   return 1;
   
-}
+};
 

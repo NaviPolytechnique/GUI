@@ -15,13 +15,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     Source/qcgaugewidget.cpp \
-    WidgetsUsed/Buttons/buttons.cpp \
-    WidgetsUsed/EandM/eandm.cpp \
-    WidgetsUsed/InputCommands/inputcommands.cpp \
     dronestatus.cpp \
     lecturefichiertexte.cpp \
     readinput.cpp \
     threadreadinput.cpp \
+    WidgetsUsed/AttitudeMeter/attitudemeter.cpp \
+    WidgetsUsed/Buttons/buttons.cpp \
+    WidgetsUsed/EandM/eandm.cpp \
+    WidgetsUsed/InputCommands/inputcommands.cpp \
+    WidgetsUsed/Compass/compass.cpp \
     Drone/Com/Communication.cpp \
     Drone/Com/Message.cpp \
     Drone/Com/MessageChecker.cpp \
@@ -37,18 +39,19 @@ SOURCES += main.cpp\
     Drone/Thread/Thread.cpp \
     Drone/Thread/ThreadStruct.cpp \
     Drone/Utils/Listener.cpp \
-    Drone/Utils/Point3D.cpp \
-    Drone/main.cpp
+    Drone/Utils/Point3D.cpp
 
 HEADERS  += mainwindow.h \
-    WidgetsUsed/Buttons/buttons.h \
     Source/qcgaugewidget.h \
-    WidgetsUsed/EandM/eandm.h \
-    WidgetsUsed/InputCommands/inputcommands.h \
     dronestatus.h \
     lecturefichiertexte.h \
     readinput.h \
     threadreadinput.h \
+    WidgetsUsed/AttitudeMeter/attitudemeter.h \
+    WidgetsUsed/Buttons/buttons.h \
+    WidgetsUsed/EandM/eandm.h \
+    WidgetsUsed/InputCommands/inputcommands.h \
+    WidgetsUsed/Compass/compass.h \
     Drone/Com/ComException.h \
     Drone/Com/Communication.h \
     Drone/Com/Message.h \
@@ -72,7 +75,12 @@ HEADERS  += mainwindow.h \
     Drone/Utils/Listener.h \
     Drone/Utils/Point3D.hpp
 
-FORMS    += mainwindow.ui WidgetsUsed/Buttons/buttons.ui WidgetsUsed/EandM/eandm.ui WidgetsUsed/InputCommands/inputcommands.ui
+FORMS    += mainwindow.ui \
+    WidgetsUsed/Buttons/buttons.ui \
+    WidgetsUsed/EandM/eandm.ui \
+    WidgetsUsed/InputCommands/inputcommands.ui \
+    WidgetsUsed/AttitudeMeter/attitudemeter.ui \
+    WidgetsUsed/Compass/compass.ui
 
 RESOURCES += \
     images.qrc

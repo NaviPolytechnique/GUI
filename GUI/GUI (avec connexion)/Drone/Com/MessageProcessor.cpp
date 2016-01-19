@@ -2,13 +2,13 @@
 
 
 
-MessageProcessor::MessageProcessor(Communication* moduleCom_, Drone* drone_): moduleCom(moduleCom_), drone(drone_){}
+MessageProcessor::MessageProcessor(Communication* moduleCom_, Drone* drone_): moduleCom(moduleCom_), drone(drone_){};
 
-MessageProcessor::~MessageProcessor(){}
+MessageProcessor::~MessageProcessor(){};
 
 void MessageProcessor::start(){
   drone->startThread(this, mProcessorThread);
-}
+};
 
 void* MessageProcessor::run(){
     while(true){
@@ -17,7 +17,7 @@ void* MessageProcessor::run(){
         delete msg;
     }
     return 0;
-}
+};
 
 
 void MessageProcessor::decompose(std::string* msg, std::string delimiter, std::vector<std::string> * vect ){
@@ -40,7 +40,7 @@ void MessageProcessor::decompose(std::string* msg, std::string delimiter, std::v
         }
     }
 
-}
+};
 
 void MessageProcessor::treatMsg(Message* msg){
     std::string* content =msg->getContent();
@@ -59,8 +59,10 @@ void MessageProcessor::treatMsg(Message* msg){
     
     if(msg->getType()==Message::SYSTEM){
         std::string content = vect[0];
-        QString Qcontent=QString::fromAscii(content);
-        MessageSystem(Qcontent);
+            /*if (!content.compare("kill")){  //pour le drone
+                    drone->shutOff();
+            }*/
+        
         
             //appeler une fonction qui actualise la partie système de l'interface et qui affiche des messages du genre : taking off, landing... (#Pily)
     }

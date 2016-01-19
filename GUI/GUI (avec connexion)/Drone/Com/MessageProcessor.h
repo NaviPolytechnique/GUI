@@ -8,7 +8,6 @@
 #include "Communication.h"
 #include <string.h>
 #include <vector>
-#include <QString>
 
 
 extern int mProcessorThread;
@@ -29,9 +28,6 @@ public:
     
   void decompose(std::string* msg, std::string delimiter, std::vector<std::string> * vect );
   
-signals:
-    void MessageSystem(QString Content);
-
 private:
   
   Communication* moduleCom;

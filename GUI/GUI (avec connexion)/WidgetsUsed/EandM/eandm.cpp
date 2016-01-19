@@ -6,7 +6,6 @@ EandM::EandM(QWidget *parent) :
     ui(new Ui::EandM)
 {
     ui->setupUi(this);
-    connect(parent, SIGNAL(MessageSystem(QString)), this, SLOT(printMessageSystem(QString));)
 }
 
 EandM::~EandM()
