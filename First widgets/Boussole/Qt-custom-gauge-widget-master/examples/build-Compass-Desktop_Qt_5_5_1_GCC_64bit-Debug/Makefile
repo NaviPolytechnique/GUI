@@ -663,6 +663,12 @@ moc_mainwindow.cpp: /home/pily/Qt/5.5/gcc_64/include/QtWidgets/QMainWindow \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QRectF \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QtMath \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmath.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QFileDialog \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qfiledialog.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdir.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfileinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QStringList \
 		../Compass/readinput.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTimer \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtimer.h \
@@ -672,7 +678,6 @@ moc_mainwindow.cpp: /home/pily/Qt/5.5/gcc_64/include/QtWidgets/QMainWindow \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTextStream \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QMessageBox \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qmessagebox.h \
-		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		../Compass/mainwindow.h
 	/home/pily/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/pily/Qt/5.5/gcc_64/mkspecs/linux-g++ -I'/home/pily/Desktop/Drone/IHM/GUI/First widgets/Boussole/Qt-custom-gauge-widget-master/examples/Compass' -I/home/pily/Qt/5.5/gcc_64/include -I/home/pily/Qt/5.5/gcc_64/include/QtWidgets -I/home/pily/Qt/5.5/gcc_64/include/QtGui -I/home/pily/Qt/5.5/gcc_64/include/QtCore -I. ../Compass/mainwindow.h -o moc_mainwindow.cpp
 
@@ -923,6 +928,12 @@ main.o: ../Compass/main.cpp ../Compass/mainwindow.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QRectF \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QtMath \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmath.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QFileDialog \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qfiledialog.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdir.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfileinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QStringList \
 		../Compass/readinput.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTimer \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtimer.h \
@@ -932,7 +943,6 @@ main.o: ../Compass/main.cpp ../Compass/mainwindow.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTextStream \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QMessageBox \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qmessagebox.h \
-		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qapplication.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1058,6 +1068,12 @@ mainwindow.o: ../Compass/mainwindow.cpp ../Compass/mainwindow.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QRectF \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QtMath \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmath.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QFileDialog \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qfiledialog.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdir.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfileinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QStringList \
 		../Compass/readinput.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTimer \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtimer.h \
@@ -1067,8 +1083,53 @@ mainwindow.o: ../Compass/mainwindow.cpp ../Compass/mainwindow.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTextStream \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QMessageBox \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qmessagebox.h \
-		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QVariant \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QAction \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qaction.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qapplication.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qeventloop.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qguiapplication.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qinputmethod.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QButtonGroup \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QGridLayout \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qgridlayout.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qlayout.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QHeaderView \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qframe.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qvalidator.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qregularexpression.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qslider.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qstyle.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QMenuBar \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qmenubar.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qmenu.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QPushButton \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QStatusBar \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qstatusbar.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QToolBar \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qtoolbar.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QVBoxLayout
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../Compass/mainwindow.cpp
 
 qcgaugewidget.o: ../../source/qcgaugewidget.cpp ../../source/qcgaugewidget.h \

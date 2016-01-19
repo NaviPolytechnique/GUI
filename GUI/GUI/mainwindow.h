@@ -7,6 +7,7 @@
 #include "WidgetsUsed/EandM/eandm.h"
 #include "WidgetsUsed/InputCommands/inputcommands.h"
 #include "WidgetsUsed/AttitudeMeter/attitudemeter.h"
+#include "WidgetsUsed/Compass/compass.h"
 #include "dronestatus.h"
 #include "threadreadinput.h"
 
@@ -37,6 +38,7 @@ private:
     InputCommands *widgetinputcommands;
     EandM *widgeteandm ;
     Buttons *widgetcontrol;
+    Compass *widgetcompass;
     ThreadReadInput *thread;
 };
 

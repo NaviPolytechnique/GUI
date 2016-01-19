@@ -23,6 +23,7 @@ SOURCES += main.cpp\
     WidgetsUsed/Buttons/buttons.cpp \
     WidgetsUsed/EandM/eandm.cpp \
     WidgetsUsed/InputCommands/inputcommands.cpp \
+    WidgetsUsed/Compass/compass.cpp
 
 HEADERS  += mainwindow.h \
     Source/qcgaugewidget.h \
@@ -33,10 +34,15 @@ HEADERS  += mainwindow.h \
     WidgetsUsed/AttitudeMeter/attitudemeter.h \
     WidgetsUsed/Buttons/buttons.h \
     WidgetsUsed/EandM/eandm.h \
-    WidgetsUsed/InputCommands/inputcommands.h
+    WidgetsUsed/InputCommands/inputcommands.h \
+    WidgetsUsed/Compass/compass.h
 
-FORMS    += mainwindow.ui WidgetsUsed/Buttons/buttons.ui WidgetsUsed/EandM/eandm.ui WidgetsUsed/InputCommands/inputcommands.ui \
-    WidgetsUsed/AttitudeMeter/attitudemeter.ui
+FORMS    += mainwindow.ui \
+    WidgetsUsed/Buttons/buttons.ui \
+    WidgetsUsed/EandM/eandm.ui \
+    WidgetsUsed/InputCommands/inputcommands.ui \
+    WidgetsUsed/AttitudeMeter/attitudemeter.ui \
+    WidgetsUsed/Compass/compass.ui
 
 RESOURCES += \
     images.qrc

@@ -35,7 +35,7 @@ public:
     QVBoxLayout *layoutvdroite;
     QLabel *logo;
     QHBoxLayout *horizonindicator;
-    QWidget *compass;
+    QHBoxLayout *compass;
     QTabWidget *tabwidget;
     QWidget *map;
     QWidget *attitudes;
@@ -83,10 +83,11 @@ public:
 
         layoutvdroite->addLayout(horizonindicator);
 
-        compass = new QWidget(centralWidget);
+        compass = new QHBoxLayout();
+        compass->setSpacing(6);
         compass->setObjectName(QStringLiteral("compass"));
 
-        layoutvdroite->addWidget(compass);
+        layoutvdroite->addLayout(compass);
 
         layoutvdroite->setStretch(0, 2);
         layoutvdroite->setStretch(1, 3);

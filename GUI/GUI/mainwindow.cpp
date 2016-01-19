@@ -27,9 +27,13 @@ MainWindow::MainWindow(QWidget *parent) :
     widgetattitudemeter = new AttitudeMeter();
     widgetattitudemeter->setMinimumSize(320,300);
     ui->horizonindicator->addWidget(widgetattitudemeter,0,Qt::AlignCenter);
+    widgetcompass = new Compass();
+    widgetcompass->setMinimumSize(320,300);
+    ui->compass->addWidget(widgetcompass,0,Qt::AlignCenter);
 
 
-    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetattitudemeter, SLOT(MAJAttitudeMeter(QString)));
+    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetattitudemeter, SLOT(MAJAttitudeMeter(QString))/*,Qt::QueuedConnection*/);
+    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetcompass, SLOT(MAJCompass(QString))/*,Qt::QueuedConnection*/);
 
 }
 

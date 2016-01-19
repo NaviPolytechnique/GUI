@@ -58,7 +58,8 @@ SOURCES       = ../GUI/main.cpp \
 		../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.cpp \
 		../GUI/WidgetsUsed/Buttons/buttons.cpp \
 		../GUI/WidgetsUsed/EandM/eandm.cpp \
-		../GUI/WidgetsUsed/InputCommands/inputcommands.cpp qrc_images.cpp \
+		../GUI/WidgetsUsed/InputCommands/inputcommands.cpp \
+		../GUI/WidgetsUsed/Compass/compass.cpp qrc_images.cpp \
 		moc_mainwindow.cpp \
 		moc_qcgaugewidget.cpp \
 		moc_dronestatus.cpp \
@@ -67,7 +68,8 @@ SOURCES       = ../GUI/main.cpp \
 		moc_attitudemeter.cpp \
 		moc_buttons.cpp \
 		moc_eandm.cpp \
-		moc_inputcommands.cpp
+		moc_inputcommands.cpp \
+		moc_compass.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		qcgaugewidget.o \
@@ -79,6 +81,7 @@ OBJECTS       = main.o \
 		buttons.o \
 		eandm.o \
 		inputcommands.o \
+		compass.o \
 		qrc_images.o \
 		moc_mainwindow.o \
 		moc_qcgaugewidget.o \
@@ -88,7 +91,8 @@ OBJECTS       = main.o \
 		moc_attitudemeter.o \
 		moc_buttons.o \
 		moc_eandm.o \
-		moc_inputcommands.o
+		moc_inputcommands.o \
+		moc_compass.o
 DIST          = /home/pily/Qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/pily/Qt/5.5/gcc_64/mkspecs/common/unix.conf \
 		/home/pily/Qt/5.5/gcc_64/mkspecs/common/linux.conf \
@@ -232,7 +236,8 @@ DIST          = /home/pily/Qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.h \
 		../GUI/WidgetsUsed/Buttons/buttons.h \
 		../GUI/WidgetsUsed/EandM/eandm.h \
-		../GUI/WidgetsUsed/InputCommands/inputcommands.h ../GUI/main.cpp \
+		../GUI/WidgetsUsed/InputCommands/inputcommands.h \
+		../GUI/WidgetsUsed/Compass/compass.h ../GUI/main.cpp \
 		../GUI/mainwindow.cpp \
 		../GUI/Source/qcgaugewidget.cpp \
 		../GUI/dronestatus.cpp \
@@ -242,7 +247,8 @@ DIST          = /home/pily/Qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
 		../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.cpp \
 		../GUI/WidgetsUsed/Buttons/buttons.cpp \
 		../GUI/WidgetsUsed/EandM/eandm.cpp \
-		../GUI/WidgetsUsed/InputCommands/inputcommands.cpp
+		../GUI/WidgetsUsed/InputCommands/inputcommands.cpp \
+		../GUI/WidgetsUsed/Compass/compass.cpp
 QMAKE_TARGET  = GUI
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = GUI
@@ -270,7 +276,7 @@ first: all
 
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h ui_buttons.h ui_eandm.h ui_inputcommands.h ui_attitudemeter.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_buttons.h ui_eandm.h ui_inputcommands.h ui_attitudemeter.h ui_compass.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../GUI/GUI.pro /home/pily/Qt/5.5/gcc_64/mkspecs/linux-g++/qmake.conf /home/pily/Qt/5.5/gcc_64/mkspecs/features/spec_pre.prf \
@@ -567,9 +573,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../GUI/images.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../GUI/mainwindow.h ../GUI/Source/qcgaugewidget.h ../GUI/dronestatus.h ../GUI/lecturefichiertexte.h ../GUI/readinput.h ../GUI/threadreadinput.h ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.h ../GUI/WidgetsUsed/Buttons/buttons.h ../GUI/WidgetsUsed/EandM/eandm.h ../GUI/WidgetsUsed/InputCommands/inputcommands.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../GUI/main.cpp ../GUI/mainwindow.cpp ../GUI/Source/qcgaugewidget.cpp ../GUI/dronestatus.cpp ../GUI/lecturefichiertexte.cpp ../GUI/readinput.cpp ../GUI/threadreadinput.cpp ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.cpp ../GUI/WidgetsUsed/Buttons/buttons.cpp ../GUI/WidgetsUsed/EandM/eandm.cpp ../GUI/WidgetsUsed/InputCommands/inputcommands.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../GUI/mainwindow.ui ../GUI/WidgetsUsed/Buttons/buttons.ui ../GUI/WidgetsUsed/EandM/eandm.ui ../GUI/WidgetsUsed/InputCommands/inputcommands.ui ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../GUI/mainwindow.h ../GUI/Source/qcgaugewidget.h ../GUI/dronestatus.h ../GUI/lecturefichiertexte.h ../GUI/readinput.h ../GUI/threadreadinput.h ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.h ../GUI/WidgetsUsed/Buttons/buttons.h ../GUI/WidgetsUsed/EandM/eandm.h ../GUI/WidgetsUsed/InputCommands/inputcommands.h ../GUI/WidgetsUsed/Compass/compass.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../GUI/main.cpp ../GUI/mainwindow.cpp ../GUI/Source/qcgaugewidget.cpp ../GUI/dronestatus.cpp ../GUI/lecturefichiertexte.cpp ../GUI/readinput.cpp ../GUI/threadreadinput.cpp ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.cpp ../GUI/WidgetsUsed/Buttons/buttons.cpp ../GUI/WidgetsUsed/EandM/eandm.cpp ../GUI/WidgetsUsed/InputCommands/inputcommands.cpp ../GUI/WidgetsUsed/Compass/compass.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../GUI/mainwindow.ui ../GUI/WidgetsUsed/Buttons/buttons.ui ../GUI/WidgetsUsed/EandM/eandm.ui ../GUI/WidgetsUsed/InputCommands/inputcommands.ui ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.ui ../GUI/WidgetsUsed/Compass/compass.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -597,9 +603,9 @@ qrc_images.cpp: ../GUI/images.qrc \
 		../GUI/logo.png
 	/home/pily/Qt/5.5/gcc_64/bin/rcc -name images ../GUI/images.qrc -o qrc_images.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_qcgaugewidget.cpp moc_dronestatus.cpp moc_lecturefichiertexte.cpp moc_threadreadinput.cpp moc_attitudemeter.cpp moc_buttons.cpp moc_eandm.cpp moc_inputcommands.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_qcgaugewidget.cpp moc_dronestatus.cpp moc_lecturefichiertexte.cpp moc_threadreadinput.cpp moc_attitudemeter.cpp moc_buttons.cpp moc_eandm.cpp moc_inputcommands.cpp moc_compass.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_qcgaugewidget.cpp moc_dronestatus.cpp moc_lecturefichiertexte.cpp moc_threadreadinput.cpp moc_attitudemeter.cpp moc_buttons.cpp moc_eandm.cpp moc_inputcommands.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_qcgaugewidget.cpp moc_dronestatus.cpp moc_lecturefichiertexte.cpp moc_threadreadinput.cpp moc_attitudemeter.cpp moc_buttons.cpp moc_eandm.cpp moc_inputcommands.cpp moc_compass.cpp
 moc_mainwindow.cpp: /home/pily/Qt/5.5/gcc_64/include/QtWidgets/QMainWindow \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qwidget.h \
@@ -726,14 +732,21 @@ moc_mainwindow.cpp: /home/pily/Qt/5.5/gcc_64/include/QtWidgets/QMainWindow \
 		../GUI/WidgetsUsed/InputCommands/inputcommands.h \
 		../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QWidget \
+		../GUI/Source/qcgaugewidget.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/QPainter \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpainter.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QObject \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QRectF \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QtMath \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmath.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QStringList \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTimer \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtimer.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbasictimer.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QVector \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QMetaType \
+		../GUI/WidgetsUsed/Compass/compass.h \
 		../GUI/dronestatus.h \
-		/home/pily/Qt/5.5/gcc_64/include/QtCore/QObject \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QString \
 		../GUI/threadreadinput.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QThread \
@@ -1197,6 +1210,15 @@ moc_attitudemeter.cpp: /home/pily/Qt/5.5/gcc_64/include/QtWidgets/QWidget \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtGui/qvector2d.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
+		../GUI/Source/qcgaugewidget.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/QPainter \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpainter.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qtextoption.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpen.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QObject \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QRectF \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QtMath \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmath.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QFileDialog \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qfiledialog.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdir.h \
@@ -1539,11 +1561,125 @@ moc_inputcommands.cpp: /home/pily/Qt/5.5/gcc_64/include/QtWidgets/QDialog \
 		../GUI/WidgetsUsed/InputCommands/inputcommands.h
 	/home/pily/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/pily/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/pily/Desktop/Drone/IHM/GUI/GUI/GUI -I/home/pily/Qt/5.5/gcc_64/include -I/home/pily/Qt/5.5/gcc_64/include/QtWidgets -I/home/pily/Qt/5.5/gcc_64/include/QtGui -I/home/pily/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/WidgetsUsed/InputCommands/inputcommands.h -o moc_inputcommands.cpp
 
+moc_compass.cpp: /home/pily/Qt/5.5/gcc_64/include/QtWidgets/QDialog \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qwidget.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qglobal.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qconfig.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfeatures.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtypetraits.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qsysinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qlogging.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qflags.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_gcc.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_armv7.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_armv6.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_armv5.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_ia64.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_mips.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_x86.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_unix.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmutex.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qnumeric.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qnamespace.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qobject.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qstring.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qchar.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbytearray.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qrefcount.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qarraydata.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qlist.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qalgorithms.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qiterator.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qstringlist.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qregexp.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcoreevent.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmetatype.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qisenum.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qobject_impl.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmargins.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qrect.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qsize.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qpoint.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpalette.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qcolor.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qrgb.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qbrush.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qpair.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qvector.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qmatrix.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpolygon.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qregion.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdatastream.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qiodevice.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qline.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qtransform.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpainterpath.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qimage.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpixelformat.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpixmap.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qshareddata.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qhash.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qfont.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qfontinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qcursor.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qkeysequence.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qevent.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qvariant.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmap.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdebug.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtextstream.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qlocale.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qset.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qurl.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qurlquery.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfile.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qvector2d.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QFileDialog \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qfiledialog.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdir.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfileinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QStringList \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTimer \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtimer.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbasictimer.h \
+		../GUI/WidgetsUsed/Compass/compass.h
+	/home/pily/Qt/5.5/gcc_64/bin/moc $(DEFINES) -I/home/pily/Qt/5.5/gcc_64/mkspecs/linux-g++ -I/home/pily/Desktop/Drone/IHM/GUI/GUI/GUI -I/home/pily/Qt/5.5/gcc_64/include -I/home/pily/Qt/5.5/gcc_64/include/QtWidgets -I/home/pily/Qt/5.5/gcc_64/include/QtGui -I/home/pily/Qt/5.5/gcc_64/include/QtCore -I. ../GUI/WidgetsUsed/Compass/compass.h -o moc_compass.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_buttons.h ui_eandm.h ui_inputcommands.h ui_attitudemeter.h
+compiler_uic_make_all: ui_mainwindow.h ui_buttons.h ui_eandm.h ui_inputcommands.h ui_attitudemeter.h ui_compass.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_buttons.h ui_eandm.h ui_inputcommands.h ui_attitudemeter.h
+	-$(DEL_FILE) ui_mainwindow.h ui_buttons.h ui_eandm.h ui_inputcommands.h ui_attitudemeter.h ui_compass.h
 ui_mainwindow.h: ../GUI/mainwindow.ui
 	/home/pily/Qt/5.5/gcc_64/bin/uic ../GUI/mainwindow.ui -o ui_mainwindow.h
 
@@ -1558,6 +1694,9 @@ ui_inputcommands.h: ../GUI/WidgetsUsed/InputCommands/inputcommands.ui
 
 ui_attitudemeter.h: ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.ui
 	/home/pily/Qt/5.5/gcc_64/bin/uic ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.ui -o ui_attitudemeter.h
+
+ui_compass.h: ../GUI/WidgetsUsed/Compass/compass.ui
+	/home/pily/Qt/5.5/gcc_64/bin/uic ../GUI/WidgetsUsed/Compass/compass.ui -o ui_compass.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -1696,14 +1835,21 @@ main.o: ../GUI/main.cpp ../GUI/mainwindow.h \
 		../GUI/WidgetsUsed/InputCommands/inputcommands.h \
 		../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QWidget \
+		../GUI/Source/qcgaugewidget.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/QPainter \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpainter.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QObject \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QRectF \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QtMath \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmath.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QStringList \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTimer \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtimer.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbasictimer.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QVector \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QMetaType \
+		../GUI/WidgetsUsed/Compass/compass.h \
 		../GUI/dronestatus.h \
-		/home/pily/Qt/5.5/gcc_64/include/QtCore/QObject \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QString \
 		../GUI/threadreadinput.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QThread \
@@ -1849,14 +1995,21 @@ mainwindow.o: ../GUI/mainwindow.cpp ../GUI/mainwindow.h \
 		../GUI/WidgetsUsed/InputCommands/inputcommands.h \
 		../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QWidget \
+		../GUI/Source/qcgaugewidget.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/QPainter \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpainter.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QObject \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QRectF \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QtMath \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmath.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QStringList \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTimer \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtimer.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbasictimer.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QVector \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QMetaType \
+		../GUI/WidgetsUsed/Compass/compass.h \
 		../GUI/dronestatus.h \
-		/home/pily/Qt/5.5/gcc_64/include/QtCore/QObject \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QString \
 		../GUI/threadreadinput.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QThread \
@@ -2475,6 +2628,15 @@ attitudemeter.o: ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.cpp ../GUI/Widge
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtGui/qvector2d.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
+		../GUI/Source/qcgaugewidget.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/QPainter \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpainter.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qtextoption.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpen.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QObject \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QRectF \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QtMath \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmath.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QFileDialog \
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qfiledialog.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdir.h \
@@ -2486,7 +2648,46 @@ attitudemeter.o: ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.cpp ../GUI/Widge
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbasictimer.h \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QVector \
 		/home/pily/Qt/5.5/gcc_64/include/QtCore/QMetaType \
-		ui_attitudemeter.h
+		ui_attitudemeter.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QVariant \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QAction \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qaction.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qicon.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QApplication \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qapplication.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qeventloop.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qguiapplication.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qinputmethod.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QButtonGroup \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QHeaderView \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qframe.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qvalidator.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qregularexpression.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qslider.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qstyle.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QLabel \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qlabel.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QVBoxLayout \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qboxlayout.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qlayout.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qgridlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o attitudemeter.o ../GUI/WidgetsUsed/AttitudeMeter/attitudemeter.cpp
 
 buttons.o: ../GUI/WidgetsUsed/Buttons/buttons.cpp ../GUI/WidgetsUsed/Buttons/buttons.h \
@@ -2945,6 +3146,121 @@ inputcommands.o: ../GUI/WidgetsUsed/InputCommands/inputcommands.cpp ../GUI/Widge
 		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qgridlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o inputcommands.o ../GUI/WidgetsUsed/InputCommands/inputcommands.cpp
 
+compass.o: ../GUI/WidgetsUsed/Compass/compass.cpp ../GUI/WidgetsUsed/Compass/compass.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QDialog \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qdialog.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qwidget.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qwindowdefs.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qglobal.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qconfig.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfeatures.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qsystemdetection.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qprocessordetection.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcompilerdetection.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtypeinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtypetraits.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qsysinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qlogging.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qflags.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbasicatomic.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qgenericatomic.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_gcc.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_msvc.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_armv7.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_armv6.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_armv5.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_ia64.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_mips.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_x86.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qatomic_unix.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qglobalstatic.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmutex.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qnumeric.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qobjectdefs.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qnamespace.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qobject.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qstring.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qchar.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbytearray.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qrefcount.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qarraydata.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qstringbuilder.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qlist.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qalgorithms.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qiterator.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbytearraylist.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qstringlist.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qregexp.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qstringmatcher.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcoreevent.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qscopedpointer.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmetatype.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qvarlengtharray.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcontainerfwd.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qisenum.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qobject_impl.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmargins.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpaintdevice.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qrect.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qsize.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qpoint.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpalette.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qcolor.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qrgb.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qbrush.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qpair.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qvector.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qmatrix.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpolygon.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qregion.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdatastream.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qiodevice.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qline.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qtransform.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpainterpath.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qimage.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpixelformat.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qpixmap.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qsharedpointer.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qshareddata.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qhash.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qfont.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qfontmetrics.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qfontinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qcursor.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qkeysequence.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qevent.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qvariant.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qmap.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdebug.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtextstream.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qlocale.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qset.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qcontiguouscache.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qurl.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qurlquery.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfile.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfiledevice.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qvector2d.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtGui/qtouchdevice.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/QFileDialog \
+		/home/pily/Qt/5.5/gcc_64/include/QtWidgets/qfiledialog.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qdir.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qfileinfo.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QStringList \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/QTimer \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qtimer.h \
+		/home/pily/Qt/5.5/gcc_64/include/QtCore/qbasictimer.h \
+		ui_compass.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o compass.o ../GUI/WidgetsUsed/Compass/compass.cpp
+
 qrc_images.o: qrc_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
 
@@ -2974,6 +3290,9 @@ moc_eandm.o: moc_eandm.cpp
 
 moc_inputcommands.o: moc_inputcommands.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_inputcommands.o moc_inputcommands.cpp
+
+moc_compass.o: moc_compass.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_compass.o moc_compass.cpp
 
 ####### Install
 
