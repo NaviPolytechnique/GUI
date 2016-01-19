@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef XYZWIDGET_H
+#define XYZWIDGET_H
 
 #include <QMainWindow>
 #include <QTimer>
@@ -11,16 +11,16 @@
 #include "qcustomplot.h"
 
 namespace Ui {
-class XYZ;
+class XyzWidget;
 }
 
-class XYZ : public QWidget
+class XyzWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit XYZ(QWidget *parent = 0);
-    ~XYZ();
+    explicit XyzWidget(QWidget *parent = 0);
+    ~XyzWidget();
     void setupRealtimeData1(QCustomPlot *customPlot);
     void setupRealtimeData2(QCustomPlot *customPlot);
     void setupRealtimeData3(QCustomPlot *customPlot);
@@ -35,10 +35,11 @@ private slots:
     void readResponseXYZ();//read log_out.txt
 
 private:
-    Ui::XYZ *ui;
+    Ui::XyzWidget *ui;
     QTimer datatimer;
     readInput rpy; //reader of the text file rpy.txt
     readInput xyz; //reader of the texte file log_out.txt
 };
 
-#endif // MAINWINDOW_H
+
+#endif // XYZWIDGET_H

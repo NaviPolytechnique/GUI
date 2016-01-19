@@ -1,5 +1,5 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef XYZ_H
+#define XYZ_H
 
 #include <QMainWindow>
 #include <QTimer>
@@ -41,4 +41,5 @@ private:
     readInput xyz; //reader of the texte file log_out.txt
 };
 
-#endif // MAINWINDOW_H
+
+#endif // XYZ_H
