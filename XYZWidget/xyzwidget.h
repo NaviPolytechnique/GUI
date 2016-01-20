@@ -1,7 +1,7 @@
 #ifndef XYZWIDGET_H
 #define XYZWIDGET_H
 
-#include <QMainWindow>
+#include <QWidget>
 #include <QTimer>
 #include <QFile>
 #include <QString>

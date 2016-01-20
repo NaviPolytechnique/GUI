@@ -14,12 +14,12 @@ namespace Ui {
 class XYZ;
 }
 
-class XYZ : public QWidget
+class XYZ : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit XYZ(QWidget *parent = 0);
+    explicit XYZ(QMainWindow *parent = 0);
     ~XYZ();
     void setupRealtimeData1(QCustomPlot *customPlot);
     void setupRealtimeData2(QCustomPlot *customPlot);
