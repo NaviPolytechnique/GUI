@@ -190,7 +190,7 @@ int Serial::readString(char *String,char FinalChar,unsigned int MaxNbBytes)
             NbBytes++;                                                  // If not, just increase the number of bytes read
         }
         if(ret==0){
-	  usleep(5000);
+      usleep(500);
 	}
         if (ret<0) return ret;                                          // Error while reading : return the error number
     }

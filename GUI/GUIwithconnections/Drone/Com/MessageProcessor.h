@@ -6,20 +6,25 @@
 #include "Message.h"
 #include "../Drone/Drone.h"
 #include "Communication.h"
+#include "mainwindow.h"
 #include <string.h>
 #include <vector>
+#include "../../mainwindow.h"
+#include <QString>
 
 
 extern int mProcessorThread;
 
 class Communication;
 class Drone;
+class MainWindow;
 
-class MessageProcessor : public Runnable {
+class MessageProcessor : public Runnable{
   
+
 public:
   
-  MessageProcessor(Communication* moduleCom_, Drone* drone);
+  MessageProcessor(Communication* moduleCom_, Drone* drone, MainWindow* window_);
   ~MessageProcessor();
   
   void start();
@@ -30,6 +35,7 @@ public:
   
 private:
   
+  MainWindow* window;
   Communication* moduleCom;
   Drone* drone;
 };

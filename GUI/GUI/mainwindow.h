@@ -10,6 +10,7 @@
 #include "WidgetsUsed/Compass/compass.h"
 #include "dronestatus.h"
 #include "threadreadinput.h"
+#include "WidgetsUsed/Gps/gps.h"
 
 
 namespace Ui {
@@ -39,6 +40,7 @@ private:
     EandM *widgeteandm ;
     Buttons *widgetcontrol;
     Compass *widgetcompass;
+    Gps *widgetmap;
     ThreadReadInput *thread;
 };
 

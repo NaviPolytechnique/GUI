@@ -4,15 +4,15 @@
 MessageSender::MessageSender(Communication* moduleCom_, Drone* drone_): drone(drone_),moduleCom(moduleCom_){
   comId = drone->getComId();
     currentMsgId= new int(0);
-};
+}
 
-MessageSender::~MessageSender(){};
+MessageSender::~MessageSender(){}
 
 void MessageSender::start(){
   drone->startThread(this, mSenderThread);
   /*Message* msg = new Message(Message::SYSTEM, "Hello I'm Navi !", 0);
   moduleCom->addtsMsg(msg);*/
-};
+}
 
 
 void* MessageSender::run(){
@@ -28,10 +28,11 @@ void* MessageSender::run(){
     std::stringstream ss;				//pas efficace apparemment
     ss<<checksum;
     msg_str = "$;"+ss.str()+";"+msg_str+"\r\n";
+    std::cout<<" envoi du message : "<<msg_str<<std::endl;
     moduleCom->sendStr((char*)msg_str.c_str());
   }
     return 0;
-};
+}
 
 std::string MessageSender::messagetoStr(Message* msg){
   Message::msg_type type = msg->getType();
@@ -59,7 +60,7 @@ std::string MessageSender::messagetoStr(Message* msg){
   ss<<content;
   return ss.str();
   
-};
+}
 
 uint32_t MessageSender::Adler32(std::string str){
   size_t len = str.size();
@@ -73,4 +74,4 @@ uint32_t MessageSender::Adler32(std::string str){
   
   return (b<<16)|a;
   
-};
+}

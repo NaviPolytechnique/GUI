@@ -40,20 +40,20 @@ private:
   Communication* moduleCom;
   int* id;
     
-  Point3D<uint16_t>* target;
-  Point3D<uint16_t>* pos;
-  Point3D<uint16_t>* speed;
-  Point3D<uint16_t>* angles;
-  Point3D<uint16_t>* posincr;
-  Point3D<uint16_t>* speedincr;
-  Point3D<uint16_t>* angleincr;
+  Point3D<int>* target;
+  Point3D<int>* pos;
+  Point3D<int>* speed;
+  Point3D<int>* angles;
+  Point3D<int>* posincr;
+  Point3D<int>* speedincr;
+  Point3D<int>* angleincr;
     
     
     //Attention : les verrous de la classe drone ne servent a rien ici
-  uint16_t* alt;
-  uint16_t* altincr;
-  uint16_t* charge;
-  uint16_t* chargeincr;
+  int* alt;
+  int* altincr;
+  int* charge;
+  int* chargeincr;
     
     
   

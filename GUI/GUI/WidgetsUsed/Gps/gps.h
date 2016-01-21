@@ -12,6 +12,7 @@
 #include <QString>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QPixmap>
 #include "readinput.h"
 
 
@@ -29,7 +30,8 @@ public:
 
 
 private slots:
-    void realtimeDataSlot();
+//    void realtimeDataSlot();
+    void MAJGps(QString);
 
 
 private:
@@ -37,7 +39,7 @@ private:
 
     QPixmap mapImg;
     QPainter painter;
-    QPoint currentPos; //current postion
+    QPointF currentPos; //current postion
 
     float agpstox;
     float bgpstox;

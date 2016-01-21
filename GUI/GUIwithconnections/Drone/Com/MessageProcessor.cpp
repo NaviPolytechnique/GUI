@@ -2,13 +2,14 @@
 
 
 
-MessageProcessor::MessageProcessor(Communication* moduleCom_, Drone* drone_): moduleCom(moduleCom_), drone(drone_){};
+MessageProcessor::MessageProcessor(Communication* moduleCom_, Drone* drone_, MainWindow* window_): moduleCom(moduleCom_),
+    drone(drone_),window(window_){}
 
-MessageProcessor::~MessageProcessor(){};
+MessageProcessor::~MessageProcessor(){}
 
 void MessageProcessor::start(){
   drone->startThread(this, mProcessorThread);
-};
+}
 
 void* MessageProcessor::run(){
     while(true){
@@ -17,7 +18,7 @@ void* MessageProcessor::run(){
         delete msg;
     }
     return 0;
-};
+}
 
 
 void MessageProcessor::decompose(std::string* msg, std::string delimiter, std::vector<std::string> * vect ){
@@ -40,9 +41,10 @@ void MessageProcessor::decompose(std::string* msg, std::string delimiter, std::v
         }
     }
 
-};
+}
 
 void MessageProcessor::treatMsg(Message* msg){
+
     std::string* content =msg->getContent();
     std::vector<std::string> vect;
     std::string delimiter = ";";
@@ -62,7 +64,7 @@ void MessageProcessor::treatMsg(Message* msg){
             /*if (!content.compare("kill")){  //pour le drone
                     drone->shutOff();
             }*/
-        
+        window->popup(QString::fromStdString(content));
         
             //appeler une fonction qui actualise la partie système de l'interface et qui affiche des messages du genre : taking off, landing... (#Pily)
     }
@@ -79,22 +81,21 @@ void MessageProcessor::treatMsg(Message* msg){
             std::cout<<"ping"<<std::endl;
             Message* msg = new Message(Message::PINGANSWER, vect[0], 0);
             moduleCom->addtsMsg(msg);
-        
-        std::cout<<vect[1]<<std::endl;
+
             if(!vect[1].compare("r")){
                 std::cout<<"normal"<<std::endl;
-                drone->setPos(::atof(vect[2].c_str()), ::atof(vect[3].c_str()), ::atof(vect[4].c_str()));
-                drone->setSpeed(::atof(vect[6].c_str()), ::atof(vect[7].c_str()), ::atof(vect[8].c_str()));
-                drone->setAngles(::atof(vect[9].c_str()), ::atof(vect[10].c_str()), ::atof(vect[11].c_str()));
-                drone->setAlt(::atof(vect[5].c_str()));
-                drone->setCharge(::atof(vect[12].c_str()));
+                drone->setPos(::atoi(vect[2].c_str()), ::atoi(vect[3].c_str()), ::atoi(vect[4].c_str()));
+                drone->setSpeed(::atoi(vect[6].c_str()), ::atoi(vect[7].c_str()), ::atoi(vect[8].c_str()));
+                drone->setAngles(::atoi(vect[9].c_str()), ::atoi(vect[10].c_str()), ::atoi(vect[11].c_str()));
+                drone->setAlt(::atoi(vect[5].c_str()));
+                drone->setCharge(::atoi(vect[12].c_str()));
             }else if (!vect[1].compare("i")){
                 std::cout<<"increment"<<std::endl;
-                drone->setPosIncr(::atof(vect[2].c_str()), ::atof(vect[3].c_str()), ::atof(vect[4].c_str()));
-                drone->setSpeedIncr(::atof(vect[6].c_str()), ::atof(vect[7].c_str()), ::atof(vect[8].c_str()));
-                drone->setAngleIncr(::atof(vect[9].c_str()), ::atof(vect[10].c_str()), ::atof(vect[11].c_str()));
-                drone->setAltIncr(::atof(vect[5].c_str()));
-                drone->setChargeIncr(::atof(vect[12].c_str()));
+                drone->setPosIncr(::atoi(vect[2].c_str()), ::atoi(vect[3].c_str()), ::atoi(vect[4].c_str()));
+                drone->setSpeedIncr(::atoi(vect[6].c_str()), ::atoi(vect[7].c_str()), ::atoi(vect[8].c_str()));
+                drone->setAngleIncr(::atoi(vect[9].c_str()), ::atoi(vect[10].c_str()), ::atoi(vect[11].c_str()));
+                drone->setAltIncr(::atoi(vect[5].c_str()));
+                drone->setChargeIncr(::atoi(vect[12].c_str()));
             }
     }
 
@@ -135,7 +136,7 @@ void MessageProcessor::treatMsg(Message* msg){
             pos = content->find(delimiter);
             std::string z_str = content->substr(oldpos, pos);
             
-            drone->setTarget(::atof(x_str.c_str()), ::atof(y_str.c_str()), ::atof(z_str.c_str()));
+            drone->setTarget(::atoi(x_str.c_str()), ::atoi(y_str.c_str()), ::atoi(z_str.c_str()));
         }
     }
     if(msg->getType()==Message::CONFIG){
@@ -235,18 +236,18 @@ void MessageProcessor::treatMsg(Message* msg){
       
       /*if(!type.compare("r")){
           std::cout<<"normal"<<std::endl;
-          drone->setPos(::atof(x_str.c_str()), ::atof(y_str.c_str()), ::atof(z_str.c_str()));
-          drone->setSpeed(::atof(vx_str.c_str()), ::atof(vy_str.c_str()), ::atof(vz_str.c_str()));
-          drone->setAngles(::atof(ax_str.c_str()), ::atof(ay_str.c_str()), ::atof(az_str.c_str()));
-          drone->setAlt(::atof(alt_str.c_str()));
-          drone->setCharge(::atof(charge_str.c_str()));*/
+          drone->setPos(::atoi(x_str.c_str()), ::atoi(y_str.c_str()), ::atoi(z_str.c_str()));
+          drone->setSpeed(::atoi(vx_str.c_str()), ::atoi(vy_str.c_str()), ::atoi(vz_str.c_str()));
+          drone->setAngles(::atoi(ax_str.c_str()), ::atoi(ay_str.c_str()), ::atoi(az_str.c_str()));
+          drone->setAlt(::atoi(alt_str.c_str()));
+          drone->setCharge(::atoi(charge_str.c_str()));*/
       /*}else if (!type.compare("i")){
           std::cout<<"increment"<<std::endl;
-          drone->setPosIncr(::atof(x_str.c_str()), ::atof(y_str.c_str()), ::atof(z_str.c_str()));
-          drone->setSpeedIncr(::atof(vx_str.c_str()), ::atof(vy_str.c_str()), ::atof(vz_str.c_str()));
-          drone->setAngleIncr(::atof(ax_str.c_str()), ::atof(ay_str.c_str()), ::atof(az_str.c_str()));
-          drone->setAltIncr(::atof(alt_str.c_str()));*/
-          //drone->setChargeIncr(::atof(charge_str.c_str()));
+          drone->setPosIncr(::atoi(x_str.c_str()), ::atoi(y_str.c_str()), ::atoi(z_str.c_str()));
+          drone->setSpeedIncr(::atoi(vx_str.c_str()), ::atoi(vy_str.c_str()), ::atoi(vz_str.c_str()));
+          drone->setAngleIncr(::atoi(ax_str.c_str()), ::atoi(ay_str.c_str()), ::atoi(az_str.c_str()));
+          drone->setAltIncr(::atoi(alt_str.c_str()));*/
+          //drone->setChargeIncr(::atoi(charge_str.c_str()));
       //}
     
   //}

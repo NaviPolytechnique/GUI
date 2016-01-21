@@ -17,10 +17,10 @@ Gps::Gps(QWidget *parent) :
 
     //set ReadInput
 
-    QString namexyz = QFileDialog::getOpenFileName(this, tr("Open LOGOUT"),
+   /* QString namexyz = QFileDialog::getOpenFileName(this, tr("Open LOGOUT"),
     "",
     tr("Text files (*.txt)"));
-    xyz=readInput(namexyz);
+    xyz=readInput(namexyz);*/
 
     //set Current Position
     currentPos = QPoint(agpstox*48.712888+bgpstox,agpstoy*2.214986+bgpstoy);
@@ -38,8 +38,8 @@ Gps::Gps(QWidget *parent) :
     pen.setWidth(5);
     painter.setPen(pen);
 
-
     lab = new QLabel(this);
+
 
     //Print image
     lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
@@ -50,7 +50,8 @@ Gps::Gps(QWidget *parent) :
     //painter.drawLine(currentPos, currentPos + QPoint(100,100));
     //painter.end();
     //lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
-    connect(&datatimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
+    //
+   //connect(&datatimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
     datatimer.start(0); // Interval 0 means to refresh as fast as possible
 }
 
@@ -59,7 +60,7 @@ Gps::~Gps()
     delete ui;
 }
 
-
+/*
 void Gps::realtimeDataSlot()
 {
       // calculate two new data points:
@@ -84,4 +85,14 @@ void Gps::realtimeDataSlot()
           lab->update();
       }
 }
+*/
+void Gps::MAJGps(QString DroneStatusMAJ){
 
+    //roll
+    QStringList list=DroneStatusMAJ.split(",");
+    currentPos+=QPointF(list.at(3).toDouble()*cmtopx,list.at(4).toDouble()*cmtopx);
+    painter.drawPoint(currentPos);
+    lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
+    lab->update();
+
+}

@@ -15,6 +15,7 @@ class EandM : public QDialog
 public:
     explicit EandM(QWidget *parent = 0);
     ~EandM();
+    void popup(QString message);
 
 private slots:
     //void on_textBrowser_2_textChanged();

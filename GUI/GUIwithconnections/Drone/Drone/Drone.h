@@ -13,6 +13,7 @@
 #include "../Thread/Thread.h"
 #include "../Utils/BlockingQueue.h"
 #include "../Com/MessageChecker.h"
+#include "../../mainwindow.h"
 
 #include <unistd.h>
 
@@ -28,13 +29,14 @@ class Communication;
 class IMU;
 class EKF;
 class Autopilot;
+class MainWindow;
 
 class Drone {
   
   
   public:
     
-    Drone();
+    Drone(MainWindow* window_);
     ~Drone();
     
 //********Fonctions d'initialisation*******//
@@ -62,34 +64,36 @@ class Drone {
     //void changeConfig(char[] change)
 
 //********Accès/modification des paramètres d'état*******//
-    Point3D<uint16_t>* getPos();
-    Point3D<uint16_t>* getSpeed();
-    Point3D<uint16_t>* getTarget();
-    Point3D<uint16_t>* getAngles();
-    Point3D<uint16_t>* getPosIncr();
-    Point3D<uint16_t>* getSpeedIncr();
-    Point3D<uint16_t>* getAngleIncr();
-    uint16_t* getAlt();
-    uint16_t* getAltIncr();
-    uint16_t* getCharge();
-    uint16_t* getChargeIncr();
+    Point3D<int>* getPos();
+    Point3D<int>* getSpeed();
+    Point3D<int>* getTarget();
+    Point3D<int>* getAngles();
+    Point3D<int>* getPosIncr();
+    Point3D<int>* getSpeedIncr();
+    Point3D<int>* getAngleIncr();
+    int* getAlt();
+    int* getAltIncr();
+    int* getCharge();
+    int* getChargeIncr();
   
-    void setPos(uint16_t x, uint16_t y, uint16_t z);
-    void setTarget(uint16_t x, uint16_t y, uint16_t z);
-    void setSpeed(uint16_t vx, uint16_t vy, uint16_t vz);
-    void setAngles(uint16_t a, uint16_t b, uint16_t c);
-    void setAlt(uint16_t z);
-    void setPosIncr(uint16_t x, uint16_t y, uint16_t z);
-    void setSpeedIncr(uint16_t vx, uint16_t vy, uint16_t vz);
-    void setAngleIncr(uint16_t a, uint16_t b, uint16_t c);
-    void setAltIncr(uint16_t z);
-    void setCharge(uint16_t c);
-    void setChargeIncr(uint16_t c);
+    void setPos(int x, int y, int z);
+    void setTarget(int x, int y, int z);
+    void setSpeed(int vx, int vy, int vz);
+    void setAngles(int a, int b, int c);
+    void setAlt(int z);
+    void setPosIncr(int x, int y, int z);
+    void setSpeedIncr(int vx, int vy, int vz);
+    void setAngleIncr(int a, int b, int c);
+    void setAltIncr(int z);
+    void setCharge(int c);
+    void setChargeIncr(int c);
 
 /*******************************************************/
     
   private:
     
+
+    MainWindow* window;
     pthread_mutex_t m_mutex;
     pthread_cond_t  m_condv;
     
@@ -104,22 +108,22 @@ class Drone {
 
     
 //********Paramètres d'état*******//
-    Point3D<uint16_t>* target;
-    Point3D<uint16_t>* pos;
-    Point3D<uint16_t>* speed;
-    Point3D<uint16_t>* angles;
-    Point3D<uint16_t>* posincr;
-    Point3D<uint16_t>* speedincr;
-    Point3D<uint16_t>* angleincr;
+    Point3D<int>* target;
+    Point3D<int>* pos;
+    Point3D<int>* speed;
+    Point3D<int>* angles;
+    Point3D<int>* posincr;
+    Point3D<int>* speedincr;
+    Point3D<int>* angleincr;
     pthread_mutex_t alt_mutex;
-    uint16_t* alt;
+    int* alt;
     pthread_mutex_t altincr_mutex;
-    uint16_t* altincr;
+    int* altincr;
     
     pthread_mutex_t charge_mutex;
-    uint16_t* charge;
+    int* charge;
     pthread_mutex_t chargeincr_mutex;
-    uint16_t* chargeincr;
+    int* chargeincr;
 
 };
 

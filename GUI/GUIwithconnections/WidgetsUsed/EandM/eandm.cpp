@@ -6,6 +6,7 @@ EandM::EandM(QWidget *parent) :
     ui(new Ui::EandM)
 {
     ui->setupUi(this);
+
 }
 
 EandM::~EandM()
@@ -23,3 +24,8 @@ void EandM::on_textBrowser_2_textChanged()
     std::cin>>
 }
 */
+void EandM::popup(QString message){
+    ui->textBrowser_2->setText(message);
+
+}
+

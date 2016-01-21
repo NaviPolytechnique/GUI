@@ -1,0 +1,31 @@
+to do :
+
+-gérer l'id de la communication
+
+-message processor
+
+-gérer l'envoi de messages
+
+- 2 messages qui ont les memes id
+
+- int ou int* ou void* pour les fonctions ?
+
+-exceptions ? -> et faire en sorte qu'elles soient envoyées automatiquement. Séparer les types d'exceptions. Certaines doievent générer une nouvlle demande d'envoi de message
+
+-extinction des modules : libérer la mémoire, arreter les threads...
+
+- deux messages qui ont le mm id ?
+
+-créer une interface pour les modules et une pour les sous-modules ?
+
+-incorporer in thread qui verifie en permanence l'etat du drone et arrete les moteurs ou lance un emergency thread en cas d'urgence
+
+-checker les fonctions public et private
+
+- voir avec Louis la représentation de la vitesse, de la position, de l'objectif.... pour implémenter la classe drone
+
+- que se passe-t-il si les id ,message et ping depasse intmax ???
+
+-delete des pointeurs créés dans les fonctions ?
+
+-gérer les paramètres grace à un fichier de config : priorité des threads, ports, vitesse du ping processor, delai avant extinction pour une erreur de ping...

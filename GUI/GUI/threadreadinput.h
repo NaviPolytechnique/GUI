@@ -15,7 +15,7 @@ class ReadInput : public QObject
     Q_OBJECT
 
 public:
-    ReadInput(QString file,QObject* parent = 0);
+    ReadInput(QString filerpy,QString filexyz,QObject* parent = 0);
 
 public slots:
     void start();
@@ -28,14 +28,17 @@ signals:
 
 
 private:
-    QString file;
+    QString filerpy,filexyz;
     QString newline;
     qint64 posRPY;
+    qint64 posXYZ;
     QStringList* lignelu;
 
 
     QStringList recuperationRPY(QString s);
     QStringList readRPY();
+    QStringList recuperationXYZ(QString s);
+    QStringList readXYZ();
 
 };
 
@@ -43,7 +46,7 @@ class ThreadReadInput : public QObject
 {
     Q_OBJECT
 public:
-    explicit ThreadReadInput(QString inputfile,QObject *parent = 0);
+    explicit ThreadReadInput(QString Tfilerpy, QString Tfilexyz,QObject *parent = 0);
 
 signals:
 
@@ -59,7 +62,8 @@ private slots:
     void onReadInputEnded();
 
 private:
-    QString Tfile;
+    QString Tfilerpy;
+    QString Tfilexyz;
     QThread* thread;
 
 };

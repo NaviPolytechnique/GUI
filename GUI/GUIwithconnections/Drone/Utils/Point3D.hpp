@@ -19,17 +19,20 @@ template <typename T> class Point3D{
 
 public:
     
-    Point3D<T>(T X_, T Y_, T Z_):X(X_), Y(Y_), Z(Z_){};
+    Point3D<T>(T X_, T Y_, T Z_):X(X_), Y(Y_), Z(Z_){
+        pthread_mutex_init(&m_mutex, NULL);
+    }
     
     
     Point3D<T>(Point3D<T>* p){
         X = p->getX();
         Y = p->getY();
         Z = p->getZ();
-    };
+        pthread_mutex_init(&m_mutex, NULL);
+    }
     
     
-    ~Point3D<T>(){};
+    ~Point3D<T>(){}
     
     
     
@@ -38,7 +41,7 @@ public:
         T r = X;
         pthread_mutex_unlock(&m_mutex);
         return r;
-    };
+    }
 
     
     T getY(){
@@ -46,7 +49,7 @@ public:
         T r = Y;
         pthread_mutex_unlock(&m_mutex);
         return r;
-    };
+    }
     
 
     T getZ(){
@@ -54,7 +57,7 @@ public:
         T r = Z;
         pthread_mutex_unlock(&m_mutex);
         return r;
-    };
+    }
 
     
     void setX(T X_){
@@ -62,27 +65,27 @@ public:
         X = X_;
         pthread_mutex_unlock(&m_mutex);
         
-    };
+    }
 
     void setY(T Y_){
         pthread_mutex_lock(&m_mutex);
         Y = Y_;
         pthread_mutex_unlock(&m_mutex);
         
-    };
+    }
 
     void setZ(T Z_){
         pthread_mutex_lock(&m_mutex);
         Z = Z_;
         pthread_mutex_unlock(&m_mutex);
         
-    };
+    }
     
     void print(){
         std::cout<<"X= " << getX() <<std::endl;
         std::cout<<"Y= " << getY() <<std::endl;
         std::cout<<"Z= " << getZ() <<std::endl;
-    };
+    }
 
     
     //void set(Point3D<T> p);

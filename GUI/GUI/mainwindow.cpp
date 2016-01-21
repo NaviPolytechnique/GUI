@@ -13,7 +13,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //thread de lecture de drone
     QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),"",tr("Text files (*.txt)"));
-    thread= new ThreadReadInput(namerpy);
+    QString namexyz = QFileDialog::getOpenFileName(this, tr("Open XYZ"),"",tr("Text files (*.txt)"));
+    thread= new ThreadReadInput(namerpy,namexyz);
     thread->start();
     connect(thread, SIGNAL(TonNewLine(QString)), dronestatus, SLOT(ModifierDroneStatus(QString)));
 
@@ -32,8 +33,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->compass->addWidget(widgetcompass,0,Qt::AlignCenter);
 
 
-    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetattitudemeter, SLOT(MAJAttitudeMeter(QString))/*,Qt::QueuedConnection*/);
-    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetcompass, SLOT(MAJCompass(QString))/*,Qt::QueuedConnection*/);
+
+
+    widgetmap=new Gps();
+    ui->map->addWidget(widgetmap);
+
+    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetattitudemeter, SLOT(MAJAttitudeMeter(QString)),Qt::QueuedConnection);
+    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetcompass, SLOT(MAJCompass(QString)),Qt::QueuedConnection);
+    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetmap, SLOT(MAJGps(QString)),Qt::QueuedConnection);
 
 }
 
@@ -41,4 +48,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+
+
 

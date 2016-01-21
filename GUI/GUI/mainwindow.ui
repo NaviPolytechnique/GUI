@@ -48,7 +48,7 @@
       </item>
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabwidget">
-        <widget class="QWidget" name="map">
+        <widget class="QWidget" name="tabmap">
          <property name="font">
           <font>
            <family>Times New Roman</family>
@@ -60,8 +60,13 @@
          <attribute name="title">
           <string>Tab 1</string>
          </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <layout class="QVBoxLayout" name="map"/>
+          </item>
+         </layout>
         </widget>
-        <widget class="QWidget" name="attitudes">
+        <widget class="QWidget" name="tabattitudes">
          <attribute name="title">
           <string>Tab 2</string>
          </attribute>

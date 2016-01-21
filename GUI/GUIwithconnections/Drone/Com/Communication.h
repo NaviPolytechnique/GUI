@@ -11,6 +11,7 @@
 #include "MessageSender.h"
 #include "PingProcessor.h"
 #include "ComException.h"
+#include "../../mainwindow.h"
 
 #include<exception>
 
@@ -22,13 +23,14 @@ class MessageProcessor;
 class MessageSender;
 class PingProcessor;
 class ComException;
+class MainWindow;
 
 
 class Communication{
   
 public :
   
-  Communication(Drone* drone_);
+  Communication(Drone* drone_, MainWindow* window_);
   ~Communication();
   void start();
   void stop();
@@ -49,6 +51,7 @@ public :
     
 private :
   
+  MainWindow* window;
   Drone* drone;
   
   BlockingQueue<char*>* rMsg;
