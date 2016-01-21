@@ -90,7 +90,7 @@ void Gps::MAJGps(QString DroneStatusMAJ){
 
     //roll
     QStringList list=DroneStatusMAJ.split(",");
-    currentPos+=QPointF(list.at(3).toDouble()*cmtopx,list.at(4).toDouble()*cmtopx);
+    currentPos+=QPointF(list.at(3).toDouble()*cmtopx,-list.at(4).toDouble()*cmtopx);
     painter.drawPoint(currentPos);
     lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
     lab->update();
