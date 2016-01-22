@@ -17,7 +17,8 @@ public:
     ~EandM();
 
 private slots:
-    //void on_textBrowser_2_textChanged();
+    void NewException(QString);
+    void NewSystemMsg(QString);
 
 private:
     Ui::EandM *ui;

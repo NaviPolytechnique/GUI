@@ -13,11 +13,14 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QDialog>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -26,10 +29,13 @@ class Ui_InputCommands
 public:
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout;
+    QSpacerItem *horizontalSpacer;
     QLabel *label;
+    QPushButton *pushButton;
     QTextEdit *inputcommands;
 
-    void setupUi(QDialog *InputCommands)
+    void setupUi(QWidget *InputCommands)
     {
         if (InputCommands->objectName().isEmpty())
             InputCommands->setObjectName(QStringLiteral("InputCommands"));
@@ -41,6 +47,13 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
         label = new QLabel(InputCommands);
         label->setObjectName(QStringLiteral("label"));
         QFont font;
@@ -49,8 +62,21 @@ public:
         font.setBold(true);
         font.setWeight(75);
         label->setFont(font);
+        label->setAlignment(Qt::AlignCenter);
 
-        verticalLayout->addWidget(label, 0, Qt::AlignHCenter|Qt::AlignVCenter);
+        horizontalLayout->addWidget(label);
+
+        pushButton = new QPushButton(InputCommands);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setFont(font);
+
+        horizontalLayout->addWidget(pushButton);
+
+        horizontalLayout->setStretch(0, 3);
+        horizontalLayout->setStretch(1, 7);
+        horizontalLayout->setStretch(2, 3);
+
+        verticalLayout->addLayout(horizontalLayout);
 
         inputcommands = new QTextEdit(InputCommands);
         inputcommands->setObjectName(QStringLiteral("inputcommands"));
@@ -68,10 +94,11 @@ public:
         QMetaObject::connectSlotsByName(InputCommands);
     } // setupUi
 
-    void retranslateUi(QDialog *InputCommands)
+    void retranslateUi(QWidget *InputCommands)
     {
         InputCommands->setWindowTitle(QApplication::translate("InputCommands", "TextInput", 0));
-        label->setText(QApplication::translate("InputCommands", "INPUT COMMANDS", 0));
+        label->setText(QApplication::translate("InputCommands", "Input Commands", 0));
+        pushButton->setText(QApplication::translate("InputCommands", "SEND", 0));
     } // retranslateUi
 
 };

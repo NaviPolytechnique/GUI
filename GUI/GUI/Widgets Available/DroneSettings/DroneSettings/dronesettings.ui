@@ -1,47 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EandM</class>
- <widget class="QDialog" name="EandM">
+ <class>DroneSettings</class>
+ <widget class="QDialog" name="DroneSettings">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>309</width>
-    <height>272</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>EandM</string>
+   <string>DroneSettings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="font">
-        <font>
-         <family>Times New Roman</family>
-         <pointsize>13</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>SYSTEM</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTextBrowser" name="system">
-       <property name="styleSheet">
-        <string notr="true">color:rgb(23, 233, 15);
-background-color: black;</string>
-       </property>
-      </widget>
-     </item>
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="1,10,1">
      <item>
       <widget class="QLabel" name="label">
        <property name="font">
@@ -53,7 +27,7 @@ background-color: black;</string>
         </font>
        </property>
        <property name="text">
-        <string>EXCEPTIONS</string>
+        <string>Drone Settings</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -61,10 +35,20 @@ background-color: black;</string>
       </widget>
      </item>
      <item>
-      <widget class="QTextBrowser" name="exceptions">
-       <property name="styleSheet">
-        <string notr="true">color:rgb(23, 233, 15);
-background-color: black;</string>
+      <layout class="QFormLayout" name="formLayout"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>13</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Set</string>
        </property>
       </widget>
      </item>

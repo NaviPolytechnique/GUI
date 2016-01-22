@@ -39,10 +39,10 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizonindicator"/>
+         <layout class="QHBoxLayout" name="controls"/>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="compass"/>
+         <layout class="QHBoxLayout" name="inputcommands"/>
         </item>
        </layout>
       </item>
@@ -83,10 +83,10 @@
          </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="controls"/>
+         <layout class="QVBoxLayout" name="horizonindicator"/>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="inputcommands"/>
+         <layout class="QVBoxLayout" name="compass"/>
         </item>
        </layout>
       </item>

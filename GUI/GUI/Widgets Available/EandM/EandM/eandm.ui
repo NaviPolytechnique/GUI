@@ -35,7 +35,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTextBrowser" name="textBrowser_2">
+      <widget class="QTextBrowser" name="system">
        <property name="styleSheet">
         <string notr="true">color:rgb(23, 233, 15);
 background-color: black;</string>
@@ -61,7 +61,7 @@ background-color: black;</string>
       </widget>
      </item>
      <item>
-      <widget class="QTextBrowser" name="textBrowser">
+      <widget class="QTextBrowser" name="exceptions">
        <property name="styleSheet">
         <string notr="true">color:rgb(23, 233, 15);
 background-color: black;</string>

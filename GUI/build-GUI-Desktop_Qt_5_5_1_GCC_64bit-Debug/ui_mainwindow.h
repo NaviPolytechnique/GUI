@@ -34,8 +34,8 @@ public:
     QGridLayout *mainlayout;
     QVBoxLayout *layoutvdroite;
     QLabel *logo;
-    QHBoxLayout *horizonindicator;
-    QHBoxLayout *compass;
+    QHBoxLayout *controls;
+    QHBoxLayout *inputcommands;
     QTabWidget *tabwidget;
     QWidget *tabmap;
     QVBoxLayout *verticalLayout_2;
@@ -43,8 +43,8 @@ public:
     QWidget *tabattitudes;
     QHBoxLayout *layouthbas;
     QLabel *label_2;
-    QVBoxLayout *controls;
-    QVBoxLayout *inputcommands;
+    QVBoxLayout *horizonindicator;
+    QVBoxLayout *compass;
     QVBoxLayout *eandm;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -79,17 +79,17 @@ public:
 
         layoutvdroite->addWidget(logo);
 
-        horizonindicator = new QHBoxLayout();
-        horizonindicator->setSpacing(6);
-        horizonindicator->setObjectName(QStringLiteral("horizonindicator"));
+        controls = new QHBoxLayout();
+        controls->setSpacing(6);
+        controls->setObjectName(QStringLiteral("controls"));
 
-        layoutvdroite->addLayout(horizonindicator);
+        layoutvdroite->addLayout(controls);
 
-        compass = new QHBoxLayout();
-        compass->setSpacing(6);
-        compass->setObjectName(QStringLiteral("compass"));
+        inputcommands = new QHBoxLayout();
+        inputcommands->setSpacing(6);
+        inputcommands->setObjectName(QStringLiteral("inputcommands"));
 
-        layoutvdroite->addLayout(compass);
+        layoutvdroite->addLayout(inputcommands);
 
         layoutvdroite->setStretch(0, 2);
         layoutvdroite->setStretch(1, 3);
@@ -132,17 +132,17 @@ public:
 
         layouthbas->addWidget(label_2);
 
-        controls = new QVBoxLayout();
-        controls->setSpacing(6);
-        controls->setObjectName(QStringLiteral("controls"));
+        horizonindicator = new QVBoxLayout();
+        horizonindicator->setSpacing(6);
+        horizonindicator->setObjectName(QStringLiteral("horizonindicator"));
 
-        layouthbas->addLayout(controls);
+        layouthbas->addLayout(horizonindicator);
 
-        inputcommands = new QVBoxLayout();
-        inputcommands->setSpacing(6);
-        inputcommands->setObjectName(QStringLiteral("inputcommands"));
+        compass = new QVBoxLayout();
+        compass->setSpacing(6);
+        compass->setObjectName(QStringLiteral("compass"));
 
-        layouthbas->addLayout(inputcommands);
+        layouthbas->addLayout(compass);
 
 
         mainlayout->addLayout(layouthbas, 1, 0, 1, 1);
