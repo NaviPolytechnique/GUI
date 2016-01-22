@@ -178,7 +178,7 @@ public:
         StartAll->setText(QApplication::translate("Buttons", "Start All", 0));
         Pilot->setText(QApplication::translate("Buttons", "Pilot", 0));
         Kill->setText(QApplication::translate("Buttons", "Kill", 0));
-        Land->setText(QApplication::translate("Buttons", "PushButton", 0));
+        Land->setText(QApplication::translate("Buttons", "Land", 0));
     } // retranslateUi
 
 };

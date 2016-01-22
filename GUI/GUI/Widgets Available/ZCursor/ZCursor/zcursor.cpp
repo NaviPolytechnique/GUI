@@ -13,10 +13,11 @@ ZCursor::ZCursor(QWidget *parent) :
 
 
     ui->zslider->setTracking(true);
-    ui->zslider->setRange(0,10);
+    ui->zslider->setRange(0,100);
     ui->zslider->setSliderPosition(0);
     rmin=0;
-    rmax=10;
+    rmax=100;
+    ztarget=0;
 
     //set lcd
 
@@ -42,23 +43,22 @@ void ZCursor::MAJZCursor(QString DroneStatusMAJ)
 
 void ZCursor::setNewZTarget(int i)
 {
-    ztarget=i;
-    if(ztarget<0){
-        ztarget=0;
+    zcursor=i;
+    if(zcursor<0){
+        zcursor=0;
     }
+    ztarget=(double)zcursor/100;
     ui->lcdztarget->display(ztarget);
 
-    if (ztarget==rmin && rmin!=0){
-        rmin-=10;
-        rmax-=10;
-
+    if (zcursor==rmin && rmin!=0){
+        rmin-=100;
+        rmax-=100;
         ui->zslider->setRange(rmin,rmax);
         ui->zslider->setSliderPosition(rmax-1);
     }
-    if (ztarget==rmax){
-        rmin+=10;
-        rmax+=10;
-
+    if (zcursor==rmax){
+        rmin+=100;
+        rmax+=100;
         ui->zslider->setRange(rmin,rmax);
         ui->zslider->setSliderPosition(rmin+1);
     }

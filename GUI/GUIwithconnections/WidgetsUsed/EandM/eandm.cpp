@@ -6,26 +6,17 @@ EandM::EandM(QWidget *parent) :
     ui(new Ui::EandM)
 {
     ui->setupUi(this);
-
 }
 
 EandM::~EandM()
 {
     delete ui;
 }
-/*
-void EandM::write(){
-    std::cin>>
 
+void EandM::NewException(QString exception){
+    ui->exceptions->append(exception);
 }
 
-void EandM::on_textBrowser_2_textChanged()
-{
-    std::cin>>
+void EandM::NewSystemMsg(QString SystemMsg){
+    ui->system->append(SystemMsg);
 }
-*/
-void EandM::popup(QString message){
-    ui->textBrowser_2->setText(message);
-
-}
-

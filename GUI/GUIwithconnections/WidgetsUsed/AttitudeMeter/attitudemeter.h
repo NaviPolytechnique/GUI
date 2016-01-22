@@ -21,9 +21,6 @@ public:
     explicit AttitudeMeter(QWidget *parent = 0);
     ~AttitudeMeter();
 
-signals:
-    void LigneLu(QString Str );
-
 private slots:
     void MAJAttitudeMeter(QString DroneStatusMAJ);
 

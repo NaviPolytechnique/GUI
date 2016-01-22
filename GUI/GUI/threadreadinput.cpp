@@ -53,10 +53,16 @@ void ReadInput::sendline(){
     lignelu->append(listxyz.at(0));
     lignelu->append(listxyz.at(1));
     lignelu->append(listxyz.at(2));
+    lignelu->append(listxyz.at(3));
+    lignelu->append(listxyz.at(4));
+    lignelu->append(listxyz.at(5));
 
 
     newline=lignelu->join(",");
     emit signalNewLine(newline);
+    lignelu->removeAt(8);
+    lignelu->removeAt(7);
+    lignelu->removeAt(6);
     lignelu->removeAt(5);
     lignelu->removeAt(4);
     lignelu->removeAt(3);

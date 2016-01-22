@@ -48,6 +48,9 @@
       </item>
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabwidget">
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
         <widget class="QWidget" name="tabmap">
          <property name="font">
           <font>
@@ -70,11 +73,16 @@
          <attribute name="title">
           <string>Tab 2</string>
          </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QVBoxLayout" name="graphs"/>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>
       <item row="1" column="0">
-       <layout class="QHBoxLayout" name="layouthbas">
+       <layout class="QHBoxLayout" name="layouthbas" stretch="1,1,1,1">
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
@@ -87,6 +95,9 @@
         </item>
         <item>
          <layout class="QVBoxLayout" name="compass"/>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="zcursor"/>
         </item>
        </layout>
       </item>

@@ -7,7 +7,7 @@
 QT       += core gui widgets
 CONFIG   += c++11
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = GUIwithconnections
 TEMPLATE = app
@@ -37,7 +37,12 @@ SOURCES += main.cpp\
     Drone/Thread/Thread.cpp \
     Drone/Thread/ThreadStruct.cpp \
     Drone/Utils/Listener.cpp \
-    Drone/Utils/Point3D.cpp
+    Drone/Utils/Point3D.cpp \
+    WidgetsUsed/DroneSettings/dronesettings.cpp \
+    WidgetsUsed/Gps/gps.cpp \
+    WidgetsUsed/XYZWidget/qcustomplot.cpp \
+    WidgetsUsed/XYZWidget/xyzwidget.cpp \
+    WidgetsUsed/ZCursor/zcursor.cpp
 
 HEADERS  += mainwindow.h \
     Source/qcgaugewidget.h \
@@ -68,11 +73,20 @@ HEADERS  += mainwindow.h \
     Drone/Thread/ThreadStruct.h \
     Drone/Utils/BlockingQueue.h \
     Drone/Utils/Listener.h \
-    Drone/Utils/Point3D.hpp
+    Drone/Utils/Point3D.hpp \
+    WidgetsUsed/DroneSettings/dronesettings.h \
+    WidgetsUsed/Gps/gps.h \
+    WidgetsUsed/XYZWidget/qcustomplot.h \
+    WidgetsUsed/XYZWidget/xyzwidget.h \
+    WidgetsUsed/ZCursor/zcursor.h
 
 FORMS    += mainwindow.ui \
     WidgetsUsed/AttitudeMeter/attitudemeter.ui \
     WidgetsUsed/Buttons/buttons.ui \
     WidgetsUsed/Compass/compass.ui \
     WidgetsUsed/EandM/eandm.ui \
-    WidgetsUsed/InputCommands/inputcommands.ui
+    WidgetsUsed/InputCommands/inputcommands.ui \
+    WidgetsUsed/DroneSettings/dronesettings.ui \
+    WidgetsUsed/Gps/gps.ui \
+    WidgetsUsed/XYZWidget/xyzwidget.ui \
+    WidgetsUsed/ZCursor/zcursor.ui

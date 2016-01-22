@@ -31,16 +31,20 @@ MainWindow::MainWindow(QWidget *parent) :
     widgetcompass = new Compass();
     widgetcompass->setMinimumSize(320,300);
     ui->compass->addWidget(widgetcompass,0,Qt::AlignCenter);
+    widgetzcursor = new ZCursor();
+    ui->zcursor->addWidget(widgetzcursor);
 
-
-
-
+    widgetxyzwidget=new XyzWidget();
+    ui->graphs->addWidget(widgetxyzwidget);
     widgetmap=new Gps();
     ui->map->addWidget(widgetmap);
+
 
     connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetattitudemeter, SLOT(MAJAttitudeMeter(QString)),Qt::QueuedConnection);
     connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetcompass, SLOT(MAJCompass(QString)),Qt::QueuedConnection);
     connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetmap, SLOT(MAJGps(QString)),Qt::QueuedConnection);
+    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetxyzwidget, SLOT(MAJXyzWidget(QString)),Qt::QueuedConnection);
+    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetzcursor, SLOT(MAJZCursor(QString)),Qt::QueuedConnection);
 
 }
 

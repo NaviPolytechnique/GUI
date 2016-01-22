@@ -28,6 +28,7 @@ private:
 
     double ztarget;
     double zcurrent;
+    int zcursor;
     int rmin;
     int rmax;
 

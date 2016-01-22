@@ -34,15 +34,20 @@ public:
     QGridLayout *mainlayout;
     QVBoxLayout *layoutvdroite;
     QLabel *logo;
-    QHBoxLayout *horizonindicator;
-    QHBoxLayout *compass;
+    QHBoxLayout *controls;
+    QHBoxLayout *inputcommands;
     QTabWidget *tabwidget;
-    QWidget *map;
-    QWidget *attitudes;
+    QWidget *tabmap;
+    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *map;
+    QWidget *tabattitudes;
+    QVBoxLayout *verticalLayout_3;
+    QVBoxLayout *graphs;
     QHBoxLayout *layouthbas;
     QLabel *label_2;
-    QVBoxLayout *controls;
-    QVBoxLayout *inputcommands;
+    QVBoxLayout *horizonindicator;
+    QVBoxLayout *compass;
+    QVBoxLayout *zcursor;
     QVBoxLayout *eandm;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -77,17 +82,17 @@ public:
 
         layoutvdroite->addWidget(logo);
 
-        horizonindicator = new QHBoxLayout();
-        horizonindicator->setSpacing(6);
-        horizonindicator->setObjectName(QStringLiteral("horizonindicator"));
+        controls = new QHBoxLayout();
+        controls->setSpacing(6);
+        controls->setObjectName(QStringLiteral("controls"));
 
-        layoutvdroite->addLayout(horizonindicator);
+        layoutvdroite->addLayout(controls);
 
-        compass = new QHBoxLayout();
-        compass->setSpacing(6);
-        compass->setObjectName(QStringLiteral("compass"));
+        inputcommands = new QHBoxLayout();
+        inputcommands->setSpacing(6);
+        inputcommands->setObjectName(QStringLiteral("inputcommands"));
 
-        layoutvdroite->addLayout(compass);
+        layoutvdroite->addLayout(inputcommands);
 
         layoutvdroite->setStretch(0, 2);
         layoutvdroite->setStretch(1, 3);
@@ -97,18 +102,38 @@ public:
 
         tabwidget = new QTabWidget(centralWidget);
         tabwidget->setObjectName(QStringLiteral("tabwidget"));
-        map = new QWidget();
-        map->setObjectName(QStringLiteral("map"));
+        tabmap = new QWidget();
+        tabmap->setObjectName(QStringLiteral("tabmap"));
         QFont font;
         font.setFamily(QStringLiteral("Times New Roman"));
         font.setPointSize(13);
         font.setBold(true);
         font.setWeight(75);
-        map->setFont(font);
-        tabwidget->addTab(map, QString());
-        attitudes = new QWidget();
-        attitudes->setObjectName(QStringLiteral("attitudes"));
-        tabwidget->addTab(attitudes, QString());
+        tabmap->setFont(font);
+        verticalLayout_2 = new QVBoxLayout(tabmap);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        map = new QVBoxLayout();
+        map->setSpacing(6);
+        map->setObjectName(QStringLiteral("map"));
+
+        verticalLayout_2->addLayout(map);
+
+        tabwidget->addTab(tabmap, QString());
+        tabattitudes = new QWidget();
+        tabattitudes->setObjectName(QStringLiteral("tabattitudes"));
+        verticalLayout_3 = new QVBoxLayout(tabattitudes);
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        graphs = new QVBoxLayout();
+        graphs->setSpacing(6);
+        graphs->setObjectName(QStringLiteral("graphs"));
+
+        verticalLayout_3->addLayout(graphs);
+
+        tabwidget->addTab(tabattitudes, QString());
 
         mainlayout->addWidget(tabwidget, 0, 0, 1, 1);
 
@@ -120,18 +145,28 @@ public:
 
         layouthbas->addWidget(label_2);
 
-        controls = new QVBoxLayout();
-        controls->setSpacing(6);
-        controls->setObjectName(QStringLiteral("controls"));
+        horizonindicator = new QVBoxLayout();
+        horizonindicator->setSpacing(6);
+        horizonindicator->setObjectName(QStringLiteral("horizonindicator"));
 
-        layouthbas->addLayout(controls);
+        layouthbas->addLayout(horizonindicator);
 
-        inputcommands = new QVBoxLayout();
-        inputcommands->setSpacing(6);
-        inputcommands->setObjectName(QStringLiteral("inputcommands"));
+        compass = new QVBoxLayout();
+        compass->setSpacing(6);
+        compass->setObjectName(QStringLiteral("compass"));
 
-        layouthbas->addLayout(inputcommands);
+        layouthbas->addLayout(compass);
 
+        zcursor = new QVBoxLayout();
+        zcursor->setSpacing(6);
+        zcursor->setObjectName(QStringLiteral("zcursor"));
+
+        layouthbas->addLayout(zcursor);
+
+        layouthbas->setStretch(0, 1);
+        layouthbas->setStretch(1, 1);
+        layouthbas->setStretch(2, 1);
+        layouthbas->setStretch(3, 1);
 
         mainlayout->addLayout(layouthbas, 1, 0, 1, 1);
 
@@ -162,6 +197,9 @@ public:
 
         retranslateUi(MainWindow);
 
+        tabwidget->setCurrentIndex(1);
+
+
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
@@ -169,8 +207,8 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         logo->setText(QString());
-        tabwidget->setTabText(tabwidget->indexOf(map), QApplication::translate("MainWindow", "Tab 1", 0));
-        tabwidget->setTabText(tabwidget->indexOf(attitudes), QApplication::translate("MainWindow", "Tab 2", 0));
+        tabwidget->setTabText(tabwidget->indexOf(tabmap), QApplication::translate("MainWindow", "Tab 1", 0));
+        tabwidget->setTabText(tabwidget->indexOf(tabattitudes), QApplication::translate("MainWindow", "Tab 2", 0));
         label_2->setText(QApplication::translate("MainWindow", "TextLabel", 0));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", 0));
     } // retranslateUi

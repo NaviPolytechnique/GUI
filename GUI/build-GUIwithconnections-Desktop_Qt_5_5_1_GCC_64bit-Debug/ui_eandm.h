@@ -27,9 +27,9 @@ public:
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
     QLabel *label_2;
-    QTextBrowser *textBrowser_2;
+    QTextBrowser *system;
     QLabel *label;
-    QTextBrowser *textBrowser;
+    QTextBrowser *exceptions;
 
     void setupUi(QDialog *EandM)
     {
@@ -55,12 +55,12 @@ public:
 
         verticalLayout->addWidget(label_2);
 
-        textBrowser_2 = new QTextBrowser(EandM);
-        textBrowser_2->setObjectName(QStringLiteral("textBrowser_2"));
-        textBrowser_2->setStyleSheet(QLatin1String("color:rgb(23, 233, 15);\n"
+        system = new QTextBrowser(EandM);
+        system->setObjectName(QStringLiteral("system"));
+        system->setStyleSheet(QLatin1String("color:rgb(23, 233, 15);\n"
 "background-color: black;"));
 
-        verticalLayout->addWidget(textBrowser_2);
+        verticalLayout->addWidget(system);
 
         label = new QLabel(EandM);
         label->setObjectName(QStringLiteral("label"));
@@ -69,12 +69,12 @@ public:
 
         verticalLayout->addWidget(label);
 
-        textBrowser = new QTextBrowser(EandM);
-        textBrowser->setObjectName(QStringLiteral("textBrowser"));
-        textBrowser->setStyleSheet(QLatin1String("color:rgb(23, 233, 15);\n"
+        exceptions = new QTextBrowser(EandM);
+        exceptions->setObjectName(QStringLiteral("exceptions"));
+        exceptions->setStyleSheet(QLatin1String("color:rgb(23, 233, 15);\n"
 "background-color: black;"));
 
-        verticalLayout->addWidget(textBrowser);
+        verticalLayout->addWidget(exceptions);
 
 
         verticalLayout_2->addLayout(verticalLayout);

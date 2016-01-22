@@ -64,14 +64,16 @@ void MessageProcessor::treatMsg(Message* msg){
             /*if (!content.compare("kill")){  //pour le drone
                     drone->shutOff();
             }*/
-        window->popup(QString::fromStdString(content));
+        window->SystemMsg(QString::fromStdString(content));
         
             //appeler une fonction qui actualise la partie système de l'interface et qui affiche des messages du genre : taking off, landing... (#Pily)
     }
     
     if(msg->getType()==Message::EXCEPTION){
+
+        std::string content = vect[0];
         //appeler une fonction qui actualise la partie exception
-        
+        window->Exception(QString::fromStdString(content));
     }
     
     

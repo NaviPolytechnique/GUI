@@ -8,9 +8,12 @@
 #include "WidgetsUsed/InputCommands/inputcommands.h"
 #include "WidgetsUsed/AttitudeMeter/attitudemeter.h"
 #include "WidgetsUsed/Compass/compass.h"
+#include "WidgetsUsed/ZCursor/zcursor.h"
 #include "dronestatus.h"
 #include "threadreadinput.h"
 #include "WidgetsUsed/Gps/gps.h"
+#include "WidgetsUsed/XYZWidget/xyzwidget.h"
+#include "WidgetsUsed/XYZWidget/qcustomplot.h"
 
 
 namespace Ui {
@@ -40,7 +43,9 @@ private:
     EandM *widgeteandm ;
     Buttons *widgetcontrol;
     Compass *widgetcompass;
+    ZCursor *widgetzcursor;
     Gps *widgetmap;
+    XyzWidget *widgetxyzwidget;
     ThreadReadInput *thread;
 };
 
