@@ -12,6 +12,7 @@
 #include <QString>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QScrollArea>
 #include "readinput.h"
 
 
@@ -37,7 +38,7 @@ private:
 
     QPixmap mapImg;
     QPainter painter;
-    QPoint currentPos; //current postion
+    QPointF currentPos; //current postion
 
     float agpstox;
     float bgpstox;
@@ -47,6 +48,8 @@ private:
     float cmtopx;
 
     QLabel *lab;
+    QScrollArea *scrollArea;
+
 
     readInput xyz; //reader of the texte file log_out.txt
 

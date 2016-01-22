@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Gps</class>
- <widget class="QWidget" name="Gps">
+ <class>ZCursor</class>
+ <widget class="QWidget" name="ZCursor">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Gps</string>
+   <string>ZCursor</string>
   </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
@@ -22,10 +22,10 @@
      <height>301</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="gps">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetMaximumSize</enum>
-    </property>
+   <layout class="QVBoxLayout" name="zcursor">
+    <item>
+     <layout class="QGridLayout" name="gridLayout"/>
+    </item>
    </layout>
   </widget>
  </widget>

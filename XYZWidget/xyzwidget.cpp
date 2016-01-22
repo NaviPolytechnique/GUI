@@ -383,20 +383,7 @@ void XyzWidget::realtimeDataSlot1(double X, double Y, double Z)
   ui->customPlot1->xAxis->setRange(key+0.25, 8, Qt::AlignRight);
   ui->customPlot1->replot();
 
-  // calculate frames per second:
-  static double lastFpsKey;
-  static int frameCount;
-  ++frameCount;
-  if (key-lastFpsKey > 2) // average fps over 2 seconds
-  {
-    ui->statusBar->showMessage(
-          QString("%1 FPS, Total Data points: %2")
-          .arg(frameCount/(key-lastFpsKey), 0, 'f', 0)
-          .arg(ui->customPlot1->graph(0)->data()->count()+ui->customPlot1->graph(1)->data()->count())
-          , 0);
-    lastFpsKey = key;
-    frameCount = 0;
-  }
+
 }
 
 void XyzWidget::realtimeDataSlot2(double Vx, double Vy, double Vz)
