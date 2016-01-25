@@ -69,6 +69,19 @@ void MessageProcessor::treatMsg(Message* msg){
             //appeler une fonction qui actualise la partie système de l'interface et qui affiche des messages du genre : taking off, landing... (#Pily)
     }
     
+
+    if(msg->getType()==Message::HOME){
+        drone->setHome(std::stod(vect[0]),std::stod(vect[1]),std::stod(vect[2]));
+        drone->sendMsg(new Message(Message::HOME, std::to_string(drone->getHome()->getX())+std::to_string(drone->getHome()->getY())+std::to_string(drone->getHome()->getZ()),1));
+    }
+    
+    if(msg->getType()==Message::TARGET){
+        drone->setTarget(std::stoi(vect[0]),std::stoi(vect[1]),std::stoi(vect[2]));
+        //display message in SYSTEM PANEL
+    }
+
+
+
     if(msg->getType()==Message::EXCEPTION){
 
         std::string content = vect[0];

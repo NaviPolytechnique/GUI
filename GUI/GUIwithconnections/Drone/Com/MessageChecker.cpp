@@ -125,6 +125,10 @@ int MessageChecker::addMsgToProcess(std::vector<std::string>* msg_tab){
       msg = new Message(Message::CONFIG, (*msg_tab)[5], id);
   }else if(!type.compare("EXCEPTION")){
     msg = new Message(Message::EXCEPTION, (*msg_tab)[5], id);
+  }else if(!type.compare("HOME")){
+    msg = new Message(Message::HOME, (*msg_tab)[5], id);
+  }else if(!type.compare("TARGET")){
+    msg = new Message(Message::TARGET, (*msg_tab)[5], id);
   }else{
     return 0;
   }

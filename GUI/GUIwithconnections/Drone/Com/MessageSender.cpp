@@ -55,7 +55,13 @@ std::string MessageSender::messagetoStr(Message* msg){
     ss<<"PINGANSWER;";
   }else if(type==Message::EXCEPTION){
       ss<<"EXCEPTION;";
-      }
+  }else if(type==Message::CONFIG){
+      ss<<"CONFIG;";
+  }else if(type==Message::HOME){
+      ss<<"HOME;";
+  }else if(type==Message::TARGET){
+      ss<<"TARGET;";
+  }
   
   ss<<content;
   return ss.str();

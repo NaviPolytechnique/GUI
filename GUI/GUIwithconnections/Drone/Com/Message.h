@@ -11,7 +11,7 @@ class Message{
 public:
   
   
-   enum msg_type {SYSTEM, CONTROL, EMERGENCY, PING, PINGANSWER, CONFIG, EXCEPTION};
+  enum msg_type {SYSTEM, CONTROL, EMERGENCY, PING, PINGANSWER, CONFIG, EXCEPTION, TARGET, HOME};
    
   Message(Message::msg_type type_, std::string content_, int id_);
   ~Message();

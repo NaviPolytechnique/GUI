@@ -17,6 +17,8 @@ Drone::Drone(MainWindow* window_):window(window_){
   altincr = new int(0.);
   charge = new int(0);
   chargeincr = new int (0);
+
+  home = new Point3D<double>(0,0,0);
     
   pthread_mutex_init(&m_mutex, NULL);
   pthread_cond_init(&m_condv, NULL);
@@ -132,6 +134,19 @@ int* Drone::getChargeIncr(){
     int* r = chargeincr;
     pthread_mutex_unlock(&chargeincr_mutex);
     return r;
+}
+
+
+
+void Drone::setHome(double x, double y, double z){
+    home->setX(x);
+    home->setY(y);
+    home->setZ(z);
+}
+
+
+Point3D<double>* Drone::getHome(){
+    return home;
 }
 
 void Drone::setPos(int x, int y, int z){
