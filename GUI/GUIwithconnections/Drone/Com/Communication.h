@@ -9,7 +9,6 @@
 #include "Message.h"
 #include "MessageProcessor.h"
 #include "MessageSender.h"
-#include "PingProcessor.h"
 #include "ComException.h"
 #include "../../mainwindow.h"
 
@@ -65,7 +64,7 @@ private :
   Listener* rMsgListener;
   
   MessageProcessor* msgProcessor;
-  PingProcessor* pingProcessor;
+
   
   
   

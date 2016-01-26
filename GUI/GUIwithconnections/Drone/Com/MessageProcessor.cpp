@@ -112,6 +112,38 @@ void MessageProcessor::treatMsg(Message* msg){
                 drone->setAltIncr(::atoi(vect[5].c_str()));
                 drone->setChargeIncr(::atoi(vect[12].c_str()));
             }
+
+            double C=360./(6280); //conversion unité faury (rad*1000->deg)
+            double rr=(double)(drone->getAngles()->getX())*C;
+            double pp=(double)(drone->getAngles()->getY())*C;
+            double yy=(double)(drone->getAngles()->getZ())*C;
+            double x=(double)(drone->getPos()->getX())/100.;
+            double y=(double)(drone->getPos()->getY())/100.;
+            double z=(double)(drone->getPos()->getZ())/100.;
+            double vx=(double)(drone->getSpeed()->getX())/100.;
+            double vy=(double)(drone->getSpeed()->getY())/100.;
+            double vz=(double)(drone->getSpeed()->getZ())/100.;
+            double alt=(double)(*drone->getAlt())/100.;
+            double batt=(double)(*drone->getCharge());
+
+            QStringList DroneStatusList;
+            DroneStatusList.append(QString::number(rr));
+            DroneStatusList.append(QString::number(pp));
+            DroneStatusList.append(QString::number(yy));
+            DroneStatusList.append(QString::number(x));
+            DroneStatusList.append(QString::number(y));
+            DroneStatusList.append(QString::number(z));
+            DroneStatusList.append(QString::number(vx));
+            DroneStatusList.append(QString::number(vy));
+            DroneStatusList.append(QString::number(vz));
+            DroneStatusList.append(QString::number(alt));
+            DroneStatusList.append(QString::number(batt));
+
+            QString DroneStatusString = DroneStatusList.join(",");
+            window->getDroneStatus()->ModifierDroneStatus(DroneStatusString);
+
+
+
     }
 
     

@@ -37,7 +37,7 @@ ZCursor::~ZCursor()
 void ZCursor::MAJZCursor(QString DroneStatusMAJ)
 {
     QStringList list=DroneStatusMAJ.split(",");
-    zcurrent = list.at(5).toDouble();
+    zcurrent = list.at(9).toDouble();
     ui->lcdzcurrent->display(zcurrent);
 }
 

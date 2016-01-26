@@ -107,5 +107,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+DroneStatus* MainWindow::getDroneStatus(){
+    return dronestatus;
+}
+
 
 

@@ -30,3 +30,6 @@ QString DroneStatus::getVecteurDroneStatus(){
 QString DroneStatus::getParametresDrone(){
     return ParametresDrone;
 }
+
+
+

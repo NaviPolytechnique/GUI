@@ -30,6 +30,7 @@ void* MessageSender::run(){
     msg_str = "$;"+ss.str()+";"+msg_str+"\r\n";
     std::cout<<" envoi du message : "<<msg_str<<std::endl;
     moduleCom->sendStr((char*)msg_str.c_str());
+    delete msg;
   }
     return 0;
 }

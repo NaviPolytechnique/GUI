@@ -15,7 +15,7 @@ Communication::Communication(Drone* drone_, MainWindow* window_): drone(drone_),
   rMsgChecker = new MessageChecker(this, drone);
   msgProcessor = new MessageProcessor(this,drone, window);
   msgSender = new MessageSender(this,drone);
-  //pingProcessor = new PingProcessor(this, drone);
+
   
   
 }
@@ -30,7 +30,6 @@ Communication::~Communication(){
     delete msgSender;
     delete rMsgListener;
     delete msgProcessor;
-    delete pingProcessor;
 }
 
 void Communication::start(){
@@ -38,7 +37,7 @@ void Communication::start(){
   rMsgChecker->start();
   msgProcessor->start();
   msgSender->start();
-  //pingProcessor->start();
+
    
   std::cout<<"Communication started"<<std::endl;
     
@@ -75,7 +74,7 @@ void Communication::sendStr(char* str){
 }
 
 void Communication::registerAnswer(int id){
-  pingProcessor->registerAnswer(id);
+  //pingProcessor->registerAnswer(id);
 }
 
 void Communication::launchException(ComException e){

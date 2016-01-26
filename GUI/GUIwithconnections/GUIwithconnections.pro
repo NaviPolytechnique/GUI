@@ -30,7 +30,6 @@ SOURCES += main.cpp\
     Drone/Com/MessageChecker.cpp \
     Drone/Com/MessageProcessor.cpp \
     Drone/Com/MessageSender.cpp \
-    Drone/Com/PingProcessor.cpp \
     Drone/Drone/Drone.cpp \
     Drone/Drone/StateChecker.cpp \
     Drone/Serial/Serial.cpp \
@@ -61,7 +60,6 @@ HEADERS  += mainwindow.h \
     Drone/Com/MessageChecker.h \
     Drone/Com/MessageProcessor.h \
     Drone/Com/MessageSender.h \
-    Drone/Com/PingProcessor.h \
     Drone/Drone/Config.h \
     Drone/Drone/Drone.h \
     Drone/Drone/StateChecker.h \
