@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -21,12 +22,24 @@ QT_BEGIN_NAMESPACE
 class Ui_Gps
 {
 public:
+    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *gps;
 
     void setupUi(QWidget *Gps)
     {
         if (Gps->objectName().isEmpty())
             Gps->setObjectName(QStringLiteral("Gps"));
         Gps->resize(400, 300);
+        verticalLayout_2 = new QVBoxLayout(Gps);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        gps = new QVBoxLayout();
+        gps->setSpacing(6);
+        gps->setObjectName(QStringLiteral("gps"));
+
+        verticalLayout_2->addLayout(gps);
+
 
         retranslateUi(Gps);
 

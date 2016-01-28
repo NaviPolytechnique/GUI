@@ -13,6 +13,7 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include <QPixmap>
+#include <QScrollArea>
 #include "readinput.h"
 
 
@@ -50,6 +51,7 @@ private:
 
     QLabel *lab;
 
+    QScrollArea *scrollArea;
     readInput xyz; //reader of the texte file log_out.txt
 
     QTimer datatimer;

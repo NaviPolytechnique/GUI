@@ -38,21 +38,33 @@ Gps::Gps(QWidget *parent) :
     pen.setWidth(5);
     painter.setPen(pen);
 
+    lab = new QLabel;
 
-    lab = new QLabel(this);
+    ui->gps->addWidget(lab);
+
+    scrollArea = new QScrollArea;
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setWidget(lab);
+    ui->gps->addWidget(scrollArea);
+
 
     //Print image
     lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
     //lab->setScaledContents(true);
-    lab->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    //lab->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     lab->adjustSize();
+    scrollArea->adjustSize();
     lab->show();
     //painter.drawLine(currentPos, currentPos + QPoint(100,100));
     //painter.end();
     //lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
     connect(&datatimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
     datatimer.start(0); // Interval 0 means to refresh as fast as possible
+    scrollArea->setWidgetResizable(true);
 }
+
+
+
 
 Gps::~Gps()
 {
@@ -71,15 +83,9 @@ void Gps::realtimeDataSlot()
       static double lastPointKey = 0;
       if (key-lastPointKey > 0.01) // at most add point every 10 ms
       {
-          //QPainter p;
-          //p.begin(&mapImg);
-          //QPen pen(Qt::blue, 5,Qt::SolidLine,Qt::RoundCap);
-
-          //p.setPen(pen);
           QStringList list = xyz.readXYZ();
-          QPoint buffer = currentPos+QPoint(list.at(0).toDouble()*cmtopx,list.at(1).toDouble()*cmtopx);
-          painter.drawLine(currentPos, buffer);
-          currentPos = buffer;
+          currentPos+=QPointF(list.at(0).toDouble()*cmtopx,-list.at(1).toDouble()*cmtopx);
+          painter.drawPoint(currentPos);
           lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
           lab->update();
       }

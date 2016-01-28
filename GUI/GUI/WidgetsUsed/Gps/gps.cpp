@@ -38,7 +38,7 @@ Gps::Gps(QWidget *parent) :
     pen.setWidth(5);
     painter.setPen(pen);
 
-    lab = new QLabel(this);
+   /* lab = new QLabel(this);
 
 
     //Print image
@@ -53,6 +53,31 @@ Gps::Gps(QWidget *parent) :
     //
    //connect(&datatimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
     datatimer.start(0); // Interval 0 means to refresh as fast as possible
+    */
+    lab = new QLabel;
+
+    ui->gps->addWidget(lab);
+
+    scrollArea = new QScrollArea;
+    scrollArea->setWidgetResizable(true);
+    scrollArea->setWidget(lab);
+    ui->gps->addWidget(scrollArea);
+
+
+    //Print image
+    lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
+    //lab->setScaledContents(true);
+    //lab->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+    lab->adjustSize();
+    scrollArea->adjustSize();
+    lab->show();
+    //painter.drawLine(currentPos, currentPos + QPoint(100,100));
+    //painter.end();
+    //lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
+    //connect(&datatimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
+    datatimer.start(0); // Interval 0 means to refresh as fast as possible
+    scrollArea->setWidgetResizable(true);
+
 }
 
 Gps::~Gps()

@@ -13,21 +13,11 @@
   <property name="windowTitle">
    <string>Gps</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>-1</x>
-     <y>-1</y>
-     <width>401</width>
-     <height>301</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="gps">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetMaximumSize</enum>
-    </property>
-   </layout>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="gps"/>
+   </item>
+  </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

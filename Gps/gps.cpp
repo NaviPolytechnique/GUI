@@ -39,9 +39,13 @@ Gps::Gps(QWidget *parent) :
     painter.setPen(pen);
 
     lab = new QLabel;
+
+    ui->gps->addWidget(lab);
+
     scrollArea = new QScrollArea;
     scrollArea->setWidgetResizable(true);
-    scrollArea-> setWidget(lab);
+    scrollArea->setWidget(lab);
+    ui->gps->addWidget(scrollArea);
 
 
     //Print image
@@ -57,8 +61,10 @@ Gps::Gps(QWidget *parent) :
     connect(&datatimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
     datatimer.start(0); // Interval 0 means to refresh as fast as possible
     scrollArea->setWidgetResizable(true);
-    ui->gps->addWidget(scrollArea);
 }
+
+
+
 
 Gps::~Gps()
 {
