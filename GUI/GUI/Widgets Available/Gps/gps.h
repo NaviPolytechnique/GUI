@@ -31,6 +31,10 @@ public:
 
 private slots:
     void realtimeDataSlot();
+<<<<<<< HEAD
+    void homePointSlot(QString s);
+=======
+>>>>>>> origin/master
 
 
 private:
@@ -39,6 +43,10 @@ private:
     QPixmap mapImg;
     QPainter painter;
     QPointF currentPos; //current postion
+<<<<<<< HEAD
+    QPointF homePoint ; //home Point
+=======
+>>>>>>> origin/master
 
     float agpstox;
     float bgpstox;
@@ -47,6 +55,11 @@ private:
 
     float cmtopx;
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> origin/master
     QLabel *lab;
     QScrollArea *scrollArea;
 
