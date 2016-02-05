@@ -22,8 +22,10 @@ Gps::Gps(QWidget *parent) :
     tr("Text files (*.txt)"));
     xyz=readInput(namexyz);
 
-    //set Current Position
-    currentPos = QPoint(agpstox*48.712888+bgpstox,agpstoy*2.214986+bgpstoy);
+    //set Current Position (default home point : (48.48.712888; 2.214986)
+
+    homePoint = QPoint(agpstox*48.712888+bgpstox,agpstoy*2.214986+bgpstoy);
+    currentPos = homePoint;
 
 
     //set Image
@@ -42,6 +44,8 @@ Gps::Gps(QWidget *parent) :
 
     ui->gps->addWidget(lab);
 
+    //set scroll Area
+
     scrollArea = new QScrollArea;
     scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(lab);
@@ -50,14 +54,10 @@ Gps::Gps(QWidget *parent) :
 
     //Print image
     lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
-    //lab->setScaledContents(true);
-    //lab->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
     lab->adjustSize();
     scrollArea->adjustSize();
     lab->show();
-    //painter.drawLine(currentPos, currentPos + QPoint(100,100));
-    //painter.end();
-    //lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
+    
     connect(&datatimer, SIGNAL(timeout()), this, SLOT(realtimeDataSlot()));
     datatimer.start(0); // Interval 0 means to refresh as fast as possible
     scrollArea->setWidgetResizable(true);
@@ -89,5 +89,13 @@ void Gps::realtimeDataSlot()
           lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
           lab->update();
       }
+}
+
+void Gps::homePointSlot(QString s) {
+
+    QStringList list = s.split(",");
+    homePoint = QPointF(agpstox*list.at(0).toDouble()+bgpstox,agpstoy*list.at(1).toDouble()+bgpstoy);
+    currentPos = homePoint; //the current position is the new home point
+
 }
 

@@ -31,6 +31,8 @@ public:
 
 private slots:
     void realtimeDataSlot();
+    void homePointSlot(QString s);
+
 
 
 private:
@@ -39,6 +41,7 @@ private:
     QPixmap mapImg;
     QPainter painter;
     QPointF currentPos; //current postion
+    QPointF homePoint ; //home Point
 
     float agpstox;
     float bgpstox;
