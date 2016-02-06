@@ -18,15 +18,21 @@ public:
     explicit ZCursor(QWidget *parent = 0);
     ~ZCursor();
 
+signals:
+    void SendZTarget(double);
+
 private slots:
     void MAJZCursor(QString DroneStatusMAJ);
     void setNewZTarget(int);
 
 
+    void on_pushButton_clicked();
+    
 private:
     Ui::ZCursor *ui;
 
     double ztarget;
+    double ztargetok;
     double zcurrent;
     int zcursor;
     int rmin;

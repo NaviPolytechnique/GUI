@@ -17,6 +17,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
@@ -29,7 +30,10 @@ class Ui_ZCursor
 public:
     QHBoxLayout *horizontalLayout_2;
     QHBoxLayout *horizontalLayout;
+    QVBoxLayout *verticalLayout_7;
     QSlider *zslider;
+    QLCDNumber *lcdzslider;
+    QPushButton *pushButton;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_3;
     QVBoxLayout *verticalLayout_4;
@@ -50,7 +54,12 @@ public:
     {
         if (ZCursor->objectName().isEmpty())
             ZCursor->setObjectName(QStringLiteral("ZCursor"));
-        ZCursor->resize(188, 272);
+        ZCursor->resize(259, 272);
+        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(ZCursor->sizePolicy().hasHeightForWidth());
+        ZCursor->setSizePolicy(sizePolicy);
         horizontalLayout_2 = new QHBoxLayout(ZCursor);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -58,11 +67,43 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        horizontalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        verticalLayout_7 = new QVBoxLayout();
+        verticalLayout_7->setSpacing(6);
+        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
         zslider = new QSlider(ZCursor);
         zslider->setObjectName(QStringLiteral("zslider"));
         zslider->setOrientation(Qt::Vertical);
 
-        horizontalLayout->addWidget(zslider);
+        verticalLayout_7->addWidget(zslider, 0, Qt::AlignHCenter);
+
+        lcdzslider = new QLCDNumber(ZCursor);
+        lcdzslider->setObjectName(QStringLiteral("lcdzslider"));
+        QFont font;
+        font.setFamily(QStringLiteral("Times New Roman"));
+        font.setPointSize(13);
+        font.setBold(true);
+        font.setWeight(75);
+        lcdzslider->setFont(font);
+
+        verticalLayout_7->addWidget(lcdzslider);
+
+        pushButton = new QPushButton(ZCursor);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setEnabled(true);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy1);
+
+        verticalLayout_7->addWidget(pushButton);
+
+        verticalLayout_7->setStretch(0, 3);
+        verticalLayout_7->setStretch(1, 1);
+        verticalLayout_7->setStretch(2, 1);
+
+        horizontalLayout->addLayout(verticalLayout_7);
 
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
@@ -75,11 +116,6 @@ public:
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         label_2 = new QLabel(ZCursor);
         label_2->setObjectName(QStringLiteral("label_2"));
-        QFont font;
-        font.setFamily(QStringLiteral("Times New Roman"));
-        font.setPointSize(13);
-        font.setBold(true);
-        font.setWeight(75);
         label_2->setFont(font);
         label_2->setAlignment(Qt::AlignCenter);
 
@@ -87,7 +123,6 @@ public:
 
         lcdztarget = new QLCDNumber(ZCursor);
         lcdztarget->setObjectName(QStringLiteral("lcdztarget"));
-        lcdztarget->setFont(font);
 
         verticalLayout_4->addWidget(lcdztarget);
 
@@ -171,6 +206,8 @@ public:
 
         horizontalLayout->addLayout(verticalLayout);
 
+        horizontalLayout->setStretch(0, 2);
+        horizontalLayout->setStretch(1, 4);
 
         horizontalLayout_2->addLayout(horizontalLayout);
 
@@ -183,6 +220,7 @@ public:
     void retranslateUi(QWidget *ZCursor)
     {
         ZCursor->setWindowTitle(QApplication::translate("ZCursor", "ZCursor", 0));
+        pushButton->setText(QApplication::translate("ZCursor", "Set ZTarget", 0));
         label_2->setText(QApplication::translate("ZCursor", "ZTarget", 0));
         label_3->setText(QApplication::translate("ZCursor", "M", 0));
         label->setText(QApplication::translate("ZCursor", "ZCurrent", 0));

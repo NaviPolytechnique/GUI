@@ -18,6 +18,7 @@ ZCursor::ZCursor(QWidget *parent) :
     rmin=0;
     rmax=100;
     ztarget=0;
+    ztargetok=0;
 
     //set lcd
 
@@ -39,16 +40,24 @@ void ZCursor::MAJZCursor(QString DroneStatusMAJ)
     QStringList list=DroneStatusMAJ.split(",");
     zcurrent = list.at(9).toDouble();
     ui->lcdzcurrent->display(zcurrent);
+    if (abs((int)((ztarget-zcurrent)*100))<20){
+        ui->lcdzcurrent->setPalette(Qt::green);
+    }
+    else {
+        ui->lcdzcurrent->setPalette(Qt::color0);
+    }
+
 }
 
 void ZCursor::setNewZTarget(int i)
 {
+    ui->lcdztarget->setPalette(Qt::color0);
     zcursor=i;
     if(zcursor<0){
         zcursor=0;
     }
-    ztarget=(double)zcursor/100;
-    ui->lcdztarget->display(ztarget);
+    ztargetok=(double)zcursor/100;
+    ui->lcdzslider->display(ztargetok);
 
     if (zcursor==rmin && rmin!=0){
         rmin-=100;
@@ -65,3 +74,12 @@ void ZCursor::setNewZTarget(int i)
 
 }
 
+
+void ZCursor::on_pushButton_clicked()
+{
+
+    ztarget=ztargetok;
+    ui->lcdztarget->display(ztarget);
+    ui->lcdztarget->setPalette(Qt::green);
+    emit SendZTarget(ztarget);
+}
