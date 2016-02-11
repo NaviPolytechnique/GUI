@@ -33,6 +33,11 @@ public:
         if (Compass->objectName().isEmpty())
             Compass->setObjectName(QStringLiteral("Compass"));
         Compass->resize(351, 300);
+        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(Compass->sizePolicy().hasHeightForWidth());
+        Compass->setSizePolicy(sizePolicy);
         verticalLayout_2 = new QVBoxLayout(Compass);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -48,6 +53,7 @@ public:
         font.setBold(true);
         font.setWeight(75);
         label->setFont(font);
+        label->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(label, 0, Qt::AlignHCenter);
 
@@ -57,8 +63,6 @@ public:
 
         verticalLayout->addLayout(compass);
 
-        verticalLayout->setStretch(0, 1);
-        verticalLayout->setStretch(1, 10);
 
         verticalLayout_2->addLayout(verticalLayout);
 

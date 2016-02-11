@@ -30,6 +30,7 @@ void Buttons::on_EmStp_clicked()
 
 void Buttons::on_CbIMU_clicked()
 {
+
     emit CalibrateIMU();
 }
 

@@ -4,8 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
 
+QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Buttons
@@ -18,3 +18,4 @@ SOURCES += main.cpp\
 HEADERS  += buttons.h
 
 FORMS    += buttons.ui
+

@@ -13,6 +13,7 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include <QPixmap>
+#include <QScrollArea>
 #include "readinput.h"
 
 
@@ -32,6 +33,8 @@ public:
 private slots:
 //    void realtimeDataSlot();
     void MAJGps(QString);
+    void homePointSlot(QString);
+
 
 
 private:
@@ -40,16 +43,19 @@ private:
     QPixmap mapImg;
     QPainter painter;
     QPointF currentPos; //current postion
+    QPointF homePoint;
 
     float agpstox;
     float bgpstox;
     float agpstoy;
     float bgpstoy;
 
+
     float cmtopx;
 
     QLabel *lab;
 
+    QScrollArea *scrollArea;
     readInput xyz; //reader of the texte file log_out.txt
 
     QTimer datatimer;

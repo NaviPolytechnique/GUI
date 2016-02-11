@@ -30,13 +30,17 @@ MainWindow::MainWindow(QWidget *parent) :
     widgetinputcommands = new InputCommands();
     ui->inputcommands->addWidget(widgetinputcommands);
     widgetattitudemeter = new AttitudeMeter();
-    widgetattitudemeter->setMinimumSize(320,300);
+    widgetattitudemeter->setMinimumSize(300,270);
     ui->horizonindicator->addWidget(widgetattitudemeter,0,Qt::AlignCenter);
     widgetcompass = new Compass();
-    widgetcompass->setMinimumSize(320,300);
+    widgetcompass->setMinimumSize(270,200);
     ui->compass->addWidget(widgetcompass,0,Qt::AlignCenter);
     widgetzcursor = new ZCursor();
     ui->zcursor->addWidget(widgetzcursor);
+    widgetRPYControl=new RPYControl();
+    ui->RPYControl->addWidget(widgetRPYControl);
+    widgetbatterygauge=new BatteryGauge();
+    ui->battery->addWidget(widgetbatterygauge);
 
     widgetxyzwidget=new XyzWidget();
     ui->graphs->addWidget(widgetxyzwidget);
@@ -55,17 +59,17 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(widgetcontrol,SIGNAL(StartAll()),this,SLOT(StartAll()),Qt::QueuedConnection);
     connect(widgetcontrol,SIGNAL(Kill()),this,SLOT(Kill()),Qt::QueuedConnection);
 
-
-
-
-
-
+    connect(widgetRPYControl,SIGNAL(sendRPYT(QString)),this,SLOT(sendRPYT(QString)));
+    connect(widgetzcursor,SIGNAL(SendZTarget(double)),this,SLOT(sendztarget(double)));
+    connect(widgetinputcommands,SIGNAL(SendCommand(QString)),this,SLOT(sendtextcommand(QString)));
 
     connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetattitudemeter, SLOT(MAJAttitudeMeter(QString)),Qt::QueuedConnection);
     connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetcompass, SLOT(MAJCompass(QString)),Qt::QueuedConnection);
     connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetmap, SLOT(MAJGps(QString)),Qt::QueuedConnection);
     connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetxyzwidget, SLOT(MAJXyzWidget(QString)),Qt::QueuedConnection);
     connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetzcursor, SLOT(MAJZCursor(QString)),Qt::QueuedConnection);
+    connect(dronestatus, SIGNAL(DroneStatusMAJ(QString)), widgetbatterygauge, SLOT(MAJBattery(QString)),Qt::QueuedConnection);
+    connect(dronestatus, SIGNAL(HomePoint(QString)),widgetmap,SLOT(homePointSlot(QString)));
 
 }
 
@@ -101,6 +105,18 @@ void MainWindow::Kill()
 {
     d->sendMsg(new Message(Message::SYSTEM,std::string("kill;"),1));
 }
+void MainWindow::sendRPYT(QString RPYT)
+{
+
+}
+void MainWindow::sendztarget(double zt)
+{
+
+}
+
+void MainWindow::sendtextcommand(QString text){
+
+}
 
 MainWindow::~MainWindow()
 {
@@ -110,6 +126,7 @@ MainWindow::~MainWindow()
 DroneStatus* MainWindow::getDroneStatus(){
     return dronestatus;
 }
+
 
 
 

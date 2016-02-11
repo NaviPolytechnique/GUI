@@ -33,3 +33,4 @@ QString DroneStatus::getParametresDrone(){
 
 
 
+

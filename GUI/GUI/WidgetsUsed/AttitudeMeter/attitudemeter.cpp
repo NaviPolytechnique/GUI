@@ -11,21 +11,21 @@ AttitudeMeter::AttitudeMeter(QWidget *parent) :
 
     //init horizon artificiel
     mAttitudeGauge = new QcGaugeWidget;
-    mAttitudeGauge->addBackground(99);
-    QcBackgroundItem *bkg = mAttitudeGauge->addBackground(92);
+    mAttitudeGauge->addBackground(79);
+    QcBackgroundItem *bkg = mAttitudeGauge->addBackground(72);
     bkg->clearrColors();
     bkg->addColor(0.1,Qt::black);
     bkg->addColor(1.0,Qt::white);
-    mAttMeter = mAttitudeGauge->addAttitudeMeter(88);
+    mAttMeter = mAttitudeGauge->addAttitudeMeter(68);
 
-    mAttitudeNeedle = mAttitudeGauge->addNeedle(70);
+    mAttitudeNeedle = mAttitudeGauge->addNeedle(50);
     mAttitudeNeedle->setMinDegree(0);
     mAttitudeNeedle->setMaxDegree(180);
     mAttitudeNeedle->setValueRange(0,180);
     mAttitudeNeedle->setCurrentValue(90);
     mAttitudeNeedle->setColor(Qt::white);
     mAttitudeNeedle->setNeedle(QcNeedleItem::AttitudeMeterNeedle);
-    mAttitudeGauge->addGlass(80);
+    mAttitudeGauge->addGlass(68);
     ui->attitudemeter->addWidget(mAttitudeGauge);
 }
 

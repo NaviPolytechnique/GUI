@@ -23,7 +23,7 @@ QT_BEGIN_NAMESPACE
 class Ui_AttitudeMeter
 {
 public:
-    QWidget *verticalLayoutWidget;
+    QVBoxLayout *verticalLayout;
     QVBoxLayout *Layout;
     QLabel *label;
     QVBoxLayout *attitudemeter;
@@ -34,16 +34,26 @@ public:
             AttitudeMeter->setObjectName(QStringLiteral("AttitudeMeter"));
         AttitudeMeter->setEnabled(true);
         AttitudeMeter->resize(351, 300);
-        verticalLayoutWidget = new QWidget(AttitudeMeter);
-        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(0, 0, 351, 301));
-        Layout = new QVBoxLayout(verticalLayoutWidget);
+        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(AttitudeMeter->sizePolicy().hasHeightForWidth());
+        AttitudeMeter->setSizePolicy(sizePolicy);
+        verticalLayout = new QVBoxLayout(AttitudeMeter);
+        verticalLayout->setSpacing(6);
+        verticalLayout->setContentsMargins(11, 11, 11, 11);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        Layout = new QVBoxLayout();
         Layout->setSpacing(6);
-        Layout->setContentsMargins(11, 11, 11, 11);
         Layout->setObjectName(QStringLiteral("Layout"));
-        Layout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(verticalLayoutWidget);
+        label = new QLabel(AttitudeMeter);
         label->setObjectName(QStringLiteral("label"));
+        QFont font;
+        font.setFamily(QStringLiteral("Times New Roman"));
+        font.setPointSize(13);
+        font.setBold(true);
+        font.setWeight(75);
+        label->setFont(font);
         label->setAlignment(Qt::AlignCenter);
 
         Layout->addWidget(label);
@@ -54,10 +64,9 @@ public:
 
         Layout->addLayout(attitudemeter);
 
-        Layout->setStretch(0, 1);
-        Layout->setStretch(1, 10);
-        label->raise();
-        verticalLayoutWidget->raise();
+
+        verticalLayout->addLayout(Layout);
+
 
         retranslateUi(AttitudeMeter);
 

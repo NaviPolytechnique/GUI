@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_DroneStatus_t {
-    QByteArrayData data[10];
-    char stringdata[144];
+    QByteArrayData data[11];
+    char stringdata[154];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,14 +35,15 @@ QT_MOC_LITERAL(2, 27, 0),
 QT_MOC_LITERAL(3, 28, 18),
 QT_MOC_LITERAL(4, 47, 18),
 QT_MOC_LITERAL(5, 66, 15),
-QT_MOC_LITERAL(6, 82, 19),
-QT_MOC_LITERAL(7, 102, 7),
-QT_MOC_LITERAL(8, 110, 23),
-QT_MOC_LITERAL(9, 134, 8)
+QT_MOC_LITERAL(6, 82, 9),
+QT_MOC_LITERAL(7, 92, 19),
+QT_MOC_LITERAL(8, 112, 7),
+QT_MOC_LITERAL(9, 120, 23),
+QT_MOC_LITERAL(10, 144, 8)
     },
     "DroneStatus\0DroneStatusMAJ\0\0"
     "VecteurDroneStatus\0ParametresDroneMAJ\0"
-    "ParametresDrone\0ModifierDroneStatus\0"
+    "ParametresDrone\0HomePoint\0ModifierDroneStatus\0"
     "NewEtat\0ModifierParametresDrone\0"
     "NewParam\0"
 };
@@ -54,28 +55,30 @@ static const uint qt_meta_data_DroneStatus[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
-       2,   46, // properties
+       5,   14, // methods
+       2,   54, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   34,    2, 0x06,
-       4,    1,   37,    2, 0x06,
+       1,    1,   39,    2, 0x06,
+       4,    1,   42,    2, 0x06,
+       6,    1,   45,    2, 0x06,
 
  // slots: name, argc, parameters, tag, flags
-       6,    1,   40,    2, 0x0a,
-       8,    1,   43,    2, 0x0a,
+       7,    1,   48,    2, 0x0a,
+       9,    1,   51,    2, 0x0a,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::QString,    5,
+    QMetaType::Void, QMetaType::QString,    2,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    7,
-    QMetaType::Void, QMetaType::QString,    9,
+    QMetaType::Void, QMetaType::QString,    8,
+    QMetaType::Void, QMetaType::QString,   10,
 
  // properties: name, type, flags
        3, QMetaType::QString, 0x00495003,
@@ -95,8 +98,9 @@ void DroneStatus::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: _t->DroneStatusMAJ((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 1: _t->ParametresDroneMAJ((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 2: _t->ModifierDroneStatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: _t->ModifierParametresDrone((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 2: _t->HomePoint((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 3: _t->ModifierDroneStatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 4: _t->ModifierParametresDrone((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -112,6 +116,12 @@ void DroneStatus::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             typedef void (DroneStatus::*_t)(QString );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&DroneStatus::ParametresDroneMAJ)) {
                 *result = 1;
+            }
+        }
+        {
+            typedef void (DroneStatus::*_t)(QString );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&DroneStatus::HomePoint)) {
+                *result = 2;
             }
         }
     }
@@ -142,13 +152,13 @@ int DroneStatus::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 5;
     }
 #ifndef QT_NO_PROPERTIES
       else if (_c == QMetaObject::ReadProperty) {
@@ -198,5 +208,12 @@ void DroneStatus::ParametresDroneMAJ(QString _t1)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void DroneStatus::HomePoint(QString _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
 }
 QT_END_MOC_NAMESPACE

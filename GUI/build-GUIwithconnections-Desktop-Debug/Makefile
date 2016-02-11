@@ -73,7 +73,10 @@ SOURCES       = ../GUIwithconnections/main.cpp \
 		../GUIwithconnections/WidgetsUsed/Gps/gps.cpp \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.cpp \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.cpp \
-		../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.cpp moc_mainwindow.cpp \
+		../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.cpp \
+		../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.cpp \
+		../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.cpp qrc_images.cpp \
+		moc_mainwindow.cpp \
 		moc_qcgaugewidget.cpp \
 		moc_attitudemeter.cpp \
 		moc_buttons.cpp \
@@ -87,7 +90,9 @@ SOURCES       = ../GUIwithconnections/main.cpp \
 		moc_gps.cpp \
 		moc_qcustomplot.cpp \
 		moc_xyzwidget.cpp \
-		moc_zcursor.cpp
+		moc_zcursor.cpp \
+		moc_batterygauge.cpp \
+		moc_rpycontrol.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		qcgaugewidget.o \
@@ -117,6 +122,9 @@ OBJECTS       = main.o \
 		qcustomplot.o \
 		xyzwidget.o \
 		zcursor.o \
+		batterygauge.o \
+		rpycontrol.o \
+		qrc_images.o \
 		moc_mainwindow.o \
 		moc_qcgaugewidget.o \
 		moc_attitudemeter.o \
@@ -131,7 +139,9 @@ OBJECTS       = main.o \
 		moc_gps.o \
 		moc_qcustomplot.o \
 		moc_xyzwidget.o \
-		moc_zcursor.o
+		moc_zcursor.o \
+		moc_batterygauge.o \
+		moc_rpycontrol.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -194,6 +204,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../GUIwithconnections/GUIwithconnections.pro \
+		../GUIwithconnections/images.qrc \
 		../GUIwithconnections/GUIwithconnections.pro
 QMAKE_TARGET  = GUIwithconnections
 DESTDIR       = #avoid trailing-slash linebreak
@@ -224,7 +235,7 @@ first: all
 
 all: Makefile $(TARGET)
 
-$(TARGET): ui_mainwindow.h ui_attitudemeter.h ui_buttons.h ui_compass.h ui_eandm.h ui_inputcommands.h ui_dronesettings.h ui_gps.h ui_xyzwidget.h ui_zcursor.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_attitudemeter.h ui_buttons.h ui_compass.h ui_eandm.h ui_inputcommands.h ui_dronesettings.h ui_gps.h ui_xyzwidget.h ui_zcursor.h ui_batterygauge.h ui_rpycontrol.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 	{ test -n "$(DESTDIR)" && DESTDIR="$(DESTDIR)" || DESTDIR=.; } && test $$(gdb --version | sed -e 's,[^0-9][^0-9]*\([0-9]\)\.\([0-9]\).*,\1\2,;q') -gt 72 && gdb --nx --batch --quiet -ex 'set confirm off' -ex "save gdb-index $$DESTDIR" -ex quit '$(TARGET)' && test -f $(TARGET).gdb-index && objcopy --add-section '.gdb_index=$(TARGET).gdb-index' --set-section-flags '.gdb_index=readonly' '$(TARGET)' '$(TARGET)' && rm -f $(TARGET).gdb-index || true
 
@@ -290,6 +301,7 @@ Makefile: ../GUIwithconnections/GUIwithconnections.pro /usr/lib/x86_64-linux-gnu
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../GUIwithconnections/GUIwithconnections.pro \
+		../GUIwithconnections/images.qrc \
 		/usr/lib/x86_64-linux-gnu/libQt5PrintSupport.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Widgets.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Gui.prl \
@@ -357,6 +369,7 @@ Makefile: ../GUIwithconnections/GUIwithconnections.pro /usr/lib/x86_64-linux-gnu
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 ../GUIwithconnections/GUIwithconnections.pro:
+../GUIwithconnections/images.qrc:
 /usr/lib/x86_64-linux-gnu/libQt5PrintSupport.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Widgets.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Gui.prl:
@@ -368,7 +381,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/GUIwithconnections1.0.0 || mkdir -p .tmp/GUIwithconnections1.0.0
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/GUIwithconnections1.0.0/ && $(COPY_FILE) --parents ../GUIwithconnections/mainwindow.h ../GUIwithconnections/Source/qcgaugewidget.h ../GUIwithconnections/WidgetsUsed/AttitudeMeter/attitudemeter.h ../GUIwithconnections/WidgetsUsed/Buttons/buttons.h ../GUIwithconnections/WidgetsUsed/Compass/compass.h ../GUIwithconnections/WidgetsUsed/EandM/eandm.h ../GUIwithconnections/WidgetsUsed/InputCommands/inputcommands.h ../GUIwithconnections/dronestatus.h ../GUIwithconnections/lecturefichiertexte.h ../GUIwithconnections/readinput.h ../GUIwithconnections/threadreadinput.h ../GUIwithconnections/Drone/Com/ComException.h ../GUIwithconnections/Drone/Com/Communication.h ../GUIwithconnections/Drone/Com/Message.h ../GUIwithconnections/Drone/Com/MessageChecker.h ../GUIwithconnections/Drone/Com/MessageProcessor.h ../GUIwithconnections/Drone/Com/MessageSender.h ../GUIwithconnections/Drone/Drone/Config.h ../GUIwithconnections/Drone/Drone/Drone.h ../GUIwithconnections/Drone/Drone/StateChecker.h ../GUIwithconnections/Drone/Serial/serial_exception/serial_exception.hpp ../GUIwithconnections/Drone/Serial/Serial.h ../GUIwithconnections/Drone/serial_exception/serial_exception.hpp ../GUIwithconnections/Drone/Thread/Runnable.h ../GUIwithconnections/Drone/Thread/Thread.h ../GUIwithconnections/Drone/Thread/ThreadStruct.h ../GUIwithconnections/Drone/Utils/BlockingQueue.h ../GUIwithconnections/Drone/Utils/Listener.h ../GUIwithconnections/Drone/Utils/Point3D.hpp ../GUIwithconnections/WidgetsUsed/DroneSettings/dronesettings.h ../GUIwithconnections/WidgetsUsed/Gps/gps.h ../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.h ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.h .tmp/GUIwithconnections1.0.0/ && $(COPY_FILE) --parents ../GUIwithconnections/main.cpp ../GUIwithconnections/mainwindow.cpp ../GUIwithconnections/Source/qcgaugewidget.cpp ../GUIwithconnections/WidgetsUsed/AttitudeMeter/attitudemeter.cpp ../GUIwithconnections/WidgetsUsed/Buttons/buttons.cpp ../GUIwithconnections/WidgetsUsed/Compass/compass.cpp ../GUIwithconnections/WidgetsUsed/EandM/eandm.cpp ../GUIwithconnections/WidgetsUsed/InputCommands/inputcommands.cpp ../GUIwithconnections/dronestatus.cpp ../GUIwithconnections/lecturefichiertexte.cpp ../GUIwithconnections/readinput.cpp ../GUIwithconnections/threadreadinput.cpp ../GUIwithconnections/Drone/Com/Communication.cpp ../GUIwithconnections/Drone/Com/Message.cpp ../GUIwithconnections/Drone/Com/MessageChecker.cpp ../GUIwithconnections/Drone/Com/MessageProcessor.cpp ../GUIwithconnections/Drone/Com/MessageSender.cpp ../GUIwithconnections/Drone/Drone/Drone.cpp ../GUIwithconnections/Drone/Drone/StateChecker.cpp ../GUIwithconnections/Drone/Serial/Serial.cpp ../GUIwithconnections/Drone/Thread/Thread.cpp ../GUIwithconnections/Drone/Thread/ThreadStruct.cpp ../GUIwithconnections/Drone/Utils/Listener.cpp ../GUIwithconnections/Drone/Utils/Point3D.cpp ../GUIwithconnections/WidgetsUsed/DroneSettings/dronesettings.cpp ../GUIwithconnections/WidgetsUsed/Gps/gps.cpp ../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.cpp ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.cpp ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.cpp .tmp/GUIwithconnections1.0.0/ && $(COPY_FILE) --parents ../GUIwithconnections/mainwindow.ui ../GUIwithconnections/WidgetsUsed/AttitudeMeter/attitudemeter.ui ../GUIwithconnections/WidgetsUsed/Buttons/buttons.ui ../GUIwithconnections/WidgetsUsed/Compass/compass.ui ../GUIwithconnections/WidgetsUsed/EandM/eandm.ui ../GUIwithconnections/WidgetsUsed/InputCommands/inputcommands.ui ../GUIwithconnections/WidgetsUsed/DroneSettings/dronesettings.ui ../GUIwithconnections/WidgetsUsed/Gps/gps.ui ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.ui ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.ui .tmp/GUIwithconnections1.0.0/ && (cd `dirname .tmp/GUIwithconnections1.0.0` && $(TAR) GUIwithconnections1.0.0.tar GUIwithconnections1.0.0 && $(COMPRESS) GUIwithconnections1.0.0.tar) && $(MOVE) `dirname .tmp/GUIwithconnections1.0.0`/GUIwithconnections1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/GUIwithconnections1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/GUIwithconnections1.0.0/ && $(COPY_FILE) --parents ../GUIwithconnections/images.qrc .tmp/GUIwithconnections1.0.0/ && $(COPY_FILE) --parents ../GUIwithconnections/mainwindow.h ../GUIwithconnections/Source/qcgaugewidget.h ../GUIwithconnections/WidgetsUsed/AttitudeMeter/attitudemeter.h ../GUIwithconnections/WidgetsUsed/Buttons/buttons.h ../GUIwithconnections/WidgetsUsed/Compass/compass.h ../GUIwithconnections/WidgetsUsed/EandM/eandm.h ../GUIwithconnections/WidgetsUsed/InputCommands/inputcommands.h ../GUIwithconnections/dronestatus.h ../GUIwithconnections/lecturefichiertexte.h ../GUIwithconnections/readinput.h ../GUIwithconnections/threadreadinput.h ../GUIwithconnections/Drone/Com/ComException.h ../GUIwithconnections/Drone/Com/Communication.h ../GUIwithconnections/Drone/Com/Message.h ../GUIwithconnections/Drone/Com/MessageChecker.h ../GUIwithconnections/Drone/Com/MessageProcessor.h ../GUIwithconnections/Drone/Com/MessageSender.h ../GUIwithconnections/Drone/Drone/Config.h ../GUIwithconnections/Drone/Drone/Drone.h ../GUIwithconnections/Drone/Drone/StateChecker.h ../GUIwithconnections/Drone/Serial/serial_exception/serial_exception.hpp ../GUIwithconnections/Drone/Serial/Serial.h ../GUIwithconnections/Drone/serial_exception/serial_exception.hpp ../GUIwithconnections/Drone/Thread/Runnable.h ../GUIwithconnections/Drone/Thread/Thread.h ../GUIwithconnections/Drone/Thread/ThreadStruct.h ../GUIwithconnections/Drone/Utils/BlockingQueue.h ../GUIwithconnections/Drone/Utils/Listener.h ../GUIwithconnections/Drone/Utils/Point3D.hpp ../GUIwithconnections/WidgetsUsed/DroneSettings/dronesettings.h ../GUIwithconnections/WidgetsUsed/Gps/gps.h ../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.h ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.h ../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h ../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h .tmp/GUIwithconnections1.0.0/ && $(COPY_FILE) --parents ../GUIwithconnections/main.cpp ../GUIwithconnections/mainwindow.cpp ../GUIwithconnections/Source/qcgaugewidget.cpp ../GUIwithconnections/WidgetsUsed/AttitudeMeter/attitudemeter.cpp ../GUIwithconnections/WidgetsUsed/Buttons/buttons.cpp ../GUIwithconnections/WidgetsUsed/Compass/compass.cpp ../GUIwithconnections/WidgetsUsed/EandM/eandm.cpp ../GUIwithconnections/WidgetsUsed/InputCommands/inputcommands.cpp ../GUIwithconnections/dronestatus.cpp ../GUIwithconnections/lecturefichiertexte.cpp ../GUIwithconnections/readinput.cpp ../GUIwithconnections/threadreadinput.cpp ../GUIwithconnections/Drone/Com/Communication.cpp ../GUIwithconnections/Drone/Com/Message.cpp ../GUIwithconnections/Drone/Com/MessageChecker.cpp ../GUIwithconnections/Drone/Com/MessageProcessor.cpp ../GUIwithconnections/Drone/Com/MessageSender.cpp ../GUIwithconnections/Drone/Drone/Drone.cpp ../GUIwithconnections/Drone/Drone/StateChecker.cpp ../GUIwithconnections/Drone/Serial/Serial.cpp ../GUIwithconnections/Drone/Thread/Thread.cpp ../GUIwithconnections/Drone/Thread/ThreadStruct.cpp ../GUIwithconnections/Drone/Utils/Listener.cpp ../GUIwithconnections/Drone/Utils/Point3D.cpp ../GUIwithconnections/WidgetsUsed/DroneSettings/dronesettings.cpp ../GUIwithconnections/WidgetsUsed/Gps/gps.cpp ../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.cpp ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.cpp ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.cpp ../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.cpp ../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.cpp .tmp/GUIwithconnections1.0.0/ && $(COPY_FILE) --parents ../GUIwithconnections/mainwindow.ui ../GUIwithconnections/WidgetsUsed/AttitudeMeter/attitudemeter.ui ../GUIwithconnections/WidgetsUsed/Buttons/buttons.ui ../GUIwithconnections/WidgetsUsed/Compass/compass.ui ../GUIwithconnections/WidgetsUsed/EandM/eandm.ui ../GUIwithconnections/WidgetsUsed/InputCommands/inputcommands.ui ../GUIwithconnections/WidgetsUsed/DroneSettings/dronesettings.ui ../GUIwithconnections/WidgetsUsed/Gps/gps.ui ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.ui ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.ui ../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.ui ../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.ui .tmp/GUIwithconnections1.0.0/ && (cd `dirname .tmp/GUIwithconnections1.0.0` && $(TAR) GUIwithconnections1.0.0.tar GUIwithconnections1.0.0 && $(COMPRESS) GUIwithconnections1.0.0.tar) && $(MOVE) `dirname .tmp/GUIwithconnections1.0.0`/GUIwithconnections1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/GUIwithconnections1.0.0
 
 
 clean:compiler_clean 
@@ -389,11 +402,16 @@ mocables: compiler_moc_header_make_all compiler_moc_source_make_all
 
 check: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_images.cpp
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_qcgaugewidget.cpp moc_attitudemeter.cpp moc_buttons.cpp moc_compass.cpp moc_eandm.cpp moc_inputcommands.cpp moc_dronestatus.cpp moc_lecturefichiertexte.cpp moc_threadreadinput.cpp moc_dronesettings.cpp moc_gps.cpp moc_qcustomplot.cpp moc_xyzwidget.cpp moc_zcursor.cpp
+	-$(DEL_FILE) qrc_images.cpp
+qrc_images.cpp: ../GUIwithconnections/images.qrc \
+		../GUIwithconnections/logo.png
+	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name images ../GUIwithconnections/images.qrc -o qrc_images.cpp
+
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_qcgaugewidget.cpp moc_attitudemeter.cpp moc_buttons.cpp moc_compass.cpp moc_eandm.cpp moc_inputcommands.cpp moc_dronestatus.cpp moc_lecturefichiertexte.cpp moc_threadreadinput.cpp moc_dronesettings.cpp moc_gps.cpp moc_qcustomplot.cpp moc_xyzwidget.cpp moc_zcursor.cpp moc_batterygauge.cpp moc_rpycontrol.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_qcgaugewidget.cpp moc_attitudemeter.cpp moc_buttons.cpp moc_compass.cpp moc_eandm.cpp moc_inputcommands.cpp moc_dronestatus.cpp moc_lecturefichiertexte.cpp moc_threadreadinput.cpp moc_dronesettings.cpp moc_gps.cpp moc_qcustomplot.cpp moc_xyzwidget.cpp moc_zcursor.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_qcgaugewidget.cpp moc_attitudemeter.cpp moc_buttons.cpp moc_compass.cpp moc_eandm.cpp moc_inputcommands.cpp moc_dronestatus.cpp moc_lecturefichiertexte.cpp moc_threadreadinput.cpp moc_dronesettings.cpp moc_gps.cpp moc_qcustomplot.cpp moc_xyzwidget.cpp moc_zcursor.cpp moc_batterygauge.cpp moc_rpycontrol.cpp
 moc_mainwindow.cpp: /usr/include/qt5/QtWidgets/QMainWindow \
 		/usr/include/qt5/QtWidgets/qmainwindow.h \
 		/usr/include/qt5/QtWidgets/qwidget.h \
@@ -572,6 +590,8 @@ moc_mainwindow.cpp: /usr/include/qt5/QtWidgets/QMainWindow \
 		/usr/include/qt5/QtCore/QDateTime \
 		/usr/include/qt5/QtCore/qdatetime.h \
 		/usr/include/qt5/QtGui/QPixmap \
+		/usr/include/qt5/QtWidgets/QScrollArea \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		../GUIwithconnections/readinput.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h \
@@ -795,7 +815,6 @@ moc_mainwindow.cpp: /usr/include/qt5/QtWidgets/QMainWindow \
 		/usr/include/qt5/QtGui/QVector3D \
 		/usr/include/qt5/QtGui/QMatrix4x4 \
 		/usr/include/qt5/QtWidgets/qgraphicsview.h \
-		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
 		/usr/include/qt5/QtWidgets/qstyleoption.h \
 		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
@@ -891,6 +910,8 @@ moc_mainwindow.cpp: /usr/include/qt5/QtWidgets/QMainWindow \
 		/usr/include/qt5/QtCore/QPair \
 		/usr/include/qt5/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/include/qt5/QtPrintSupport/qtprintsupportversion.h \
+		../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h \
+		../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h \
 		../GUIwithconnections/Drone/Drone/Drone.h \
 		../GUIwithconnections/Drone/Thread/ThreadStruct.h \
 		../GUIwithconnections/Drone/Thread/Thread.h \
@@ -2150,6 +2171,9 @@ moc_gps.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		/usr/include/qt5/QtWidgets/QMessageBox \
 		/usr/include/qt5/QtWidgets/qmessagebox.h \
 		/usr/include/qt5/QtGui/QPixmap \
+		/usr/include/qt5/QtWidgets/QScrollArea \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
+		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
 		../GUIwithconnections/readinput.h \
 		../GUIwithconnections/WidgetsUsed/Gps/gps.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../GUIwithconnections/WidgetsUsed/Gps/gps.h -o moc_gps.cpp
@@ -3220,11 +3244,234 @@ moc_zcursor.cpp: /usr/include/qt5/QtWidgets/QWidget \
 		../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.h -o moc_zcursor.cpp
 
+moc_batterygauge.cpp: /usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h -o moc_batterygauge.cpp
+
+moc_rpycontrol.cpp: /usr/include/qt5/QtWidgets/QDialog \
+		/usr/include/qt5/QtWidgets/qdialog.h \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h
+	/usr/lib/x86_64-linux-gnu/qt5/bin/moc $(DEFINES) $(INCPATH) -I/usr/include/c++/4.8 -I/usr/include/x86_64-linux-gnu/c++/4.8 -I/usr/include/c++/4.8/backward -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h -o moc_rpycontrol.cpp
+
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_attitudemeter.h ui_buttons.h ui_compass.h ui_eandm.h ui_inputcommands.h ui_dronesettings.h ui_gps.h ui_xyzwidget.h ui_zcursor.h
+compiler_uic_make_all: ui_mainwindow.h ui_attitudemeter.h ui_buttons.h ui_compass.h ui_eandm.h ui_inputcommands.h ui_dronesettings.h ui_gps.h ui_xyzwidget.h ui_zcursor.h ui_batterygauge.h ui_rpycontrol.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_attitudemeter.h ui_buttons.h ui_compass.h ui_eandm.h ui_inputcommands.h ui_dronesettings.h ui_gps.h ui_xyzwidget.h ui_zcursor.h
+	-$(DEL_FILE) ui_mainwindow.h ui_attitudemeter.h ui_buttons.h ui_compass.h ui_eandm.h ui_inputcommands.h ui_dronesettings.h ui_gps.h ui_xyzwidget.h ui_zcursor.h ui_batterygauge.h ui_rpycontrol.h
 ui_mainwindow.h: ../GUIwithconnections/mainwindow.ui
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../GUIwithconnections/mainwindow.ui -o ui_mainwindow.h
 
@@ -3249,11 +3496,485 @@ ui_dronesettings.h: ../GUIwithconnections/WidgetsUsed/DroneSettings/dronesetting
 ui_gps.h: ../GUIwithconnections/WidgetsUsed/Gps/gps.ui
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../GUIwithconnections/WidgetsUsed/Gps/gps.ui -o ui_gps.h
 
-ui_xyzwidget.h: ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.ui
+ui_xyzwidget.h: ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.ui \
+		../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h \
+		/usr/include/qt5/QtCore/QObject \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/QPointer \
+		/usr/include/qt5/QtCore/qpointer.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		/usr/include/qt5/QtGui/QPainter \
+		/usr/include/qt5/QtGui/qpainter.h \
+		/usr/include/qt5/QtGui/qtextoption.h \
+		/usr/include/qt5/QtGui/qpen.h \
+		/usr/include/qt5/QtGui/QPaintEvent \
+		/usr/include/qt5/QtGui/QMouseEvent \
+		/usr/include/qt5/QtGui/QPixmap \
+		/usr/include/qt5/QtCore/QVector \
+		/usr/include/qt5/QtCore/QString \
+		/usr/include/qt5/QtCore/QDateTime \
+		/usr/include/qt5/QtCore/qdatetime.h \
+		/usr/include/qt5/QtCore/QMultiMap \
+		/usr/include/qt5/QtCore/QFlags \
+		/usr/include/qt5/QtCore/QDebug \
+		/usr/include/qt5/QtGui/QVector2D \
+		/usr/include/qt5/QtCore/QStack \
+		/usr/include/qt5/QtCore/qstack.h \
+		/usr/include/qt5/QtCore/QCache \
+		/usr/include/qt5/QtCore/qcache.h \
+		/usr/include/qt5/QtCore/QMargins \
+		/usr/include/qt5/QtCore/qmath.h \
+		/usr/include/qt5/QtCore/qnumeric.h \
+		/usr/include/qt5/QtPrintSupport/QPrinter \
+		/usr/include/qt5/QtPrintSupport/qprinter.h \
+		/usr/include/qt5/QtGui/qpagedpaintdevice.h \
+		/usr/include/qt5/QtPrintSupport/qtprintsupportglobal.h \
+		/usr/include/qt5/QtPrintSupport/QPrintEngine \
+		/usr/include/qt5/QtPrintSupport/qprintengine.h \
+		/usr/include/qt5/QtCore/QtNumeric \
+		/usr/include/qt5/QtPrintSupport/QtPrintSupport \
+		/usr/include/qt5/QtPrintSupport/QtPrintSupportDepends \
+		/usr/include/qt5/QtCore/QtCore \
+		/usr/include/qt5/QtCore/QtCoreDepends \
+		/usr/include/qt5/QtCore/qabstractanimation.h \
+		/usr/include/qt5/QtCore/qanimationgroup.h \
+		/usr/include/qt5/QtCore/qparallelanimationgroup.h \
+		/usr/include/qt5/QtCore/qpauseanimation.h \
+		/usr/include/qt5/QtCore/qpropertyanimation.h \
+		/usr/include/qt5/QtCore/qvariantanimation.h \
+		/usr/include/qt5/QtCore/qeasingcurve.h \
+		/usr/include/qt5/QtCore/qsequentialanimationgroup.h \
+		/usr/include/qt5/QtCore/qtextcodec.h \
+		/usr/include/qt5/QtCore/qendian.h \
+		/usr/include/qt5/QtCore/qlibraryinfo.h \
+		/usr/include/qt5/QtCore/qbuffer.h \
+		/usr/include/qt5/QtCore/qdir.h \
+		/usr/include/qt5/QtCore/qfileinfo.h \
+		/usr/include/qt5/QtCore/qdiriterator.h \
+		/usr/include/qt5/QtCore/qfileselector.h \
+		/usr/include/qt5/QtCore/QStringList \
+		/usr/include/qt5/QtCore/qfilesystemwatcher.h \
+		/usr/include/qt5/QtCore/qlockfile.h \
+		/usr/include/qt5/QtCore/qloggingcategory.h \
+		/usr/include/qt5/QtCore/qprocess.h \
+		/usr/include/qt5/QtCore/qresource.h \
+		/usr/include/qt5/QtCore/qsavefile.h \
+		/usr/include/qt5/QtCore/qsettings.h \
+		/usr/include/qt5/QtCore/qstandardpaths.h \
+		/usr/include/qt5/QtCore/qtemporarydir.h \
+		/usr/include/qt5/QtCore/QScopedPointer \
+		/usr/include/qt5/QtCore/qtemporaryfile.h \
+		/usr/include/qt5/QtCore/qabstractitemmodel.h \
+		/usr/include/qt5/QtCore/qabstractproxymodel.h \
+		/usr/include/qt5/QtCore/qidentityproxymodel.h \
+		/usr/include/qt5/QtCore/qitemselectionmodel.h \
+		/usr/include/qt5/QtCore/qsortfilterproxymodel.h \
+		/usr/include/qt5/QtCore/qstringlistmodel.h \
+		/usr/include/qt5/QtCore/qjsonarray.h \
+		/usr/include/qt5/QtCore/qjsonvalue.h \
+		/usr/include/qt5/QtCore/qjsondocument.h \
+		/usr/include/qt5/QtCore/qjsonobject.h \
+		/usr/include/qt5/QtCore/qabstracteventdispatcher.h \
+		/usr/include/qt5/QtCore/qeventloop.h \
+		/usr/include/qt5/QtCore/qabstractnativeeventfilter.h \
+		/usr/include/qt5/QtCore/qbasictimer.h \
+		/usr/include/qt5/QtCore/qcoreapplication.h \
+		/usr/include/qt5/QtCore/qmetaobject.h \
+		/usr/include/qt5/QtCore/qmimedata.h \
+		/usr/include/qt5/QtCore/qobjectcleanuphandler.h \
+		/usr/include/qt5/QtCore/qsharedmemory.h \
+		/usr/include/qt5/QtCore/qsignalmapper.h \
+		/usr/include/qt5/QtCore/qsocketnotifier.h \
+		/usr/include/qt5/QtCore/qsystemsemaphore.h \
+		/usr/include/qt5/QtCore/qtimer.h \
+		/usr/include/qt5/QtCore/qtranslator.h \
+		/usr/include/qt5/QtCore/qwineventnotifier.h \
+		/usr/include/qt5/QtCore/qmimedatabase.h \
+		/usr/include/qt5/QtCore/qmimetype.h \
+		/usr/include/qt5/QtCore/qfactoryinterface.h \
+		/usr/include/qt5/QtCore/qlibrary.h \
+		/usr/include/qt5/QtCore/qplugin.h \
+		/usr/include/qt5/QtCore/qpluginloader.h \
+		/usr/include/qt5/QtCore/quuid.h \
+		/usr/include/qt5/QtCore/qabstractstate.h \
+		/usr/include/qt5/QtCore/qabstracttransition.h \
+		/usr/include/qt5/QtCore/qeventtransition.h \
+		/usr/include/qt5/QtCore/qfinalstate.h \
+		/usr/include/qt5/QtCore/qhistorystate.h \
+		/usr/include/qt5/QtCore/qsignaltransition.h \
+		/usr/include/qt5/QtCore/qstate.h \
+		/usr/include/qt5/QtCore/qstatemachine.h \
+		/usr/include/qt5/QtCore/qexception.h \
+		/usr/include/qt5/QtCore/qfuture.h \
+		/usr/include/qt5/QtCore/qfutureinterface.h \
+		/usr/include/qt5/QtCore/qrunnable.h \
+		/usr/include/qt5/QtCore/qresultstore.h \
+		/usr/include/qt5/QtCore/qfuturesynchronizer.h \
+		/usr/include/qt5/QtCore/qfuturewatcher.h \
+		/usr/include/qt5/QtCore/qreadwritelock.h \
+		/usr/include/qt5/QtCore/qsemaphore.h \
+		/usr/include/qt5/QtCore/qthread.h \
+		/usr/include/qt5/QtCore/qthreadpool.h \
+		/usr/include/qt5/QtCore/qthreadstorage.h \
+		/usr/include/qt5/QtCore/qwaitcondition.h \
+		/usr/include/qt5/QtCore/qarraydataops.h \
+		/usr/include/qt5/QtCore/qarraydatapointer.h \
+		/usr/include/qt5/QtCore/qbitarray.h \
+		/usr/include/qt5/QtCore/qbytearraymatcher.h \
+		/usr/include/qt5/QtCore/qcollator.h \
+		/usr/include/qt5/QtCore/qcommandlineoption.h \
+		/usr/include/qt5/QtCore/qcommandlineparser.h \
+		/usr/include/qt5/QtCore/qcryptographichash.h \
+		/usr/include/qt5/QtCore/qelapsedtimer.h \
+		/usr/include/qt5/QtCore/qlinkedlist.h \
+		/usr/include/qt5/QtCore/qmessageauthenticationcode.h \
+		/usr/include/qt5/QtCore/qqueue.h \
+		/usr/include/qt5/QtCore/qregularexpression.h \
+		/usr/include/qt5/QtCore/qscopedvaluerollback.h \
+		/usr/include/qt5/QtCore/qtextboundaryfinder.h \
+		/usr/include/qt5/QtCore/qtimeline.h \
+		/usr/include/qt5/QtCore/qtimezone.h \
+		/usr/include/qt5/QtCore/qxmlstream.h \
+		/usr/include/qt5/QtCore/qtcoreversion.h \
+		/usr/include/qt5/QtGui/QtGui \
+		/usr/include/qt5/QtGui/QtGuiDepends \
+		/usr/include/qt5/QtGui/qaccessible.h \
+		/usr/include/qt5/QtGui/qaccessiblebridge.h \
+		/usr/include/qt5/QtGui/qaccessibleobject.h \
+		/usr/include/qt5/QtGui/qaccessibleplugin.h \
+		/usr/include/qt5/QtGui/qbitmap.h \
+		/usr/include/qt5/QtGui/qicon.h \
+		/usr/include/qt5/QtGui/qiconengine.h \
+		/usr/include/qt5/QtGui/qiconengineplugin.h \
+		/usr/include/qt5/QtGui/qimageiohandler.h \
+		/usr/include/qt5/QtGui/qimagereader.h \
+		/usr/include/qt5/QtGui/qimagewriter.h \
+		/usr/include/qt5/QtGui/qmovie.h \
+		/usr/include/qt5/QtGui/qpicture.h \
+		/usr/include/qt5/QtGui/qpictureformatplugin.h \
+		/usr/include/qt5/QtGui/qpixmapcache.h \
+		/usr/include/qt5/QtGui/qstandarditemmodel.h \
+		/usr/include/qt5/QtGui/qclipboard.h \
+		/usr/include/qt5/QtGui/qdrag.h \
+		/usr/include/qt5/QtGui/qgenericplugin.h \
+		/usr/include/qt5/QtGui/qgenericpluginfactory.h \
+		/usr/include/qt5/QtGui/qguiapplication.h \
+		/usr/include/qt5/QtGui/qinputmethod.h \
+		/usr/include/qt5/QtGui/qoffscreensurface.h \
+		/usr/include/qt5/QtGui/qsurface.h \
+		/usr/include/qt5/QtGui/qsurfaceformat.h \
+		/usr/include/qt5/QtGui/qopenglcontext.h \
+		/usr/include/qt5/QtGui/QSurfaceFormat \
+		/usr/include/qt5/QtGui/qopengl.h \
+		/usr/include/qt5/QtCore/qt_windows.h \
+		/usr/include/qt5/QtGui/qopengles2ext.h \
+		/usr/include/qt5/QtGui/qopenglext.h \
+		/usr/include/qt5/QtGui/qopenglversionfunctions.h \
+		/usr/include/qt5/QtGui/qscreen.h \
+		/usr/include/qt5/QtCore/QList \
+		/usr/include/qt5/QtCore/QRect \
+		/usr/include/qt5/QtCore/QSize \
+		/usr/include/qt5/QtCore/QSizeF \
+		/usr/include/qt5/QtGui/QTransform \
+		/usr/include/qt5/QtGui/qsessionmanager.h \
+		/usr/include/qt5/QtGui/qstylehints.h \
+		/usr/include/qt5/QtGui/qwindow.h \
+		/usr/include/qt5/QtCore/QEvent \
+		/usr/include/qt5/QtGui/qgenericmatrix.h \
+		/usr/include/qt5/QtGui/qmatrix4x4.h \
+		/usr/include/qt5/QtGui/qvector3d.h \
+		/usr/include/qt5/QtGui/qvector4d.h \
+		/usr/include/qt5/QtGui/qquaternion.h \
+		/usr/include/qt5/QtGui/qopenglbuffer.h \
+		/usr/include/qt5/QtGui/qopengldebug.h \
+		/usr/include/qt5/QtGui/qopenglframebufferobject.h \
+		/usr/include/qt5/QtGui/qopenglfunctions.h \
+		/usr/include/qt5/QtGui/qopenglpaintdevice.h \
+		/usr/include/qt5/QtGui/qopenglpixeltransferoptions.h \
+		/usr/include/qt5/QtCore/QSharedDataPointer \
+		/usr/include/qt5/QtGui/qopenglshaderprogram.h \
+		/usr/include/qt5/QtGui/qopengltexture.h \
+		/usr/include/qt5/QtGui/qopengltimerquery.h \
+		/usr/include/qt5/QtGui/qopenglvertexarrayobject.h \
+		/usr/include/qt5/QtGui/qbackingstore.h \
+		/usr/include/qt5/QtGui/qpaintengine.h \
+		/usr/include/qt5/QtGui/qpdfwriter.h \
+		/usr/include/qt5/QtGui/qabstracttextdocumentlayout.h \
+		/usr/include/qt5/QtGui/qtextlayout.h \
+		/usr/include/qt5/QtGui/qtextformat.h \
+		/usr/include/qt5/QtGui/qglyphrun.h \
+		/usr/include/qt5/QtGui/qrawfont.h \
+		/usr/include/qt5/QtGui/qfontdatabase.h \
+		/usr/include/qt5/QtGui/qtextcursor.h \
+		/usr/include/qt5/QtGui/qtextdocument.h \
+		/usr/include/qt5/QtGui/qstatictext.h \
+		/usr/include/qt5/QtGui/qsyntaxhighlighter.h \
+		/usr/include/qt5/QtGui/qtextobject.h \
+		/usr/include/qt5/QtGui/qtextdocumentfragment.h \
+		/usr/include/qt5/QtGui/qtextdocumentwriter.h \
+		/usr/include/qt5/QtGui/qtextlist.h \
+		/usr/include/qt5/QtGui/qtexttable.h \
+		/usr/include/qt5/QtGui/qdesktopservices.h \
+		/usr/include/qt5/QtGui/qvalidator.h \
+		/usr/include/qt5/QtGui/qtguiversion.h \
+		/usr/include/qt5/QtWidgets/QtWidgets \
+		/usr/include/qt5/QtWidgets/QtWidgetsDepends \
+		/usr/include/qt5/QtWidgets/qaccessiblewidget.h \
+		/usr/include/qt5/QtWidgets/qcolordialog.h \
+		/usr/include/qt5/QtWidgets/qdialog.h \
+		/usr/include/qt5/QtWidgets/qerrormessage.h \
+		/usr/include/qt5/QtWidgets/qfiledialog.h \
+		/usr/include/qt5/QtWidgets/qfilesystemmodel.h \
+		/usr/include/qt5/QtWidgets/qfontdialog.h \
+		/usr/include/qt5/QtWidgets/qinputdialog.h \
+		/usr/include/qt5/QtWidgets/qlineedit.h \
+		/usr/include/qt5/QtWidgets/qframe.h \
+		/usr/include/qt5/QtWidgets/qmessagebox.h \
+		/usr/include/qt5/QtWidgets/qprogressdialog.h \
+		/usr/include/qt5/QtWidgets/qwizard.h \
+		/usr/include/qt5/QtWidgets/qgraphicseffect.h \
+		/usr/include/qt5/QtWidgets/qgraphicsanchorlayout.h \
+		/usr/include/qt5/QtWidgets/qgraphicsitem.h \
+		/usr/include/qt5/QtWidgets/qgraphicslayout.h \
+		/usr/include/qt5/QtWidgets/qgraphicslayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgraphicsgridlayout.h \
+		/usr/include/qt5/QtWidgets/qgraphicsitemanimation.h \
+		/usr/include/qt5/QtWidgets/qgraphicslinearlayout.h \
+		/usr/include/qt5/QtWidgets/qgraphicsproxywidget.h \
+		/usr/include/qt5/QtWidgets/qgraphicswidget.h \
+		/usr/include/qt5/QtWidgets/qgraphicsscene.h \
+		/usr/include/qt5/QtWidgets/qgraphicssceneevent.h \
+		/usr/include/qt5/QtWidgets/qgraphicstransform.h \
+		/usr/include/qt5/QtGui/QVector3D \
+		/usr/include/qt5/QtGui/QMatrix4x4 \
+		/usr/include/qt5/QtWidgets/qgraphicsview.h \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
+		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
+		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
+		/usr/include/qt5/QtWidgets/qstyleoption.h \
+		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
+		/usr/include/qt5/QtWidgets/qslider.h \
+		/usr/include/qt5/QtWidgets/qabstractslider.h \
+		/usr/include/qt5/QtWidgets/qstyle.h \
+		/usr/include/qt5/QtWidgets/qtabbar.h \
+		/usr/include/qt5/QtWidgets/qtabwidget.h \
+		/usr/include/qt5/QtWidgets/qrubberband.h \
+		/usr/include/qt5/QtWidgets/qabstractitemview.h \
+		/usr/include/qt5/QtWidgets/qcolumnview.h \
+		/usr/include/qt5/QtWidgets/qdatawidgetmapper.h \
+		/usr/include/qt5/QtWidgets/qdirmodel.h \
+		/usr/include/qt5/QtWidgets/qfileiconprovider.h \
+		/usr/include/qt5/QtWidgets/qheaderview.h \
+		/usr/include/qt5/QtWidgets/qitemdelegate.h \
+		/usr/include/qt5/QtWidgets/qitemeditorfactory.h \
+		/usr/include/qt5/QtWidgets/qlistview.h \
+		/usr/include/qt5/QtWidgets/qlistwidget.h \
+		/usr/include/qt5/QtWidgets/qstyleditemdelegate.h \
+		/usr/include/qt5/QtWidgets/qtableview.h \
+		/usr/include/qt5/QtWidgets/qtablewidget.h \
+		/usr/include/qt5/QtWidgets/qtreeview.h \
+		/usr/include/qt5/QtWidgets/qtreewidget.h \
+		/usr/include/qt5/QtWidgets/qtreewidgetitemiterator.h \
+		/usr/include/qt5/QtWidgets/qaction.h \
+		/usr/include/qt5/QtWidgets/qactiongroup.h \
+		/usr/include/qt5/QtWidgets/qapplication.h \
+		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
+		/usr/include/qt5/QtWidgets/qboxlayout.h \
+		/usr/include/qt5/QtWidgets/qlayout.h \
+		/usr/include/qt5/QtWidgets/qlayoutitem.h \
+		/usr/include/qt5/QtWidgets/qgridlayout.h \
+		/usr/include/qt5/QtWidgets/qformlayout.h \
+		/usr/include/qt5/QtWidgets/QLayout \
+		/usr/include/qt5/QtWidgets/qgesture.h \
+		/usr/include/qt5/QtWidgets/qgesturerecognizer.h \
+		/usr/include/qt5/QtWidgets/qshortcut.h \
+		/usr/include/qt5/QtWidgets/qstackedlayout.h \
+		/usr/include/qt5/QtWidgets/qtooltip.h \
+		/usr/include/qt5/QtWidgets/qwhatsthis.h \
+		/usr/include/qt5/QtWidgets/qwidgetaction.h \
+		/usr/include/qt5/QtWidgets/qkeyeventtransition.h \
+		/usr/include/qt5/QtWidgets/qmouseeventtransition.h \
+		/usr/include/qt5/QtWidgets/qcommonstyle.h \
+		/usr/include/qt5/QtWidgets/qdrawutil.h \
+		/usr/include/qt5/QtWidgets/qproxystyle.h \
+		/usr/include/qt5/QtWidgets/QCommonStyle \
+		/usr/include/qt5/QtWidgets/qstylefactory.h \
+		/usr/include/qt5/QtWidgets/qstylepainter.h \
+		/usr/include/qt5/QtWidgets/qstyleplugin.h \
+		/usr/include/qt5/QtWidgets/qcolormap.h \
+		/usr/include/qt5/QtWidgets/qcompleter.h \
+		/usr/include/qt5/QtWidgets/qscroller.h \
+		/usr/include/qt5/QtCore/QPointF \
+		/usr/include/qt5/QtWidgets/QScrollerProperties \
+		/usr/include/qt5/QtWidgets/qscrollerproperties.h \
+		/usr/include/qt5/QtCore/QMetaType \
+		/usr/include/qt5/QtCore/QVariant \
+		/usr/include/qt5/QtWidgets/qsystemtrayicon.h \
+		/usr/include/qt5/QtWidgets/qundogroup.h \
+		/usr/include/qt5/QtWidgets/qundostack.h \
+		/usr/include/qt5/QtWidgets/qundoview.h \
+		/usr/include/qt5/QtWidgets/qabstractbutton.h \
+		/usr/include/qt5/QtWidgets/qbuttongroup.h \
+		/usr/include/qt5/QtWidgets/qcalendarwidget.h \
+		/usr/include/qt5/QtWidgets/qcheckbox.h \
+		/usr/include/qt5/QtWidgets/qcombobox.h \
+		/usr/include/qt5/QtWidgets/qcommandlinkbutton.h \
+		/usr/include/qt5/QtWidgets/qpushbutton.h \
+		/usr/include/qt5/QtWidgets/qdatetimeedit.h \
+		/usr/include/qt5/QtWidgets/qdial.h \
+		/usr/include/qt5/QtWidgets/qdialogbuttonbox.h \
+		/usr/include/qt5/QtWidgets/qdockwidget.h \
+		/usr/include/qt5/QtWidgets/qfocusframe.h \
+		/usr/include/qt5/QtWidgets/qfontcombobox.h \
+		/usr/include/qt5/QtWidgets/qgroupbox.h \
+		/usr/include/qt5/QtWidgets/qkeysequenceedit.h \
+		/usr/include/qt5/QtWidgets/qlabel.h \
+		/usr/include/qt5/QtWidgets/qlcdnumber.h \
+		/usr/include/qt5/QtWidgets/qmainwindow.h \
+		/usr/include/qt5/QtWidgets/qmdiarea.h \
+		/usr/include/qt5/QtWidgets/qmdisubwindow.h \
+		/usr/include/qt5/QtWidgets/qmenu.h \
+		/usr/include/qt5/QtWidgets/qmenubar.h \
+		/usr/include/qt5/QtWidgets/qplaintextedit.h \
+		/usr/include/qt5/QtWidgets/qtextedit.h \
+		/usr/include/qt5/QtWidgets/qprogressbar.h \
+		/usr/include/qt5/QtWidgets/qradiobutton.h \
+		/usr/include/qt5/QtWidgets/qscrollbar.h \
+		/usr/include/qt5/QtWidgets/qsizegrip.h \
+		/usr/include/qt5/QtWidgets/qspinbox.h \
+		/usr/include/qt5/QtWidgets/qsplashscreen.h \
+		/usr/include/qt5/QtWidgets/qsplitter.h \
+		/usr/include/qt5/QtWidgets/qstackedwidget.h \
+		/usr/include/qt5/QtWidgets/qstatusbar.h \
+		/usr/include/qt5/QtWidgets/qtextbrowser.h \
+		/usr/include/qt5/QtWidgets/qtoolbar.h \
+		/usr/include/qt5/QtWidgets/qtoolbox.h \
+		/usr/include/qt5/QtWidgets/qtoolbutton.h \
+		/usr/include/qt5/QtWidgets/qtwidgetsversion.h \
+		/usr/include/qt5/QtPrintSupport/qabstractprintdialog.h \
+		/usr/include/qt5/QtPrintSupport/qpagesetupdialog.h \
+		/usr/include/qt5/QtPrintSupport/qprintdialog.h \
+		/usr/include/qt5/QtPrintSupport/qprintpreviewdialog.h \
+		/usr/include/qt5/QtPrintSupport/qprinterinfo.h \
+		/usr/include/qt5/QtCore/QPair \
+		/usr/include/qt5/QtPrintSupport/qprintpreviewwidget.h \
+		/usr/include/qt5/QtPrintSupport/qtprintsupportversion.h
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.ui -o ui_xyzwidget.h
 
 ui_zcursor.h: ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.ui
 	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.ui -o ui_zcursor.h
+
+ui_batterygauge.h: ../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.ui
+	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.ui -o ui_batterygauge.h
+
+ui_rpycontrol.h: ../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.ui
+	/usr/lib/x86_64-linux-gnu/qt5/bin/uic ../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.ui -o ui_rpycontrol.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -3261,7 +3982,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -3444,6 +4165,8 @@ main.o: ../GUIwithconnections/main.cpp ../GUIwithconnections/mainwindow.h \
 		/usr/include/qt5/QtCore/QDateTime \
 		/usr/include/qt5/QtCore/qdatetime.h \
 		/usr/include/qt5/QtGui/QPixmap \
+		/usr/include/qt5/QtWidgets/QScrollArea \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		../GUIwithconnections/readinput.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h \
@@ -3667,7 +4390,6 @@ main.o: ../GUIwithconnections/main.cpp ../GUIwithconnections/mainwindow.h \
 		/usr/include/qt5/QtGui/QVector3D \
 		/usr/include/qt5/QtGui/QMatrix4x4 \
 		/usr/include/qt5/QtWidgets/qgraphicsview.h \
-		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
 		/usr/include/qt5/QtWidgets/qstyleoption.h \
 		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
@@ -3763,6 +4485,8 @@ main.o: ../GUIwithconnections/main.cpp ../GUIwithconnections/mainwindow.h \
 		/usr/include/qt5/QtCore/QPair \
 		/usr/include/qt5/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/include/qt5/QtPrintSupport/qtprintsupportversion.h \
+		../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h \
+		../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h \
 		../GUIwithconnections/Drone/Drone/Drone.h \
 		../GUIwithconnections/Drone/Thread/ThreadStruct.h \
 		../GUIwithconnections/Drone/Thread/Thread.h \
@@ -3960,6 +4684,8 @@ mainwindow.o: ../GUIwithconnections/mainwindow.cpp ../GUIwithconnections/mainwin
 		/usr/include/qt5/QtCore/QDateTime \
 		/usr/include/qt5/QtCore/qdatetime.h \
 		/usr/include/qt5/QtGui/QPixmap \
+		/usr/include/qt5/QtWidgets/QScrollArea \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		../GUIwithconnections/readinput.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h \
@@ -4183,7 +4909,6 @@ mainwindow.o: ../GUIwithconnections/mainwindow.cpp ../GUIwithconnections/mainwin
 		/usr/include/qt5/QtGui/QVector3D \
 		/usr/include/qt5/QtGui/QMatrix4x4 \
 		/usr/include/qt5/QtWidgets/qgraphicsview.h \
-		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
 		/usr/include/qt5/QtWidgets/qstyleoption.h \
 		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
@@ -4279,6 +5004,8 @@ mainwindow.o: ../GUIwithconnections/mainwindow.cpp ../GUIwithconnections/mainwin
 		/usr/include/qt5/QtCore/QPair \
 		/usr/include/qt5/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/include/qt5/QtPrintSupport/qtprintsupportversion.h \
+		../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h \
+		../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h \
 		../GUIwithconnections/Drone/Drone/Drone.h \
 		../GUIwithconnections/Drone/Thread/ThreadStruct.h \
 		../GUIwithconnections/Drone/Thread/Thread.h \
@@ -4294,17 +5021,7 @@ mainwindow.o: ../GUIwithconnections/mainwindow.cpp ../GUIwithconnections/mainwin
 		../GUIwithconnections/Drone/Com/MessageProcessor.h \
 		../GUIwithconnections/Drone/Com/MessageSender.h \
 		../GUIwithconnections/Drone/Utils/Point3D.hpp \
-		ui_mainwindow.h \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/QButtonGroup \
-		/usr/include/qt5/QtWidgets/QGridLayout \
-		/usr/include/qt5/QtWidgets/QHBoxLayout \
-		/usr/include/qt5/QtWidgets/QHeaderView \
-		/usr/include/qt5/QtWidgets/QMenuBar \
-		/usr/include/qt5/QtWidgets/QTabWidget \
-		/usr/include/qt5/QtWidgets/QToolBar \
-		/usr/include/qt5/QtWidgets/QVBoxLayout
+		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../GUIwithconnections/mainwindow.cpp
 
 qcgaugewidget.o: ../GUIwithconnections/Source/qcgaugewidget.cpp ../GUIwithconnections/Source/qcgaugewidget.h \
@@ -4555,46 +5272,7 @@ attitudemeter.o: ../GUIwithconnections/WidgetsUsed/AttitudeMeter/attitudemeter.c
 		/usr/include/qt5/QtCore/qbasictimer.h \
 		/usr/include/qt5/QtCore/QVector \
 		/usr/include/qt5/QtCore/QMetaType \
-		ui_attitudemeter.h \
-		/usr/include/qt5/QtCore/QVariant \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/qaction.h \
-		/usr/include/qt5/QtGui/qicon.h \
-		/usr/include/qt5/QtWidgets/qactiongroup.h \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/qapplication.h \
-		/usr/include/qt5/QtCore/qcoreapplication.h \
-		/usr/include/qt5/QtCore/qeventloop.h \
-		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
-		/usr/include/qt5/QtGui/qguiapplication.h \
-		/usr/include/qt5/QtGui/qinputmethod.h \
-		/usr/include/qt5/QtWidgets/QButtonGroup \
-		/usr/include/qt5/QtWidgets/qbuttongroup.h \
-		/usr/include/qt5/QtWidgets/QHeaderView \
-		/usr/include/qt5/QtWidgets/qheaderview.h \
-		/usr/include/qt5/QtWidgets/qabstractitemview.h \
-		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
-		/usr/include/qt5/QtWidgets/qframe.h \
-		/usr/include/qt5/QtCore/qabstractitemmodel.h \
-		/usr/include/qt5/QtCore/qitemselectionmodel.h \
-		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt5/QtWidgets/qstyleoption.h \
-		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt5/QtGui/qvalidator.h \
-		/usr/include/qt5/QtCore/qregularexpression.h \
-		/usr/include/qt5/QtWidgets/qslider.h \
-		/usr/include/qt5/QtWidgets/qabstractslider.h \
-		/usr/include/qt5/QtWidgets/qstyle.h \
-		/usr/include/qt5/QtWidgets/qtabbar.h \
-		/usr/include/qt5/QtWidgets/qtabwidget.h \
-		/usr/include/qt5/QtWidgets/qrubberband.h \
-		/usr/include/qt5/QtWidgets/QLabel \
-		/usr/include/qt5/QtWidgets/qlabel.h \
-		/usr/include/qt5/QtWidgets/QVBoxLayout \
-		/usr/include/qt5/QtWidgets/qboxlayout.h \
-		/usr/include/qt5/QtWidgets/qlayout.h \
-		/usr/include/qt5/QtWidgets/qlayoutitem.h \
-		/usr/include/qt5/QtWidgets/qgridlayout.h
+		ui_attitudemeter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o attitudemeter.o ../GUIwithconnections/WidgetsUsed/AttitudeMeter/attitudemeter.cpp
 
 buttons.o: ../GUIwithconnections/WidgetsUsed/Buttons/buttons.cpp ../GUIwithconnections/WidgetsUsed/Buttons/buttons.h \
@@ -4707,49 +5385,7 @@ buttons.o: ../GUIwithconnections/WidgetsUsed/Buttons/buttons.cpp ../GUIwithconne
 		/usr/include/qt5/QtCore/qfiledevice.h \
 		/usr/include/qt5/QtGui/qvector2d.h \
 		/usr/include/qt5/QtGui/qtouchdevice.h \
-		ui_buttons.h \
-		/usr/include/qt5/QtCore/QVariant \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/qaction.h \
-		/usr/include/qt5/QtGui/qicon.h \
-		/usr/include/qt5/QtWidgets/qactiongroup.h \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/qapplication.h \
-		/usr/include/qt5/QtCore/qcoreapplication.h \
-		/usr/include/qt5/QtCore/qeventloop.h \
-		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
-		/usr/include/qt5/QtGui/qguiapplication.h \
-		/usr/include/qt5/QtGui/qinputmethod.h \
-		/usr/include/qt5/QtWidgets/QButtonGroup \
-		/usr/include/qt5/QtWidgets/qbuttongroup.h \
-		/usr/include/qt5/QtWidgets/QGridLayout \
-		/usr/include/qt5/QtWidgets/qgridlayout.h \
-		/usr/include/qt5/QtWidgets/qlayout.h \
-		/usr/include/qt5/QtWidgets/qlayoutitem.h \
-		/usr/include/qt5/QtWidgets/qboxlayout.h \
-		/usr/include/qt5/QtWidgets/QHeaderView \
-		/usr/include/qt5/QtWidgets/qheaderview.h \
-		/usr/include/qt5/QtWidgets/qabstractitemview.h \
-		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
-		/usr/include/qt5/QtWidgets/qframe.h \
-		/usr/include/qt5/QtCore/qabstractitemmodel.h \
-		/usr/include/qt5/QtCore/qitemselectionmodel.h \
-		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt5/QtWidgets/qstyleoption.h \
-		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt5/QtGui/qvalidator.h \
-		/usr/include/qt5/QtCore/qregularexpression.h \
-		/usr/include/qt5/QtWidgets/qslider.h \
-		/usr/include/qt5/QtWidgets/qabstractslider.h \
-		/usr/include/qt5/QtWidgets/qstyle.h \
-		/usr/include/qt5/QtWidgets/qtabbar.h \
-		/usr/include/qt5/QtWidgets/qtabwidget.h \
-		/usr/include/qt5/QtWidgets/qrubberband.h \
-		/usr/include/qt5/QtWidgets/QLabel \
-		/usr/include/qt5/QtWidgets/qlabel.h \
-		/usr/include/qt5/QtWidgets/QPushButton \
-		/usr/include/qt5/QtWidgets/qpushbutton.h \
-		/usr/include/qt5/QtWidgets/qabstractbutton.h
+		ui_buttons.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o buttons.o ../GUIwithconnections/WidgetsUsed/Buttons/buttons.cpp
 
 compass.o: ../GUIwithconnections/WidgetsUsed/Compass/compass.cpp ../GUIwithconnections/WidgetsUsed/Compass/compass.h \
@@ -4880,46 +5516,7 @@ compass.o: ../GUIwithconnections/WidgetsUsed/Compass/compass.cpp ../GUIwithconne
 		/usr/include/qt5/QtCore/QTimer \
 		/usr/include/qt5/QtCore/qtimer.h \
 		/usr/include/qt5/QtCore/qbasictimer.h \
-		ui_compass.h \
-		/usr/include/qt5/QtCore/QVariant \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/qaction.h \
-		/usr/include/qt5/QtGui/qicon.h \
-		/usr/include/qt5/QtWidgets/qactiongroup.h \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/qapplication.h \
-		/usr/include/qt5/QtCore/qcoreapplication.h \
-		/usr/include/qt5/QtCore/qeventloop.h \
-		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
-		/usr/include/qt5/QtGui/qguiapplication.h \
-		/usr/include/qt5/QtGui/qinputmethod.h \
-		/usr/include/qt5/QtWidgets/QButtonGroup \
-		/usr/include/qt5/QtWidgets/qbuttongroup.h \
-		/usr/include/qt5/QtWidgets/QHeaderView \
-		/usr/include/qt5/QtWidgets/qheaderview.h \
-		/usr/include/qt5/QtWidgets/qabstractitemview.h \
-		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
-		/usr/include/qt5/QtWidgets/qframe.h \
-		/usr/include/qt5/QtCore/qabstractitemmodel.h \
-		/usr/include/qt5/QtCore/qitemselectionmodel.h \
-		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt5/QtWidgets/qstyleoption.h \
-		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt5/QtGui/qvalidator.h \
-		/usr/include/qt5/QtCore/qregularexpression.h \
-		/usr/include/qt5/QtWidgets/qslider.h \
-		/usr/include/qt5/QtWidgets/qabstractslider.h \
-		/usr/include/qt5/QtWidgets/qstyle.h \
-		/usr/include/qt5/QtWidgets/qtabbar.h \
-		/usr/include/qt5/QtWidgets/qtabwidget.h \
-		/usr/include/qt5/QtWidgets/qrubberband.h \
-		/usr/include/qt5/QtWidgets/QLabel \
-		/usr/include/qt5/QtWidgets/qlabel.h \
-		/usr/include/qt5/QtWidgets/QVBoxLayout \
-		/usr/include/qt5/QtWidgets/qboxlayout.h \
-		/usr/include/qt5/QtWidgets/qlayout.h \
-		/usr/include/qt5/QtWidgets/qlayoutitem.h \
-		/usr/include/qt5/QtWidgets/qgridlayout.h
+		ui_compass.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o compass.o ../GUIwithconnections/WidgetsUsed/Compass/compass.cpp
 
 eandm.o: ../GUIwithconnections/WidgetsUsed/EandM/eandm.cpp ../GUIwithconnections/WidgetsUsed/EandM/eandm.h \
@@ -5042,44 +5639,7 @@ eandm.o: ../GUIwithconnections/WidgetsUsed/EandM/eandm.cpp ../GUIwithconnections
 		/usr/include/qt5/QtGui/qtextcursor.h \
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
-		ui_eandm.h \
-		/usr/include/qt5/QtCore/QVariant \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/qaction.h \
-		/usr/include/qt5/QtGui/qicon.h \
-		/usr/include/qt5/QtWidgets/qactiongroup.h \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/qapplication.h \
-		/usr/include/qt5/QtCore/qcoreapplication.h \
-		/usr/include/qt5/QtCore/qeventloop.h \
-		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
-		/usr/include/qt5/QtGui/qguiapplication.h \
-		/usr/include/qt5/QtGui/qinputmethod.h \
-		/usr/include/qt5/QtWidgets/QButtonGroup \
-		/usr/include/qt5/QtWidgets/qbuttongroup.h \
-		/usr/include/qt5/QtWidgets/QHeaderView \
-		/usr/include/qt5/QtWidgets/qheaderview.h \
-		/usr/include/qt5/QtWidgets/qabstractitemview.h \
-		/usr/include/qt5/QtCore/qabstractitemmodel.h \
-		/usr/include/qt5/QtCore/qitemselectionmodel.h \
-		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt5/QtWidgets/qstyleoption.h \
-		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt5/QtGui/qvalidator.h \
-		/usr/include/qt5/QtCore/qregularexpression.h \
-		/usr/include/qt5/QtWidgets/qslider.h \
-		/usr/include/qt5/QtWidgets/qabstractslider.h \
-		/usr/include/qt5/QtWidgets/qstyle.h \
-		/usr/include/qt5/QtWidgets/qtabbar.h \
-		/usr/include/qt5/QtWidgets/qtabwidget.h \
-		/usr/include/qt5/QtWidgets/qrubberband.h \
-		/usr/include/qt5/QtWidgets/QLabel \
-		/usr/include/qt5/QtWidgets/qlabel.h \
-		/usr/include/qt5/QtWidgets/QVBoxLayout \
-		/usr/include/qt5/QtWidgets/qboxlayout.h \
-		/usr/include/qt5/QtWidgets/qlayout.h \
-		/usr/include/qt5/QtWidgets/qlayoutitem.h \
-		/usr/include/qt5/QtWidgets/qgridlayout.h
+		ui_eandm.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o eandm.o ../GUIwithconnections/WidgetsUsed/EandM/eandm.cpp
 
 inputcommands.o: ../GUIwithconnections/WidgetsUsed/InputCommands/inputcommands.cpp ../GUIwithconnections/WidgetsUsed/InputCommands/inputcommands.h \
@@ -5204,49 +5764,7 @@ inputcommands.o: ../GUIwithconnections/WidgetsUsed/InputCommands/inputcommands.c
 		/usr/include/qt5/QtGui/qtextcursor.h \
 		/usr/include/qt5/QtGui/qtextformat.h \
 		/usr/include/qt5/QtGui/qpen.h \
-		ui_inputcommands.h \
-		/usr/include/qt5/QtCore/QVariant \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/qaction.h \
-		/usr/include/qt5/QtGui/qicon.h \
-		/usr/include/qt5/QtWidgets/qactiongroup.h \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/qapplication.h \
-		/usr/include/qt5/QtCore/qcoreapplication.h \
-		/usr/include/qt5/QtCore/qeventloop.h \
-		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
-		/usr/include/qt5/QtGui/qguiapplication.h \
-		/usr/include/qt5/QtGui/qinputmethod.h \
-		/usr/include/qt5/QtWidgets/QButtonGroup \
-		/usr/include/qt5/QtWidgets/qbuttongroup.h \
-		/usr/include/qt5/QtWidgets/QHBoxLayout \
-		/usr/include/qt5/QtWidgets/qboxlayout.h \
-		/usr/include/qt5/QtWidgets/qlayout.h \
-		/usr/include/qt5/QtWidgets/qlayoutitem.h \
-		/usr/include/qt5/QtWidgets/qgridlayout.h \
-		/usr/include/qt5/QtWidgets/QHeaderView \
-		/usr/include/qt5/QtWidgets/qheaderview.h \
-		/usr/include/qt5/QtWidgets/qabstractitemview.h \
-		/usr/include/qt5/QtCore/qabstractitemmodel.h \
-		/usr/include/qt5/QtCore/qitemselectionmodel.h \
-		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt5/QtWidgets/qstyleoption.h \
-		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt5/QtGui/qvalidator.h \
-		/usr/include/qt5/QtCore/qregularexpression.h \
-		/usr/include/qt5/QtWidgets/qslider.h \
-		/usr/include/qt5/QtWidgets/qabstractslider.h \
-		/usr/include/qt5/QtWidgets/qstyle.h \
-		/usr/include/qt5/QtWidgets/qtabbar.h \
-		/usr/include/qt5/QtWidgets/qtabwidget.h \
-		/usr/include/qt5/QtWidgets/qrubberband.h \
-		/usr/include/qt5/QtWidgets/QLabel \
-		/usr/include/qt5/QtWidgets/qlabel.h \
-		/usr/include/qt5/QtWidgets/QPushButton \
-		/usr/include/qt5/QtWidgets/qpushbutton.h \
-		/usr/include/qt5/QtWidgets/qabstractbutton.h \
-		/usr/include/qt5/QtWidgets/QSpacerItem \
-		/usr/include/qt5/QtWidgets/QVBoxLayout
+		ui_inputcommands.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o inputcommands.o ../GUIwithconnections/WidgetsUsed/InputCommands/inputcommands.cpp
 
 dronestatus.o: ../GUIwithconnections/dronestatus.cpp ../GUIwithconnections/dronestatus.h \
@@ -5813,6 +6331,8 @@ Communication.o: ../GUIwithconnections/Drone/Com/Communication.cpp ../GUIwithcon
 		/usr/include/qt5/QtCore/QDateTime \
 		/usr/include/qt5/QtCore/qdatetime.h \
 		/usr/include/qt5/QtGui/QPixmap \
+		/usr/include/qt5/QtWidgets/QScrollArea \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		../GUIwithconnections/readinput.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h \
@@ -6036,7 +6556,6 @@ Communication.o: ../GUIwithconnections/Drone/Com/Communication.cpp ../GUIwithcon
 		/usr/include/qt5/QtGui/QVector3D \
 		/usr/include/qt5/QtGui/QMatrix4x4 \
 		/usr/include/qt5/QtWidgets/qgraphicsview.h \
-		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
 		/usr/include/qt5/QtWidgets/qstyleoption.h \
 		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
@@ -6132,6 +6651,8 @@ Communication.o: ../GUIwithconnections/Drone/Com/Communication.cpp ../GUIwithcon
 		/usr/include/qt5/QtCore/QPair \
 		/usr/include/qt5/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/include/qt5/QtPrintSupport/qtprintsupportversion.h \
+		../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h \
+		../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h \
 		../GUIwithconnections/Drone/Com/ComException.h \
 		../GUIwithconnections/Drone/Com/MessageProcessor.h \
 		../GUIwithconnections/Drone/Com/MessageSender.h
@@ -6331,6 +6852,8 @@ MessageChecker.o: ../GUIwithconnections/Drone/Com/MessageChecker.cpp ../GUIwithc
 		/usr/include/qt5/QtCore/QDateTime \
 		/usr/include/qt5/QtCore/qdatetime.h \
 		/usr/include/qt5/QtGui/QPixmap \
+		/usr/include/qt5/QtWidgets/QScrollArea \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		../GUIwithconnections/readinput.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h \
@@ -6554,7 +7077,6 @@ MessageChecker.o: ../GUIwithconnections/Drone/Com/MessageChecker.cpp ../GUIwithc
 		/usr/include/qt5/QtGui/QVector3D \
 		/usr/include/qt5/QtGui/QMatrix4x4 \
 		/usr/include/qt5/QtWidgets/qgraphicsview.h \
-		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
 		/usr/include/qt5/QtWidgets/qstyleoption.h \
 		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
@@ -6650,6 +7172,8 @@ MessageChecker.o: ../GUIwithconnections/Drone/Com/MessageChecker.cpp ../GUIwithc
 		/usr/include/qt5/QtCore/QPair \
 		/usr/include/qt5/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/include/qt5/QtPrintSupport/qtprintsupportversion.h \
+		../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h \
+		../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h \
 		../GUIwithconnections/Drone/Com/MessageSender.h \
 		../GUIwithconnections/Drone/Com/ComException.h \
 		../GUIwithconnections/Drone/Utils/Point3D.hpp
@@ -6848,6 +7372,8 @@ MessageProcessor.o: ../GUIwithconnections/Drone/Com/MessageProcessor.cpp ../GUIw
 		/usr/include/qt5/QtCore/QDateTime \
 		/usr/include/qt5/QtCore/qdatetime.h \
 		/usr/include/qt5/QtGui/QPixmap \
+		/usr/include/qt5/QtWidgets/QScrollArea \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		../GUIwithconnections/readinput.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h \
@@ -7071,7 +7597,6 @@ MessageProcessor.o: ../GUIwithconnections/Drone/Com/MessageProcessor.cpp ../GUIw
 		/usr/include/qt5/QtGui/QVector3D \
 		/usr/include/qt5/QtGui/QMatrix4x4 \
 		/usr/include/qt5/QtWidgets/qgraphicsview.h \
-		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
 		/usr/include/qt5/QtWidgets/qstyleoption.h \
 		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
@@ -7167,6 +7692,8 @@ MessageProcessor.o: ../GUIwithconnections/Drone/Com/MessageProcessor.cpp ../GUIw
 		/usr/include/qt5/QtCore/QPair \
 		/usr/include/qt5/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/include/qt5/QtPrintSupport/qtprintsupportversion.h \
+		../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h \
+		../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h \
 		../GUIwithconnections/Drone/Utils/Point3D.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MessageProcessor.o ../GUIwithconnections/Drone/Com/MessageProcessor.cpp
 
@@ -7363,6 +7890,8 @@ MessageSender.o: ../GUIwithconnections/Drone/Com/MessageSender.cpp ../GUIwithcon
 		/usr/include/qt5/QtCore/QDateTime \
 		/usr/include/qt5/QtCore/qdatetime.h \
 		/usr/include/qt5/QtGui/QPixmap \
+		/usr/include/qt5/QtWidgets/QScrollArea \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		../GUIwithconnections/readinput.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h \
@@ -7586,7 +8115,6 @@ MessageSender.o: ../GUIwithconnections/Drone/Com/MessageSender.cpp ../GUIwithcon
 		/usr/include/qt5/QtGui/QVector3D \
 		/usr/include/qt5/QtGui/QMatrix4x4 \
 		/usr/include/qt5/QtWidgets/qgraphicsview.h \
-		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
 		/usr/include/qt5/QtWidgets/qstyleoption.h \
 		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
@@ -7682,6 +8210,8 @@ MessageSender.o: ../GUIwithconnections/Drone/Com/MessageSender.cpp ../GUIwithcon
 		/usr/include/qt5/QtCore/QPair \
 		/usr/include/qt5/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/include/qt5/QtPrintSupport/qtprintsupportversion.h \
+		../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h \
+		../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h \
 		../GUIwithconnections/Drone/Utils/Point3D.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MessageSender.o ../GUIwithconnections/Drone/Com/MessageSender.cpp
 
@@ -7877,6 +8407,8 @@ Drone.o: ../GUIwithconnections/Drone/Drone/Drone.cpp ../GUIwithconnections/Drone
 		/usr/include/qt5/QtCore/QDateTime \
 		/usr/include/qt5/QtCore/qdatetime.h \
 		/usr/include/qt5/QtGui/QPixmap \
+		/usr/include/qt5/QtWidgets/QScrollArea \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		../GUIwithconnections/readinput.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.h \
 		../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h \
@@ -8100,7 +8632,6 @@ Drone.o: ../GUIwithconnections/Drone/Drone/Drone.cpp ../GUIwithconnections/Drone
 		/usr/include/qt5/QtGui/QVector3D \
 		/usr/include/qt5/QtGui/QMatrix4x4 \
 		/usr/include/qt5/QtWidgets/qgraphicsview.h \
-		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
 		/usr/include/qt5/QtWidgets/qstyleoption.h \
 		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
@@ -8196,6 +8727,8 @@ Drone.o: ../GUIwithconnections/Drone/Drone/Drone.cpp ../GUIwithconnections/Drone
 		/usr/include/qt5/QtCore/QPair \
 		/usr/include/qt5/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/include/qt5/QtPrintSupport/qtprintsupportversion.h \
+		../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h \
+		../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h \
 		../GUIwithconnections/Drone/Com/MessageSender.h \
 		../GUIwithconnections/Drone/Utils/Point3D.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Drone.o ../GUIwithconnections/Drone/Drone/Drone.cpp
@@ -8338,52 +8871,7 @@ dronesettings.o: ../GUIwithconnections/WidgetsUsed/DroneSettings/dronesettings.c
 		/usr/include/qt5/QtCore/qfiledevice.h \
 		/usr/include/qt5/QtGui/qvector2d.h \
 		/usr/include/qt5/QtGui/qtouchdevice.h \
-		ui_dronesettings.h \
-		/usr/include/qt5/QtCore/QVariant \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/qaction.h \
-		/usr/include/qt5/QtGui/qicon.h \
-		/usr/include/qt5/QtWidgets/qactiongroup.h \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/qapplication.h \
-		/usr/include/qt5/QtCore/qcoreapplication.h \
-		/usr/include/qt5/QtCore/qeventloop.h \
-		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
-		/usr/include/qt5/QtGui/qguiapplication.h \
-		/usr/include/qt5/QtGui/qinputmethod.h \
-		/usr/include/qt5/QtWidgets/QButtonGroup \
-		/usr/include/qt5/QtWidgets/qbuttongroup.h \
-		/usr/include/qt5/QtWidgets/QFormLayout \
-		/usr/include/qt5/QtWidgets/qformlayout.h \
-		/usr/include/qt5/QtWidgets/QLayout \
-		/usr/include/qt5/QtWidgets/qlayout.h \
-		/usr/include/qt5/QtWidgets/qlayoutitem.h \
-		/usr/include/qt5/QtWidgets/qboxlayout.h \
-		/usr/include/qt5/QtWidgets/qgridlayout.h \
-		/usr/include/qt5/QtWidgets/QHeaderView \
-		/usr/include/qt5/QtWidgets/qheaderview.h \
-		/usr/include/qt5/QtWidgets/qabstractitemview.h \
-		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
-		/usr/include/qt5/QtWidgets/qframe.h \
-		/usr/include/qt5/QtCore/qabstractitemmodel.h \
-		/usr/include/qt5/QtCore/qitemselectionmodel.h \
-		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt5/QtWidgets/qstyleoption.h \
-		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt5/QtGui/qvalidator.h \
-		/usr/include/qt5/QtCore/qregularexpression.h \
-		/usr/include/qt5/QtWidgets/qslider.h \
-		/usr/include/qt5/QtWidgets/qabstractslider.h \
-		/usr/include/qt5/QtWidgets/qstyle.h \
-		/usr/include/qt5/QtWidgets/qtabbar.h \
-		/usr/include/qt5/QtWidgets/qtabwidget.h \
-		/usr/include/qt5/QtWidgets/qrubberband.h \
-		/usr/include/qt5/QtWidgets/QLabel \
-		/usr/include/qt5/QtWidgets/qlabel.h \
-		/usr/include/qt5/QtWidgets/QPushButton \
-		/usr/include/qt5/QtWidgets/qpushbutton.h \
-		/usr/include/qt5/QtWidgets/qabstractbutton.h \
-		/usr/include/qt5/QtWidgets/QVBoxLayout
+		ui_dronesettings.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dronesettings.o ../GUIwithconnections/WidgetsUsed/DroneSettings/dronesettings.cpp
 
 gps.o: ../GUIwithconnections/WidgetsUsed/Gps/gps.cpp ../GUIwithconnections/WidgetsUsed/Gps/gps.h \
@@ -8523,39 +9011,11 @@ gps.o: ../GUIwithconnections/WidgetsUsed/Gps/gps.cpp ../GUIwithconnections/Widge
 		/usr/include/qt5/QtWidgets/QMessageBox \
 		/usr/include/qt5/QtWidgets/qmessagebox.h \
 		/usr/include/qt5/QtGui/QPixmap \
-		../GUIwithconnections/readinput.h \
-		ui_gps.h \
-		/usr/include/qt5/QtCore/QVariant \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/qaction.h \
-		/usr/include/qt5/QtGui/qicon.h \
-		/usr/include/qt5/QtWidgets/qactiongroup.h \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/qapplication.h \
-		/usr/include/qt5/QtCore/qcoreapplication.h \
-		/usr/include/qt5/QtCore/qeventloop.h \
-		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
-		/usr/include/qt5/QtGui/qguiapplication.h \
-		/usr/include/qt5/QtGui/qinputmethod.h \
-		/usr/include/qt5/QtWidgets/QButtonGroup \
-		/usr/include/qt5/QtWidgets/qbuttongroup.h \
-		/usr/include/qt5/QtWidgets/QHeaderView \
-		/usr/include/qt5/QtWidgets/qheaderview.h \
-		/usr/include/qt5/QtWidgets/qabstractitemview.h \
+		/usr/include/qt5/QtWidgets/QScrollArea \
+		/usr/include/qt5/QtWidgets/qscrollarea.h \
 		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
-		/usr/include/qt5/QtCore/qabstractitemmodel.h \
-		/usr/include/qt5/QtCore/qitemselectionmodel.h \
-		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt5/QtWidgets/qstyleoption.h \
-		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt5/QtGui/qvalidator.h \
-		/usr/include/qt5/QtCore/qregularexpression.h \
-		/usr/include/qt5/QtWidgets/qslider.h \
-		/usr/include/qt5/QtWidgets/qabstractslider.h \
-		/usr/include/qt5/QtWidgets/qstyle.h \
-		/usr/include/qt5/QtWidgets/qtabbar.h \
-		/usr/include/qt5/QtWidgets/qtabwidget.h \
-		/usr/include/qt5/QtWidgets/qrubberband.h
+		../GUIwithconnections/readinput.h \
+		ui_gps.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gps.o ../GUIwithconnections/WidgetsUsed/Gps/gps.cpp
 
 qcustomplot.o: ../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.cpp ../GUIwithconnections/WidgetsUsed/XYZWidget/qcustomplot.h \
@@ -9502,12 +9962,7 @@ xyzwidget.o: ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.cpp ../GUIwit
 		/usr/include/qt5/QtCore/QPair \
 		/usr/include/qt5/QtPrintSupport/qprintpreviewwidget.h \
 		/usr/include/qt5/QtPrintSupport/qtprintsupportversion.h \
-		ui_xyzwidget.h \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/QButtonGroup \
-		/usr/include/qt5/QtWidgets/QGridLayout \
-		/usr/include/qt5/QtWidgets/QHeaderView
+		ui_xyzwidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o xyzwidget.o ../GUIwithconnections/WidgetsUsed/XYZWidget/xyzwidget.cpp
 
 zcursor.o: ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.cpp ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.h \
@@ -9628,44 +10083,236 @@ zcursor.o: ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.cpp ../GUIwithconne
 		/usr/include/qt5/QtCore/qbitarray.h \
 		/usr/include/qt5/QtWidgets/QLabel \
 		/usr/include/qt5/QtWidgets/qlabel.h \
-		ui_zcursor.h \
-		/usr/include/qt5/QtCore/QVariant \
-		/usr/include/qt5/QtWidgets/QAction \
-		/usr/include/qt5/QtWidgets/qaction.h \
-		/usr/include/qt5/QtGui/qicon.h \
-		/usr/include/qt5/QtWidgets/qactiongroup.h \
-		/usr/include/qt5/QtWidgets/QApplication \
-		/usr/include/qt5/QtWidgets/qapplication.h \
-		/usr/include/qt5/QtCore/qcoreapplication.h \
-		/usr/include/qt5/QtCore/qeventloop.h \
-		/usr/include/qt5/QtWidgets/qdesktopwidget.h \
-		/usr/include/qt5/QtGui/qguiapplication.h \
-		/usr/include/qt5/QtGui/qinputmethod.h \
-		/usr/include/qt5/QtWidgets/QButtonGroup \
-		/usr/include/qt5/QtWidgets/qbuttongroup.h \
-		/usr/include/qt5/QtWidgets/QHBoxLayout \
-		/usr/include/qt5/QtWidgets/qboxlayout.h \
-		/usr/include/qt5/QtWidgets/qlayout.h \
-		/usr/include/qt5/QtWidgets/qlayoutitem.h \
-		/usr/include/qt5/QtWidgets/qgridlayout.h \
-		/usr/include/qt5/QtWidgets/QHeaderView \
-		/usr/include/qt5/QtWidgets/qheaderview.h \
-		/usr/include/qt5/QtWidgets/qabstractitemview.h \
-		/usr/include/qt5/QtWidgets/qabstractscrollarea.h \
-		/usr/include/qt5/QtCore/qabstractitemmodel.h \
-		/usr/include/qt5/QtCore/qitemselectionmodel.h \
-		/usr/include/qt5/QtWidgets/qabstractitemdelegate.h \
-		/usr/include/qt5/QtWidgets/qstyleoption.h \
-		/usr/include/qt5/QtWidgets/qabstractspinbox.h \
-		/usr/include/qt5/QtGui/qvalidator.h \
-		/usr/include/qt5/QtCore/qregularexpression.h \
-		/usr/include/qt5/QtWidgets/qstyle.h \
-		/usr/include/qt5/QtWidgets/qtabbar.h \
-		/usr/include/qt5/QtWidgets/qtabwidget.h \
-		/usr/include/qt5/QtWidgets/qrubberband.h \
-		/usr/include/qt5/QtWidgets/QSpacerItem \
-		/usr/include/qt5/QtWidgets/QVBoxLayout
+		ui_zcursor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o zcursor.o ../GUIwithconnections/WidgetsUsed/ZCursor/zcursor.cpp
+
+batterygauge.o: ../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.cpp ../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.h \
+		/usr/include/qt5/QtWidgets/QWidget \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		ui_batterygauge.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o batterygauge.o ../GUIwithconnections/WidgetsUsed/BatteryGauge/batterygauge.cpp
+
+rpycontrol.o: ../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.cpp ../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.h \
+		/usr/include/qt5/QtWidgets/QDialog \
+		/usr/include/qt5/QtWidgets/qdialog.h \
+		/usr/include/qt5/QtWidgets/qwidget.h \
+		/usr/include/qt5/QtGui/qwindowdefs.h \
+		/usr/include/qt5/QtCore/qglobal.h \
+		/usr/include/qt5/QtCore/qconfig.h \
+		/usr/include/qt5/QtCore/qfeatures.h \
+		/usr/include/qt5/QtCore/qsystemdetection.h \
+		/usr/include/qt5/QtCore/qprocessordetection.h \
+		/usr/include/qt5/QtCore/qcompilerdetection.h \
+		/usr/include/qt5/QtCore/qglobalstatic.h \
+		/usr/include/qt5/QtCore/qatomic.h \
+		/usr/include/qt5/QtCore/qbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt5/QtCore/qgenericatomic.h \
+		/usr/include/qt5/QtCore/qatomic_msvc.h \
+		/usr/include/qt5/QtCore/qatomic_integrity.h \
+		/usr/include/qt5/QtCore/qoldbasicatomic.h \
+		/usr/include/qt5/QtCore/qatomic_vxworks.h \
+		/usr/include/qt5/QtCore/qatomic_power.h \
+		/usr/include/qt5/QtCore/qatomic_alpha.h \
+		/usr/include/qt5/QtCore/qatomic_armv7.h \
+		/usr/include/qt5/QtCore/qatomic_armv6.h \
+		/usr/include/qt5/QtCore/qatomic_armv5.h \
+		/usr/include/qt5/QtCore/qatomic_bfin.h \
+		/usr/include/qt5/QtCore/qatomic_ia64.h \
+		/usr/include/qt5/QtCore/qatomic_mips.h \
+		/usr/include/qt5/QtCore/qatomic_s390.h \
+		/usr/include/qt5/QtCore/qatomic_sh4a.h \
+		/usr/include/qt5/QtCore/qatomic_sparc.h \
+		/usr/include/qt5/QtCore/qatomic_gcc.h \
+		/usr/include/qt5/QtCore/qatomic_x86.h \
+		/usr/include/qt5/QtCore/qatomic_cxx11.h \
+		/usr/include/qt5/QtCore/qatomic_unix.h \
+		/usr/include/qt5/QtCore/qmutex.h \
+		/usr/include/qt5/QtCore/qlogging.h \
+		/usr/include/qt5/QtCore/qflags.h \
+		/usr/include/qt5/QtCore/qtypeinfo.h \
+		/usr/include/qt5/QtCore/qtypetraits.h \
+		/usr/include/qt5/QtCore/qsysinfo.h \
+		/usr/include/qt5/QtCore/qobjectdefs.h \
+		/usr/include/qt5/QtCore/qnamespace.h \
+		/usr/include/qt5/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt5/QtGui/qwindowdefs_win.h \
+		/usr/include/qt5/QtCore/qobject.h \
+		/usr/include/qt5/QtCore/qstring.h \
+		/usr/include/qt5/QtCore/qchar.h \
+		/usr/include/qt5/QtCore/qbytearray.h \
+		/usr/include/qt5/QtCore/qrefcount.h \
+		/usr/include/qt5/QtCore/qarraydata.h \
+		/usr/include/qt5/QtCore/qstringbuilder.h \
+		/usr/include/qt5/QtCore/qlist.h \
+		/usr/include/qt5/QtCore/qalgorithms.h \
+		/usr/include/qt5/QtCore/qiterator.h \
+		/usr/include/qt5/QtCore/qcoreevent.h \
+		/usr/include/qt5/QtCore/qscopedpointer.h \
+		/usr/include/qt5/QtCore/qmetatype.h \
+		/usr/include/qt5/QtCore/qvarlengtharray.h \
+		/usr/include/qt5/QtCore/qcontainerfwd.h \
+		/usr/include/qt5/QtCore/qisenum.h \
+		/usr/include/qt5/QtCore/qobject_impl.h \
+		/usr/include/qt5/QtCore/qmargins.h \
+		/usr/include/qt5/QtCore/qrect.h \
+		/usr/include/qt5/QtCore/qsize.h \
+		/usr/include/qt5/QtCore/qpoint.h \
+		/usr/include/qt5/QtGui/qpaintdevice.h \
+		/usr/include/qt5/QtGui/qpalette.h \
+		/usr/include/qt5/QtGui/qcolor.h \
+		/usr/include/qt5/QtGui/qrgb.h \
+		/usr/include/qt5/QtCore/qstringlist.h \
+		/usr/include/qt5/QtCore/qdatastream.h \
+		/usr/include/qt5/QtCore/qiodevice.h \
+		/usr/include/qt5/QtCore/qpair.h \
+		/usr/include/qt5/QtCore/qregexp.h \
+		/usr/include/qt5/QtCore/qstringmatcher.h \
+		/usr/include/qt5/QtGui/qbrush.h \
+		/usr/include/qt5/QtCore/qvector.h \
+		/usr/include/qt5/QtGui/qmatrix.h \
+		/usr/include/qt5/QtGui/qpolygon.h \
+		/usr/include/qt5/QtGui/qregion.h \
+		/usr/include/qt5/QtCore/qline.h \
+		/usr/include/qt5/QtGui/qtransform.h \
+		/usr/include/qt5/QtGui/qpainterpath.h \
+		/usr/include/qt5/QtGui/qimage.h \
+		/usr/include/qt5/QtGui/qpixmap.h \
+		/usr/include/qt5/QtCore/qsharedpointer.h \
+		/usr/include/qt5/QtCore/qshareddata.h \
+		/usr/include/qt5/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt5/QtCore/qhash.h \
+		/usr/include/qt5/QtGui/qfont.h \
+		/usr/include/qt5/QtGui/qfontmetrics.h \
+		/usr/include/qt5/QtGui/qfontinfo.h \
+		/usr/include/qt5/QtWidgets/qsizepolicy.h \
+		/usr/include/qt5/QtGui/qcursor.h \
+		/usr/include/qt5/QtGui/qkeysequence.h \
+		/usr/include/qt5/QtGui/qevent.h \
+		/usr/include/qt5/QtCore/qvariant.h \
+		/usr/include/qt5/QtCore/qmap.h \
+		/usr/include/qt5/QtCore/qdebug.h \
+		/usr/include/qt5/QtCore/qtextstream.h \
+		/usr/include/qt5/QtCore/qlocale.h \
+		/usr/include/qt5/QtCore/qset.h \
+		/usr/include/qt5/QtCore/qcontiguouscache.h \
+		/usr/include/qt5/QtCore/qurl.h \
+		/usr/include/qt5/QtCore/qurlquery.h \
+		/usr/include/qt5/QtCore/qfile.h \
+		/usr/include/qt5/QtCore/qfiledevice.h \
+		/usr/include/qt5/QtGui/qvector2d.h \
+		/usr/include/qt5/QtGui/qtouchdevice.h \
+		ui_rpycontrol.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rpycontrol.o ../GUIwithconnections/WidgetsUsed/RPYControl/rpycontrol.cpp
+
+qrc_images.o: qrc_images.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
@@ -9711,6 +10358,12 @@ moc_xyzwidget.o: moc_xyzwidget.cpp
 
 moc_zcursor.o: moc_zcursor.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_zcursor.o moc_zcursor.cpp
+
+moc_batterygauge.o: moc_batterygauge.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_batterygauge.o moc_batterygauge.cpp
+
+moc_rpycontrol.o: moc_rpycontrol.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_rpycontrol.o moc_rpycontrol.cpp
 
 ####### Install
 

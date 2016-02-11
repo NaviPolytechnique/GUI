@@ -44,7 +44,9 @@ public:
     QVBoxLayout *verticalLayout_3;
     QVBoxLayout *graphs;
     QHBoxLayout *layouthbas;
-    QLabel *label_2;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *RPYControl;
+    QHBoxLayout *battery;
     QVBoxLayout *horizonindicator;
     QVBoxLayout *compass;
     QVBoxLayout *zcursor;
@@ -77,7 +79,7 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(logo->sizePolicy().hasHeightForWidth());
         logo->setSizePolicy(sizePolicy);
-        logo->setPixmap(QPixmap(QString::fromUtf8(":/new/logo")));
+        logo->setPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/logo.png")));
         logo->setScaledContents(true);
 
         layoutvdroite->addWidget(logo);
@@ -102,8 +104,15 @@ public:
 
         tabwidget = new QTabWidget(centralWidget);
         tabwidget->setObjectName(QStringLiteral("tabwidget"));
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(tabwidget->sizePolicy().hasHeightForWidth());
+        tabwidget->setSizePolicy(sizePolicy1);
         tabmap = new QWidget();
         tabmap->setObjectName(QStringLiteral("tabmap"));
+        sizePolicy1.setHeightForWidth(tabmap->sizePolicy().hasHeightForWidth());
+        tabmap->setSizePolicy(sizePolicy1);
         QFont font;
         font.setFamily(QStringLiteral("Times New Roman"));
         font.setPointSize(13);
@@ -123,6 +132,8 @@ public:
         tabwidget->addTab(tabmap, QString());
         tabattitudes = new QWidget();
         tabattitudes->setObjectName(QStringLiteral("tabattitudes"));
+        sizePolicy1.setHeightForWidth(tabattitudes->sizePolicy().hasHeightForWidth());
+        tabattitudes->setSizePolicy(sizePolicy1);
         verticalLayout_3 = new QVBoxLayout(tabattitudes);
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setContentsMargins(11, 11, 11, 11);
@@ -140,10 +151,23 @@ public:
         layouthbas = new QHBoxLayout();
         layouthbas->setSpacing(6);
         layouthbas->setObjectName(QStringLiteral("layouthbas"));
-        label_2 = new QLabel(centralWidget);
-        label_2->setObjectName(QStringLiteral("label_2"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        RPYControl = new QHBoxLayout();
+        RPYControl->setSpacing(6);
+        RPYControl->setObjectName(QStringLiteral("RPYControl"));
 
-        layouthbas->addWidget(label_2);
+        verticalLayout->addLayout(RPYControl);
+
+        battery = new QHBoxLayout();
+        battery->setSpacing(6);
+        battery->setObjectName(QStringLiteral("battery"));
+
+        verticalLayout->addLayout(battery);
+
+
+        layouthbas->addLayout(verticalLayout);
 
         horizonindicator = new QVBoxLayout();
         horizonindicator->setSpacing(6);
@@ -176,7 +200,7 @@ public:
 
         mainlayout->addLayout(eandm, 1, 1, 1, 1);
 
-        mainlayout->setRowStretch(0, 3);
+        mainlayout->setRowStretch(0, 5);
         mainlayout->setRowStretch(1, 1);
         mainlayout->setColumnStretch(0, 6);
         mainlayout->setColumnStretch(1, 2);
@@ -209,7 +233,6 @@ public:
         logo->setText(QString());
         tabwidget->setTabText(tabwidget->indexOf(tabmap), QApplication::translate("MainWindow", "Tab 1", 0));
         tabwidget->setTabText(tabwidget->indexOf(tabattitudes), QApplication::translate("MainWindow", "Tab 2", 0));
-        label_2->setText(QApplication::translate("MainWindow", "TextLabel", 0));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", 0));
     } // retranslateUi
 

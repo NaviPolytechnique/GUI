@@ -41,7 +41,9 @@ SOURCES += main.cpp\
     WidgetsUsed/Gps/gps.cpp \
     WidgetsUsed/XYZWidget/qcustomplot.cpp \
     WidgetsUsed/XYZWidget/xyzwidget.cpp \
-    WidgetsUsed/ZCursor/zcursor.cpp
+    WidgetsUsed/ZCursor/zcursor.cpp \
+    WidgetsUsed/BatteryGauge/batterygauge.cpp \
+    WidgetsUsed/RPYControl/rpycontrol.cpp
 
 HEADERS  += mainwindow.h \
     Source/qcgaugewidget.h \
@@ -76,7 +78,9 @@ HEADERS  += mainwindow.h \
     WidgetsUsed/Gps/gps.h \
     WidgetsUsed/XYZWidget/qcustomplot.h \
     WidgetsUsed/XYZWidget/xyzwidget.h \
-    WidgetsUsed/ZCursor/zcursor.h
+    WidgetsUsed/ZCursor/zcursor.h \
+    WidgetsUsed/BatteryGauge/batterygauge.h \
+    WidgetsUsed/RPYControl/rpycontrol.h
 
 FORMS    += mainwindow.ui \
     WidgetsUsed/AttitudeMeter/attitudemeter.ui \
@@ -87,4 +91,9 @@ FORMS    += mainwindow.ui \
     WidgetsUsed/DroneSettings/dronesettings.ui \
     WidgetsUsed/Gps/gps.ui \
     WidgetsUsed/XYZWidget/xyzwidget.ui \
-    WidgetsUsed/ZCursor/zcursor.ui
+    WidgetsUsed/ZCursor/zcursor.ui \
+    WidgetsUsed/BatteryGauge/batterygauge.ui \
+    WidgetsUsed/RPYControl/rpycontrol.ui
+
+RESOURCES += \
+    images.qrc

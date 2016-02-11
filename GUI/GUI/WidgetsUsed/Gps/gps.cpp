@@ -23,7 +23,9 @@ Gps::Gps(QWidget *parent) :
     xyz=readInput(namexyz);*/
 
     //set Current Position
-    currentPos = QPoint(agpstox*48.712888+bgpstox,agpstoy*2.214986+bgpstoy);
+
+    homePoint = QPoint(agpstox*48.712888+bgpstox,agpstoy*2.214986+bgpstoy);
+    currentPos = homePoint;
 
 
     //set Image
@@ -121,3 +123,12 @@ void Gps::MAJGps(QString DroneStatusMAJ){
     lab->update();
 
 }
+
+void Gps::homePointSlot(QString s) {
+
+    QStringList list = s.split(",");
+    homePoint = QPointF(agpstox*list.at(0).toDouble()+bgpstox,agpstoy*list.at(1).toDouble()+bgpstoy);
+    currentPos = homePoint; //the current position is the new home point
+
+}
+

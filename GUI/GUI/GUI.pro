@@ -27,7 +27,9 @@ SOURCES += main.cpp\
     WidgetsUsed/Gps/gps.cpp \
     WidgetsUsed/ZCursor/zcursor.cpp \
     WidgetsUsed/XYZWidget/xyzwidget.cpp \
-    WidgetsUsed/XYZWidget/qcustomplot.cpp
+    WidgetsUsed/XYZWidget/qcustomplot.cpp \
+    WidgetsUsed/BatteryGauge/batterygauge.cpp \
+    WidgetsUsed/RPYControl/rpycontrol.cpp
 
 
 HEADERS  += mainwindow.h \
@@ -44,7 +46,9 @@ HEADERS  += mainwindow.h \
     WidgetsUsed/Gps/gps.h \
     WidgetsUsed/ZCursor/zcursor.h \
     WidgetsUsed/XYZWidget/xyzwidget.h \
-    WidgetsUsed/XYZWidget/qcustomplot.h
+    WidgetsUsed/XYZWidget/qcustomplot.h \
+    WidgetsUsed/BatteryGauge/batterygauge.h \
+    WidgetsUsed/RPYControl/rpycontrol.h
 
 FORMS    += mainwindow.ui \
     WidgetsUsed/Buttons/buttons.ui \
@@ -54,7 +58,9 @@ FORMS    += mainwindow.ui \
     WidgetsUsed/Compass/compass.ui \
     WidgetsUsed/Gps/gps.ui \
     WidgetsUsed/ZCursor/zcursor.ui \
-    WidgetsUsed/XYZWidget/xyzwidget.ui
+    WidgetsUsed/XYZWidget/xyzwidget.ui \
+    WidgetsUsed/BatteryGauge/batterygauge.ui \
+    WidgetsUsed/RPYControl/rpycontrol.ui
 
 RESOURCES += \
     images.qrc

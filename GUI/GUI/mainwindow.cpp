@@ -33,6 +33,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->compass->addWidget(widgetcompass,0,Qt::AlignCenter);
     widgetzcursor = new ZCursor();
     ui->zcursor->addWidget(widgetzcursor);
+    widgetRPYControl=new RPYControl();
+    ui->RPYControl->addWidget(widgetRPYControl);
+    widgetbatterygauge=new BatteryGauge();
+    ui->battery->addWidget(widgetbatterygauge);
+
 
     widgetxyzwidget=new XyzWidget();
     ui->graphs->addWidget(widgetxyzwidget);

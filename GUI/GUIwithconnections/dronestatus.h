@@ -24,6 +24,7 @@ public:
 signals:
     void DroneStatusMAJ(QString VecteurDroneStatus);
     void ParametresDroneMAJ(QString ParametresDrone);
+    void HomePoint(QString);
 
 public slots:
     void ModifierDroneStatus(QString NewEtat);

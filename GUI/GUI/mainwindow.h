@@ -14,6 +14,8 @@
 #include "WidgetsUsed/Gps/gps.h"
 #include "WidgetsUsed/XYZWidget/xyzwidget.h"
 #include "WidgetsUsed/XYZWidget/qcustomplot.h"
+#include "WidgetsUsed/BatteryGauge/batterygauge.h"
+#include "WidgetsUsed/RPYControl/rpycontrol.h"
 
 
 namespace Ui {
@@ -47,6 +49,9 @@ private:
     Gps *widgetmap;
     XyzWidget *widgetxyzwidget;
     ThreadReadInput *thread;
+    RPYControl *widgetRPYControl;
+    BatteryGauge *widgetbatterygauge;
+
 };
 
 #endif // MAINWINDOW_H

@@ -23,7 +23,7 @@ QT_BEGIN_NAMESPACE
 class Ui_XyzWidget
 {
 public:
-    QWidget *centralWidget;
+    QGridLayout *gridLayout_2;
     QGridLayout *gridLayout;
     QCustomPlot *customPlot2;
     QCustomPlot *customPlot1;
@@ -35,38 +35,40 @@ public:
         if (XyzWidget->objectName().isEmpty())
             XyzWidget->setObjectName(QStringLiteral("XyzWidget"));
         XyzWidget->resize(444, 352);
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(XyzWidget->sizePolicy().hasHeightForWidth());
         XyzWidget->setSizePolicy(sizePolicy);
-        centralWidget = new QWidget(XyzWidget);
-        centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        centralWidget->setGeometry(QRect(0, 0, 451, 361));
-        gridLayout = new QGridLayout(centralWidget);
+        gridLayout_2 = new QGridLayout(XyzWidget);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        customPlot2 = new QCustomPlot(centralWidget);
+        customPlot2 = new QCustomPlot(XyzWidget);
         customPlot2->setObjectName(QStringLiteral("customPlot2"));
 
         gridLayout->addWidget(customPlot2, 0, 1, 1, 1);
 
-        customPlot1 = new QCustomPlot(centralWidget);
+        customPlot1 = new QCustomPlot(XyzWidget);
         customPlot1->setObjectName(QStringLiteral("customPlot1"));
 
         gridLayout->addWidget(customPlot1, 0, 0, 1, 1);
 
-        customPlot3 = new QCustomPlot(centralWidget);
+        customPlot3 = new QCustomPlot(XyzWidget);
         customPlot3->setObjectName(QStringLiteral("customPlot3"));
 
         gridLayout->addWidget(customPlot3, 1, 0, 1, 1);
 
-        customPlot4 = new QCustomPlot(centralWidget);
+        customPlot4 = new QCustomPlot(XyzWidget);
         customPlot4->setObjectName(QStringLiteral("customPlot4"));
 
         gridLayout->addWidget(customPlot4, 1, 1, 1, 1);
+
+
+        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
 
 
         retranslateUi(XyzWidget);

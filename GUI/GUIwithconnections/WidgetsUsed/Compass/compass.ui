@@ -10,12 +10,18 @@
     <height>300</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Compass</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="1,10">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0">
      <item alignment="Qt::AlignHCenter">
       <widget class="QLabel" name="label">
        <property name="font">
@@ -28,6 +34,9 @@
        </property>
        <property name="text">
         <string>Compass</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>

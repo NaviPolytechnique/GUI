@@ -16,7 +16,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QWidget>
-#include "qcustomplot.h"
+#include "WidgetsUsed/XYZWidget/qcustomplot.h"
 
 QT_BEGIN_NAMESPACE
 

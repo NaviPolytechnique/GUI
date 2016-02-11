@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+
+
 namespace Ui {
 class Buttons;
 }

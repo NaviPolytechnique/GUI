@@ -8,7 +8,7 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include "readinput.h"
-#include "WidgetsUsed/XYZWidget/qcustomplot.h"
+#include "qcustomplot.h"
 
 namespace Ui {
 class XyzWidget;

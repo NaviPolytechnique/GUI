@@ -44,7 +44,9 @@ public:
     QVBoxLayout *verticalLayout_3;
     QVBoxLayout *graphs;
     QHBoxLayout *layouthbas;
-    QLabel *label_2;
+    QVBoxLayout *verticalLayout;
+    QHBoxLayout *RPYControl;
+    QHBoxLayout *battery;
     QVBoxLayout *horizonindicator;
     QVBoxLayout *compass;
     QVBoxLayout *zcursor;
@@ -140,10 +142,23 @@ public:
         layouthbas = new QHBoxLayout();
         layouthbas->setSpacing(6);
         layouthbas->setObjectName(QStringLiteral("layouthbas"));
-        label_2 = new QLabel(centralWidget);
-        label_2->setObjectName(QStringLiteral("label_2"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        RPYControl = new QHBoxLayout();
+        RPYControl->setSpacing(6);
+        RPYControl->setObjectName(QStringLiteral("RPYControl"));
 
-        layouthbas->addWidget(label_2);
+        verticalLayout->addLayout(RPYControl);
+
+        battery = new QHBoxLayout();
+        battery->setSpacing(6);
+        battery->setObjectName(QStringLiteral("battery"));
+
+        verticalLayout->addLayout(battery);
+
+
+        layouthbas->addLayout(verticalLayout);
 
         horizonindicator = new QVBoxLayout();
         horizonindicator->setSpacing(6);
@@ -209,7 +224,6 @@ public:
         logo->setText(QString());
         tabwidget->setTabText(tabwidget->indexOf(tabmap), QApplication::translate("MainWindow", "Tab 1", 0));
         tabwidget->setTabText(tabwidget->indexOf(tabattitudes), QApplication::translate("MainWindow", "Tab 2", 0));
-        label_2->setText(QApplication::translate("MainWindow", "TextLabel", 0));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", 0));
     } // retranslateUi
 

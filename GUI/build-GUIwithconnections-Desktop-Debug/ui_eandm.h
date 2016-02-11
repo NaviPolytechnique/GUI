@@ -45,6 +45,11 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label_2 = new QLabel(EandM);
         label_2->setObjectName(QStringLiteral("label_2"));
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
+        label_2->setSizePolicy(sizePolicy);
         QFont font;
         font.setFamily(QStringLiteral("Times New Roman"));
         font.setPointSize(13);
@@ -57,6 +62,8 @@ public:
 
         system = new QTextBrowser(EandM);
         system->setObjectName(QStringLiteral("system"));
+        sizePolicy.setHeightForWidth(system->sizePolicy().hasHeightForWidth());
+        system->setSizePolicy(sizePolicy);
         system->setStyleSheet(QLatin1String("color:rgb(23, 233, 15);\n"
 "background-color: black;"));
 
@@ -64,6 +71,8 @@ public:
 
         label = new QLabel(EandM);
         label->setObjectName(QStringLiteral("label"));
+        sizePolicy.setHeightForWidth(label->sizePolicy().hasHeightForWidth());
+        label->setSizePolicy(sizePolicy);
         label->setFont(font);
         label->setAlignment(Qt::AlignCenter);
 
@@ -71,6 +80,8 @@ public:
 
         exceptions = new QTextBrowser(EandM);
         exceptions->setObjectName(QStringLiteral("exceptions"));
+        sizePolicy.setHeightForWidth(exceptions->sizePolicy().hasHeightForWidth());
+        exceptions->setSizePolicy(sizePolicy);
         exceptions->setStyleSheet(QLatin1String("color:rgb(23, 233, 15);\n"
 "background-color: black;"));
 

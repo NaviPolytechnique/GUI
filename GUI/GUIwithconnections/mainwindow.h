@@ -15,6 +15,8 @@
 #include "WidgetsUsed/Gps/gps.h"
 #include "WidgetsUsed/XYZWidget/xyzwidget.h"
 #include "WidgetsUsed/XYZWidget/qcustomplot.h"
+#include "WidgetsUsed/BatteryGauge/batterygauge.h"
+#include "WidgetsUsed/RPYControl/rpycontrol.h"
 
 //com drone
 #include <iostream>
@@ -41,6 +43,7 @@ signals:
     void LigneLu(QString Str );
     void SystemMsg(QString message);
     void Exception(QString message);
+    void HomePoint(QString);
 
 private slots:
     void TakeOff();
@@ -51,6 +54,9 @@ private slots:
     void Pilot();
     //void StartAll();
     void Kill();
+    void sendztarget(double);
+    void sendRPYT(QString);
+    void sendtextcommand(QString);
 
 private:
     Ui::MainWindow *ui;
@@ -64,6 +70,8 @@ private:
     ZCursor *widgetzcursor;
     Gps *widgetmap;
     XyzWidget *widgetxyzwidget;
+    BatteryGauge *widgetbatterygauge;
+    RPYControl *widgetRPYControl;
 
     Drone *d;
 
