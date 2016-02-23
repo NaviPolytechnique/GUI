@@ -88,8 +88,8 @@ class Drone {
     void setCharge(int c);
     void setChargeIncr(int c);
 
-    void setHome(double x, double y, double z);
-    Point3D<double>* getHome();
+    void setHome(int x, int y, int z);
+    Point3D<int>* getHome();
 /*******************************************************/
     
   private:
@@ -118,7 +118,7 @@ class Drone {
     Point3D<int>* speedincr;
     Point3D<int>* angleincr;
 
-    Point3D<double>* home;
+    Point3D<int>* home;
 
     pthread_mutex_t alt_mutex;
     int* alt;
