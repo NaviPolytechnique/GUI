@@ -157,6 +157,8 @@ void Drone::setHome(int x, int y, int z){
     list.append(QString::number(y));
     QString homept=list.join(",");
     emit window->HomePoint(homept);
+    window->SystemMsg("homepoint coord");
+    window->SystemMsg(homept);
 
 }
 

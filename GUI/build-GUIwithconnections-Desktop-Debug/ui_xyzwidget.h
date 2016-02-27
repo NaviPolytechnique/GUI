@@ -24,7 +24,7 @@ QT_BEGIN_NAMESPACE
 class Ui_XyzWidget
 {
 public:
-    QWidget *centralWidget;
+    QGridLayout *gridLayout_2;
     QGridLayout *gridLayout;
     QCustomPlot *customPlot2;
     QCustomPlot *customPlot1;
@@ -41,38 +41,43 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(XyzWidget->sizePolicy().hasHeightForWidth());
         XyzWidget->setSizePolicy(sizePolicy);
-        centralWidget = new QWidget(XyzWidget);
-        centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        centralWidget->setGeometry(QRect(0, 0, 451, 361));
-        gridLayout = new QGridLayout(centralWidget);
+        gridLayout_2 = new QGridLayout(XyzWidget);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout = new QGridLayout();
         gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        gridLayout->setContentsMargins(0, 0, 0, 0);
-        customPlot2 = new QCustomPlot(centralWidget);
+        customPlot2 = new QCustomPlot(XyzWidget);
         customPlot2->setObjectName(QStringLiteral("customPlot2"));
+        sizePolicy.setHeightForWidth(customPlot2->sizePolicy().hasHeightForWidth());
+        customPlot2->setSizePolicy(sizePolicy);
 
         gridLayout->addWidget(customPlot2, 0, 1, 1, 1);
 
-        customPlot1 = new QCustomPlot(centralWidget);
+        customPlot1 = new QCustomPlot(XyzWidget);
         customPlot1->setObjectName(QStringLiteral("customPlot1"));
+        sizePolicy.setHeightForWidth(customPlot1->sizePolicy().hasHeightForWidth());
+        customPlot1->setSizePolicy(sizePolicy);
 
         gridLayout->addWidget(customPlot1, 0, 0, 1, 1);
 
-        customPlot4 = new QCustomPlot(centralWidget);
+        customPlot4 = new QCustomPlot(XyzWidget);
         customPlot4->setObjectName(QStringLiteral("customPlot4"));
+        sizePolicy.setHeightForWidth(customPlot4->sizePolicy().hasHeightForWidth());
+        customPlot4->setSizePolicy(sizePolicy);
 
         gridLayout->addWidget(customPlot4, 1, 1, 1, 1);
 
-        pushButton = new QPushButton(centralWidget);
+        pushButton = new QPushButton(XyzWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
-        pushButton->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(pushButton->sizePolicy().hasHeightForWidth());
+        pushButton->setSizePolicy(sizePolicy);
 
         gridLayout->addWidget(pushButton, 1, 0, 1, 1);
+
+
+        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
 
 
         retranslateUi(XyzWidget);

@@ -30,8 +30,9 @@ Gps::Gps(QWidget *parent) :
 
     //set Image
 
-    QString nameimg = QFileDialog::getOpenFileName(this, tr("Map Image"),"",tr("Images (*.png *.xpm *.jpg)"));
-    mapImg.load(nameimg);
+    //QString nameimg = QFileDialog::getOpenFileName(this, tr("Map Image"),"",tr("Images (*.png *.xpm *.jpg)"));
+    //mapImg.load(nameimg);
+    mapImg = QPixmap(":/new/prefix1/map");
     painter.begin(&mapImg);
     QPen pen(Qt::blue, 13,Qt::SolidLine,Qt::RoundCap);
     painter.setPen(pen);
