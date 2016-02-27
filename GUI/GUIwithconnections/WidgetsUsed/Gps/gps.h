@@ -16,7 +16,6 @@
 #include <QScrollArea>
 #include "readinput.h"
 
-
 namespace Ui {
 class Gps;
 }
@@ -29,13 +28,10 @@ public:
     explicit Gps(QWidget *parent = 0);
     ~Gps();
 
-
 private slots:
 //    void realtimeDataSlot();
     void MAJGps(QString);
     void homePointSlot(QString);
-
-
 
 private:
     Ui::Gps *ui;
@@ -43,13 +39,12 @@ private:
     QPixmap mapImg;
     QPainter painter;
     QPointF currentPos; //current postion
-    QPointF homePoint;
+    QPointF homePoint;  //homepoint
 
     float agpstox;
     float bgpstox;
     float agpstoy;
     float bgpstoy;
-
 
     float cmtopx;
 

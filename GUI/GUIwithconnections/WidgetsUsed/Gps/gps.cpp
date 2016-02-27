@@ -1,6 +1,5 @@
 #include "gps.h"
 #include "ui_gps.h"
-#include "iostream"
 
 Gps::Gps(QWidget *parent) :
     QWidget(parent),
@@ -31,14 +30,14 @@ Gps::Gps(QWidget *parent) :
 
     //set Image
 
-    //QString nameimg = QFileDialog::getOpenFileName(this, tr("Map Image"),"",tr("Images (*.png *.xpm *.jpg)"));
-    mapImg.load("/home/pily/Desktop/Drone/IHM/GUI/GUI/GUI/mapimg.jpg");
+    QString nameimg = QFileDialog::getOpenFileName(this, tr("Map Image"),"",tr("Images (*.png *.xpm *.jpg)"));
+    mapImg.load(nameimg);
     painter.begin(&mapImg);
     QPen pen(Qt::blue, 13,Qt::SolidLine,Qt::RoundCap);
     painter.setPen(pen);
     painter.drawPoint(currentPos); //first point
     pen.setColor(Qt::blue);
-    pen.setWidth(13);
+    pen.setWidth(5);
     painter.setPen(pen);
 
    /* lab = new QLabel(this);
@@ -130,6 +129,11 @@ void Gps::homePointSlot(QString s) {
     QStringList list = s.split(",");
     homePoint = QPointF(agpstox*list.at(0).toDouble()+bgpstox,agpstoy*list.at(1).toDouble()+bgpstoy);
     currentPos = homePoint; //the current position is the new home point
-
+    QPen pen(Qt::red, 13,Qt::SolidLine,Qt::RoundCap);
+    painter.setPen(pen);
+    painter.drawPoint(homePoint);
+    pen.setWidth(5);
+    painter.setPen(pen);
+    lab->setPixmap(mapImg.scaled(1200,1200,Qt::KeepAspectRatio));
+    lab->update();
 }
-
