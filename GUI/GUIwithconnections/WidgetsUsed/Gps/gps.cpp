@@ -38,7 +38,7 @@ Gps::Gps(QWidget *parent) :
     painter.setPen(pen);
     painter.drawPoint(currentPos); //first point
     pen.setColor(Qt::blue);
-    pen.setWidth(5);
+    pen.setWidth(13);
     painter.setPen(pen);
 
    /* lab = new QLabel(this);

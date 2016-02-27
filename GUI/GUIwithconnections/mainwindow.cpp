@@ -107,15 +107,34 @@ void MainWindow::Kill()
 }
 void MainWindow::sendRPYT(QString RPYT)
 {
+    QStringList RPYTlist=RPYT.split(",");
+    double R=RPYTlist[0].toDouble()*6280/360;
+    double P=RPYTlist[1].toDouble()*6280/360;
+    double Y=RPYTlist[2].toDouble()*6280/360;
 
+    d->setAngleIncr((int)R,
+                    (int)P,
+                    (int)Y);
+    d->sendMsg(new Message(Message::TARGET,std::to_string(d->getTarget()->getX()) + ";"
+                                          + std::to_string(d->getTarget()->getY()) + ";"
+                                          + std::to_string(d->getTarget()->getZ()) + ";"
+                                          + std::to_string(d->getAnglesTarget()->getX()) + ";"
+                                          + std::to_string(d->getAnglesTarget()->getY()) + ";"
+                                          + std::to_string(d->getAnglesTarget()->getZ()) + ";" ,1));
 }
 void MainWindow::sendztarget(double zt)
 {
-
+    d->setTarget(d->getTarget()->getX(),d->getTarget()->getY(),(int)zt*100);
+    d->sendMsg(new Message(Message::TARGET,std::to_string(d->getTarget()->getX()) + ";"
+                                          + std::to_string(d->getTarget()->getY()) + ";"
+                                          + std::to_string(d->getTarget()->getZ()) + ";"
+                                          + std::to_string(d->getAnglesTarget()->getX()) + ";"
+                                          + std::to_string(d->getAnglesTarget()->getY()) + ";"
+                                          + std::to_string(d->getAnglesTarget()->getZ()) + ";", 1 ));
 }
 
 void MainWindow::sendtextcommand(QString text){
-
+    d->sendMsg(new Message(Message::CONFIG, text.toStdString(),1));
 }
 
 MainWindow::~MainWindow()

@@ -68,6 +68,7 @@ class Drone {
     Point3D<int>* getSpeed();
     Point3D<int>* getTarget();
     Point3D<int>* getAngles();
+    Point3D<int>* getAnglesTarget();
     Point3D<int>* getPosIncr();
     Point3D<int>* getSpeedIncr();
     Point3D<int>* getAngleIncr();
@@ -78,6 +79,7 @@ class Drone {
   
     void setPos(int x, int y, int z);
     void setTarget(int x, int y, int z);
+    void setAnglesTarget(int x, int y, int z);
     void setSpeed(int vx, int vy, int vz);
     void setAngles(int a, int b, int c);
     void setAlt(int z);
@@ -111,6 +113,7 @@ class Drone {
     
 //********Paramètres d'état*******//
     Point3D<int>* target;
+    Point3D<int>* anglestarget;
     Point3D<int>* pos;
     Point3D<int>* speed;
     Point3D<int>* angles;

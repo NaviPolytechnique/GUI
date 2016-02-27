@@ -71,7 +71,7 @@ void MessageProcessor::treatMsg(Message* msg){
     
 
     if(msg->getType()==Message::HOME){
-        drone->setHome(::atoi(vect[0].c_str()),::atoi(vect[1].c_str()),::atoi(vect[2]).c_str());
+        drone->setHome(::atoi(vect[0].c_str()),::atoi(vect[1].c_str()),::atoi(vect[2].c_str()));
         drone->sendMsg(new Message(Message::HOME, std::to_string(drone->getHome()->getX())+";"+std::to_string(drone->getHome()->getY())+";"+std::to_string(drone->getHome()->getZ())+";",1));
     }
     

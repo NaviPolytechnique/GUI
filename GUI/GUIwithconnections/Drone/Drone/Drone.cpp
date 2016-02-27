@@ -7,6 +7,7 @@
 Drone::Drone(MainWindow* window_):window(window_){
   
   target =  new Point3D<int>(0, 0, 0);
+  anglestarget =  new Point3D<int>(0, 0, 0);
   pos =  new Point3D<int>(0, 0, 0);
   angles =  new Point3D<int>(0, 0, 0);
   speed =  new Point3D<int>(0, 0, 0);
@@ -89,6 +90,10 @@ Point3D<int>* Drone::getTarget(){
     return target;
 }
 
+Point3D<int>* Drone::getAnglesTarget(){
+    return anglestarget;
+}
+
 Point3D<int>* Drone::getAngles(){
     return angles;
 }
@@ -142,6 +147,17 @@ void Drone::setHome(int x, int y, int z){
     home->setX(x);
     home->setY(y);
     home->setZ(z);
+
+    //actualiser interface  ici on a les coordonnées GPS*100 000
+
+    double real_x = x/100000.;
+    double real_y = y/100000.;
+    QStringList list;
+    list.append(QString::number(x));
+    list.append(QString::number(y));
+    QString homept=list.join(",");
+    emit window->HomePoint(homept);
+
 }
 
 
@@ -161,6 +177,12 @@ void Drone::setTarget(int x, int y, int z){
     target->setY(y);
     target->setZ(z);
     //target->print();
+}
+
+void Drone::setAnglesTarget(int r, int p, int y){
+    anglestarget->setX(r);
+    anglestarget->setY(p);
+    anglestarget->setZ(y);
 }
 
 void Drone::setSpeed(int vx, int vy, int vz){

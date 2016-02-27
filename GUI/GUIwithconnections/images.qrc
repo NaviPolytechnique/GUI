@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/new/prefix1">
         <file>logo.png</file>
+        <file>navi_the_guardian_fairy_by_bjorny.jpg</file>
     </qresource>
 </RCC>

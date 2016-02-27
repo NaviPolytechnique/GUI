@@ -22,10 +22,6 @@ void RPYControl::on_pushButton_clicked()
     RPYTlist.append(QString::number(t));
     QString RPYT=RPYTlist.join(",");
     emit sendRPYT(RPYT);
-    ui->R->setValue(0);
-    ui->P->setValue(0);
-    ui->Y->setValue(0);
-    ui->T->setValue(0);
 }
 
 void RPYControl::on_R_valueChanged(double arg1)
