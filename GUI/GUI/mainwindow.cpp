@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //thread de lecture de drone
     QString namerpy = QFileDialog::getOpenFileName(this, tr("Open RPY"),"",tr("Text files (*.txt)"));
     QString namexyz = QFileDialog::getOpenFileName(this, tr("Open XYZ"),"",tr("Text files (*.txt)"));
+
+
     thread= new ThreadReadInput(namerpy,namexyz);
     thread->start();
     connect(thread, SIGNAL(TonNewLine(QString)), dronestatus, SLOT(ModifierDroneStatus(QString)));
