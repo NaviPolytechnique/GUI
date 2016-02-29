@@ -71,6 +71,7 @@ void MessageProcessor::treatMsg(Message* msg){
     
 
     if(msg->getType()==Message::HOME){
+        std::cout<<"Home reçu et réponse"<<std::endl;
         drone->setHome(::atoi(vect[0].c_str()),::atoi(vect[1].c_str()),::atoi(vect[2].c_str()));
         drone->sendMsg(new Message(Message::HOME, std::to_string(drone->getHome()->getX())+";"+std::to_string(drone->getHome()->getY())+";"+std::to_string(drone->getHome()->getZ())+";",1));
     }
@@ -83,7 +84,7 @@ void MessageProcessor::treatMsg(Message* msg){
 
 
     if(msg->getType()==Message::EXCEPTION){
-
+        std::cout<<"EXCEPTION"<<std::endl;
         std::string content = vect[0];
         //appeler une fonction qui actualise la partie exception
         window->Exception(QString::fromStdString(content));
@@ -93,19 +94,19 @@ void MessageProcessor::treatMsg(Message* msg){
             
         
     if(msg->getType()==Message::PING){
-            std::cout<<"ping"<<std::endl;
+            //std::cout<<"ping"<<std::endl;
             Message* msg = new Message(Message::PINGANSWER, vect[0], 0);
             moduleCom->addtsMsg(msg);
 
             if(!vect[1].compare("r")){
-                std::cout<<"normal"<<std::endl;
+                //std::cout<<"normal"<<std::endl;
                 drone->setPos(::atoi(vect[2].c_str()), ::atoi(vect[3].c_str()), ::atoi(vect[4].c_str()));
                 drone->setSpeed(::atoi(vect[6].c_str()), ::atoi(vect[7].c_str()), ::atoi(vect[8].c_str()));
                 drone->setAngles(::atoi(vect[9].c_str()), ::atoi(vect[10].c_str()), ::atoi(vect[11].c_str()));
                 drone->setAlt(::atoi(vect[5].c_str()));
                 drone->setCharge(::atoi(vect[12].c_str()));
             }else if (!vect[1].compare("i")){
-                std::cout<<"increment"<<std::endl;
+                //std::cout<<"increment"<<std::endl;
                 drone->setPosIncr(::atoi(vect[2].c_str()), ::atoi(vect[3].c_str()), ::atoi(vect[4].c_str()));
                 drone->setSpeedIncr(::atoi(vect[6].c_str()), ::atoi(vect[7].c_str()), ::atoi(vect[8].c_str()));
                 drone->setAngleIncr(::atoi(vect[9].c_str()), ::atoi(vect[10].c_str()), ::atoi(vect[11].c_str()));

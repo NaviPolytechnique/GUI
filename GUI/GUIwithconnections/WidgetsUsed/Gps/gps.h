@@ -15,6 +15,7 @@
 #include <QPixmap>
 #include <QScrollArea>
 #include "readinput.h"
+#include <cmath>
 
 namespace Ui {
 class Gps;
@@ -46,6 +47,9 @@ private:
     float agpstoy;
     float bgpstoy;
 
+
+    float deg2rad(float deg);
+    QPointF fromcoordonatestopixel(float lat, float lon);
     float cmtopx;
 
     QLabel *lab;

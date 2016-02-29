@@ -28,7 +28,7 @@ void* MessageSender::run(){
     std::stringstream ss;				//pas efficace apparemment
     ss<<checksum;
     msg_str = "$;"+ss.str()+";"+msg_str+"\r\n";
-    std::cout<<" envoi du message : "<<msg_str<<std::endl;
+    //std::cout<<" envoi du message : "<<msg_str<<std::endl;
     moduleCom->sendStr((char*)msg_str.c_str());
     delete msg;
   }

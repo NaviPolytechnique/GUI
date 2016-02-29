@@ -9,10 +9,7 @@ Gps::Gps(QWidget *parent) :
     ui->setupUi(this);
 
     //Set Image scale
-    agpstox = -5583333.333;
-    bgpstox = 271981539.1 ;
-    agpstoy = 5714.285714 ;
-    bgpstoy = -11804.06286;
+
     cmtopx = 0.00183382933 ;
 
     //set ReadInput
@@ -24,7 +21,7 @@ Gps::Gps(QWidget *parent) :
 
     //set Current Position
 
-    homePoint = QPoint(agpstox*48.712888+bgpstox,agpstoy*2.214986+bgpstoy);
+    homePoint = fromcoordonatestopixel(48.7111,2.21278);
     currentPos = homePoint;
 
 
@@ -32,6 +29,7 @@ Gps::Gps(QWidget *parent) :
 
     //QString nameimg = QFileDialog::getOpenFileName(this, tr("Map Image"),"",tr("Images (*.png *.xpm *.jpg)"));
     //mapImg.load(nameimg);
+
     mapImg = QPixmap(":/new/prefix1/map");
     painter.begin(&mapImg);
     QPen pen(Qt::blue, 13,Qt::SolidLine,Qt::RoundCap);
@@ -88,6 +86,58 @@ Gps::~Gps()
     delete ui;
 }
 
+
+QPointF Gps::fromcoordonatestopixel(float lat, float lon){
+    float latA = 48.71188;
+    float lonA = 2.20759;
+
+    float latB = 48.71423;
+    float lonB = 2.20759;
+
+    float latC = 48.71188;
+    float lonC = 2.21230;
+
+    float XA = 192;
+    float YA = 1064;
+
+    float XB = 192;
+    float YB = 566;
+
+    float XC = 851;
+    float YC = 1064;
+
+
+    float xa = cos(deg2rad(latA))*cos(deg2rad(lonA));
+    float ya = cos(deg2rad(latA))*sin(deg2rad(lonA));
+    float za = sin(deg2rad(latA));
+
+    float xb = cos(deg2rad(latB))*cos(deg2rad(lonB));
+    float yb = cos(deg2rad(latB))*sin(deg2rad(lonB));
+    float zb = sin(deg2rad(latB));
+
+    float xc = cos(deg2rad(latC))*cos(deg2rad(lonC));
+    float yc = cos(deg2rad(latC))*sin(deg2rad(lonC));
+    float zc = sin(deg2rad(latC));
+
+    float x = cos(deg2rad(lat))*cos(deg2rad(lon));
+    float y = cos(deg2rad(lat))*sin(deg2rad(lon));
+    float z = sin(deg2rad(lat));
+
+    float xcoef = ((x-xa)*(xb-xa)+(y-ya)*(yb-ya)+(z-za)*(zb-za))/((xb-xa)*(xb-xa)+(yb-ya)*(yb-ya)+(zb-za)*(zb-za));
+    float ycoef = ((x-xa)*(xc-xa)+(y-ya)*(yc-ya)+(z-za)*(zc-za))/((xc-xa)*(xc-xa)+(yc-ya)*(yc-ya)+(zc-za)*(zc-za));
+
+    float X = XA + xcoef * (XB - XA) + ycoef * (XC-XA);
+    float Y = YA + xcoef * (YB - YA) + ycoef * (YC-YA);
+
+    return QPointF(X,Y);
+}
+
+// This function converts decimal degrees to radians
+float Gps::deg2rad(float deg) {
+    float pi = 3.14159;
+    return (deg * pi / 180);
+}
+
 /*
 void Gps::realtimeDataSlot()
 {
@@ -128,7 +178,7 @@ void Gps::MAJGps(QString DroneStatusMAJ){
 void Gps::homePointSlot(QString s) {
 
     QStringList list = s.split(",");
-    homePoint = QPointF(agpstox*list.at(0).toDouble()+bgpstox,agpstoy*list.at(1).toDouble()+bgpstoy);
+    homePoint = fromcoordonatestopixel(list.at(0).toDouble(),list.at(1).toDouble());
     currentPos = homePoint; //the current position is the new home point
     QPen pen(Qt::red, 13,Qt::SolidLine,Qt::RoundCap);
     painter.setPen(pen);
