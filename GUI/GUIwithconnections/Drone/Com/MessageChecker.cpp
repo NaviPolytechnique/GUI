@@ -138,13 +138,13 @@ int MessageChecker::addMsgToProcess(std::vector<std::string>* msg_tab){
 
 uint32_t MessageChecker::Adler32(char* msg, size_t len){
 
-  uint32_t a=1, b=0;
+  uint16_t a=1, b=0;
   size_t index;
   for(index = 0; index<len;++index){
     a = (a+msg[index]) % MOD_ADLER;
     b = (b+a) % MOD_ADLER;
   }
-  return (b<<16)|a;
+  return (b<<8)|a;
 }
 
 int MessageChecker::decompose(string str, std::vector<std::string>* buffer){

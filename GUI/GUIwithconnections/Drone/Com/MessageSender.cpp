@@ -72,13 +72,13 @@ std::string MessageSender::messagetoStr(Message* msg){
 uint32_t MessageSender::Adler32(std::string str){
   size_t len = str.size();
   char* str_char = (char*)str.c_str();
-  uint32_t a=1, b=0;
+  uint16_t a=1, b=0;
   size_t index;
   for(index = 0; index<len;++index){
     a = (a+str_char[index]) % MOD_ADLER;
     b = (b+a) % MOD_ADLER;
   }
   
-  return (b<<16)|a;
+  return (b<<8)|a;
   
 }

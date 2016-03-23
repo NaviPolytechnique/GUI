@@ -406,8 +406,8 @@ compiler_rcc_make_all: qrc_images.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_images.cpp
 qrc_images.cpp: ../GUIwithconnections/images.qrc \
-		../GUIwithconnections/logo.png \
 		../GUIwithconnections/navi_the_guardian_fairy_by_bjorny.jpg \
+		../GUIwithconnections/logo.png \
 		../GUIwithconnections/mapimg.jpg
 	/usr/lib/x86_64-linux-gnu/qt5/bin/rcc -name images ../GUIwithconnections/images.qrc -o qrc_images.cpp
 

@@ -24,7 +24,7 @@ class Communication;
 
 extern int mCheckerThread; 
 
-const int MOD_ADLER = 65521;
+const int MOD_ADLER = 251;
 //extern std::string messageType[];
 
 class MessageChecker : public Runnable {

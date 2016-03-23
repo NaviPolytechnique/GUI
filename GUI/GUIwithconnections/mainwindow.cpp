@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //init com drone
     d = new Drone(this);
     d->start();
-    std::cout<<"louis est une énorme salope qui avale des bites"<<std::endl;
+    //std::cout<<"louis est une énorme salope qui avale des bites"<<std::endl;
     //init etat drone ihm
     dronestatus=new DroneStatus(this);
 
